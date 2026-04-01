@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flightplan - Plan Your Career Journey in Education</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <svg class="header__logo-icon" viewBox="0 0 32 32" width="32" height="32">
+                    <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                    <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                    <circle cx="16" cy="8" r="2" fill="white"/>
+                </svg>
+                <span class="header__logo-text">flightplan</span>
+            </a>
+            <nav class="header__nav">
+                <a href="#destinations" class="header__nav-link">Destinations</a>
+                <a href="#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="#stories" class="header__nav-link">Success Stories</a>
+                <a href="#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="#stories" class="mobile-nav__link">Success Stories</a>
+            <a href="#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__background">
+            <div class="hero__gradient"></div>
+        </div>
+        <div class="hero__content">
+            <h1 class="hero__title">Where do you want your <span class="hero__title-highlight">career to take you?</span></h1>
+            <p class="hero__subtitle">Plan your journey through education. From where you are now to where you want to be.</p>
+
+            <!-- Search Box -->
+            <div class="search-box">
+                <div class="search-box__tabs">
+                    <button class="search-box__tab search-box__tab--active" data-tab="explore">Explore roles</button>
+                    <button class="search-box__tab" data-tab="plan">Plan a journey</button>
+                </div>
+                <div class="search-box__body">
+                    <div class="search-box__panel search-box__panel--active" id="panel-explore">
+                        <div class="search-box__field">
+                            <label class="search-box__label">Where do you want to go?</label>
+                            <div class="search-box__input-wrap">
+                                <svg class="search-box__icon" viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5 L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                <input type="text" class="search-box__input" placeholder="e.g. Head of Department, Deputy Head, SENCO..." id="roleSearch">
+                            </div>
+                            <div class="search-box__suggestions" id="searchSuggestions"></div>
+                        </div>
+                        <button class="search-box__btn">Search destinations</button>
+                    </div>
+                    <div class="search-box__panel" id="panel-plan">
+                        <div class="search-box__field search-box__field--half">
+                            <label class="search-box__label">Where are you now?</label>
+                            <select class="search-box__select" id="fromRole">
+                                <option value="">Select your current role</option>
+                                <option value="ta">Teaching Assistant</option>
+                                <option value="teacher">Teacher (NQT/ECT)</option>
+                                <option value="teacher-exp">Experienced Teacher</option>
+                                <option value="tlr">TLR Holder</option>
+                                <option value="hod">Head of Department</option>
+                                <option value="pastoral">Pastoral Lead</option>
+                                <option value="senco">SENCO</option>
+                                <option value="assistant">Assistant Headteacher</option>
+                                <option value="deputy">Deputy Headteacher</option>
+                                <option value="admin">School Administrator</option>
+                                <option value="it-tech">IT Technician</option>
+                                <option value="librarian">School Librarian</option>
+                            </select>
+                        </div>
+                        <div class="search-box__field search-box__field--half">
+                            <label class="search-box__label">Where do you want to go?</label>
+                            <select class="search-box__select" id="toRole">
+                                <option value="">Select your destination</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="teacher-exp">Experienced Teacher</option>
+                                <option value="tlr">TLR Holder</option>
+                                <option value="hod">Head of Department</option>
+                                <option value="senco">SENCO</option>
+                                <option value="pastoral">Pastoral Lead</option>
+                                <option value="assistant">Assistant Headteacher</option>
+                                <option value="deputy">Deputy Headteacher</option>
+                                <option value="head">Headteacher</option>
+                                <option value="ceo">CEO / Executive Head</option>
+                                <option value="inspector">Ofsted Inspector</option>
+                                <option value="consultant">Education Consultant</option>
+                            </select>
+                        </div>
+                        <button class="search-box__btn">Plan my journey</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Animated plane -->
+        <div class="hero__plane" id="heroPlane">
+            <svg viewBox="0 0 60 60" width="48" height="48">
+                <path d="M2 38 L18 30 L14 28 L30 20 L26 18 L52 6 L44 22 L40 18 L34 34 L30 30 L24 46 Z" fill="white" opacity="0.9"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <h2 class="section-title">Popular destinations</h2>
+            <p class="section-subtitle">Explore the most sought-after roles in education</p>
+            <div class="destinations__grid">
+                <div class="dest-card dest-card--featured">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #0057b8 0%, #00a0e1 100%);">
+                        <div class="dest-card__badge">Most popular</div>
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="64" height="64"><circle cx="24" cy="14" r="8" fill="white" opacity="0.9"/><path d="M8 42 c0-10 8-16 16-16 s16 6 16 16" fill="white" opacity="0.7"/><path d="M36 18 l8-4 v12 l-8-4z" fill="white" opacity="0.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Head of Department</h3>
+                        <p class="dest-card__desc">Lead your subject area. Shape curriculum and develop a team of teachers.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">L1-L6 Leadership Scale</span>
+                            <span class="dest-card__journey">2-4 year journey</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #e8491d 0%, #ff8a50 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="14" r="7" fill="white" opacity="0.9"/><path d="M10 40 c0-9 7-14 14-14 s14 5 14 14" fill="white" opacity="0.7"/><circle cx="24" cy="28" r="3" fill="white" opacity="0.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">SENCO</h3>
+                        <p class="dest-card__desc">Champion inclusion and coordinate special educational needs provision.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">TLR or Leadership</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><rect x="8" y="20" width="32" height="20" rx="3" fill="white" opacity="0.7"/><path d="M16 20 V12 a8 8 0 0 1 16 0 V20" fill="none" stroke="white" stroke-width="3"/><circle cx="24" cy="30" r="3" fill="white"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Assistant Headteacher</h3>
+                        <p class="dest-card__desc">Step into senior leadership and drive whole-school improvement.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">L5-L12 Leadership</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><path d="M24 4 L30 18 L44 20 L34 30 L36 44 L24 38 L12 44 L14 30 L4 20 L18 18 Z" fill="white" opacity="0.8"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Headteacher</h3>
+                        <p class="dest-card__desc">Lead a school community. The ultimate destination for many educators.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">L14-L43 Leadership</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><path d="M6 38 L24 8 L42 38 Z" fill="none" stroke="white" stroke-width="3" opacity="0.8"/><circle cx="24" cy="28" r="4" fill="white" opacity="0.7"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Teacher (from TA)</h3>
+                        <p class="dest-card__desc">Make the leap from support role to leading your own classroom.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">Main Pay Scale</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #bf360c 0%, #ff7043 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><rect x="6" y="6" width="36" height="36" rx="4" fill="none" stroke="white" stroke-width="3" opacity="0.7"/><path d="M14 24 h20 M24 14 v20" stroke="white" stroke-width="3" opacity="0.8"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Education Consultant</h3>
+                        <p class="dest-card__desc">Share your expertise across multiple schools and organisations.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">Variable / Contract</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works / Journey Planner -->
+    <section class="how-it-works" id="journeys">
+        <div class="container">
+            <h2 class="section-title">Plan your career journey</h2>
+            <p class="section-subtitle">Just like planning a holiday, we help you map out every step</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step__number">1</div>
+                    <div class="step__icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="20" fill="none" stroke="#0057b8" stroke-width="2"/><circle cx="24" cy="24" r="4" fill="#0057b8"/><path d="M24 24 L24 12" stroke="#0057b8" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="step__title">Pick your departure point</h3>
+                    <p class="step__desc">Tell us your current role, experience and qualifications. Everyone's starting point is different.</p>
+                </div>
+                <div class="step__connector">
+                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#0057b8" stroke-width="2" stroke-dasharray="4 4"/></svg>
+                </div>
+                <div class="step">
+                    <div class="step__number">2</div>
+                    <div class="step__icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48"><path d="M4 36 L16 20 L28 28 L44 12" fill="none" stroke="#e8491d" stroke-width="3"/><circle cx="44" cy="12" r="3" fill="#e8491d"/></svg>
+                    </div>
+                    <h3 class="step__title">Choose your destination</h3>
+                    <p class="step__desc">Browse roles and find the career destination that excites you most. Dream big or take the next step.</p>
+                </div>
+                <div class="step__connector">
+                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#e8491d" stroke-width="2" stroke-dasharray="4 4"/></svg>
+                </div>
+                <div class="step">
+                    <div class="step__number">3</div>
+                    <div class="step__icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48"><rect x="6" y="10" width="36" height="28" rx="3" fill="none" stroke="#2e7d32" stroke-width="2"/><path d="M6 18 h36" stroke="#2e7d32" stroke-width="2"/><path d="M14 26 h8 M14 32 h12" stroke="#2e7d32" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="step__title">Get your flightplan</h3>
+                    <p class="step__desc">Receive a personalised roadmap with qualifications, experience and development milestones to reach your destination.</p>
+                </div>
+                <div class="step__connector">
+                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#2e7d32" stroke-width="2" stroke-dasharray="4 4"/></svg>
+                </div>
+                <div class="step">
+                    <div class="step__number">4</div>
+                    <div class="step__icon">
+                        <svg viewBox="0 0 48 48" width="48" height="48"><path d="M8 40 L20 28 L28 34 L40 14" fill="none" stroke="#6a1b9a" stroke-width="3"/><path d="M34 14 L40 14 L40 20" fill="none" stroke="#6a1b9a" stroke-width="3"/></svg>
+                    </div>
+                    <h3 class="step__title">Track your progress</h3>
+                    <p class="step__desc">Check off milestones as you go. Watch your boarding pass fill up as you get closer to your career destination.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Journey -->
+    <section class="featured-journey">
+        <div class="container">
+            <div class="journey-card">
+                <div class="journey-card__route">
+                    <div class="journey-card__point">
+                        <div class="journey-card__point-dot journey-card__point-dot--from"></div>
+                        <span class="journey-card__point-label">Teaching Assistant</span>
+                    </div>
+                    <div class="journey-card__line">
+                        <div class="journey-card__plane">
+                            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M2 16 L8 13 L6 12 L14 8 L12 7 L22 3 L19 10 L17 8 L14 15 L12 13 L9 20 Z" fill="#0057b8"/></svg>
+                        </div>
+                    </div>
+                    <div class="journey-card__point">
+                        <div class="journey-card__point-dot journey-card__point-dot--to"></div>
+                        <span class="journey-card__point-label">Qualified Teacher</span>
+                    </div>
+                </div>
+                <div class="journey-card__details">
+                    <h3 class="journey-card__title">Most booked journey</h3>
+                    <div class="journey-card__stops">
+                        <div class="journey-card__stop">
+                            <span class="journey-card__stop-num">Stop 1</span>
+                            <span class="journey-card__stop-name">GCSE Maths & English (if needed)</span>
+                        </div>
+                        <div class="journey-card__stop">
+                            <span class="journey-card__stop-num">Stop 2</span>
+                            <span class="journey-card__stop-name">Undergraduate Degree or Access Course</span>
+                        </div>
+                        <div class="journey-card__stop">
+                            <span class="journey-card__stop-num">Stop 3</span>
+                            <span class="journey-card__stop-name">Initial Teacher Training (PGCE / School Direct)</span>
+                        </div>
+                        <div class="journey-card__stop">
+                            <span class="journey-card__stop-num">Stop 4</span>
+                            <span class="journey-card__stop-name">ECT Induction (2 years)</span>
+                        </div>
+                    </div>
+                    <div class="journey-card__info">
+                        <span>Typical duration: <strong>3-6 years</strong></span>
+                        <span>Funding available: <strong>Yes - bursaries &amp; loans</strong></span>
+                    </div>
+                    <a href="#" class="btn btn--primary">View full journey</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="stories" id="stories">
+        <div class="container">
+            <h2 class="section-title">Success stories</h2>
+            <p class="section-subtitle">Real people who planned their career journey and arrived at their destination</p>
+            <div class="stories__grid">
+                <div class="story-card">
+                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #0057b8, #00a0e1);">
+                        <span>SP</span>
+                    </div>
+                    <div class="story-card__quote">"I was a teaching assistant for 8 years. Flightplan showed me the route to becoming a qualified teacher. I'm now an NQT and loving every minute."</div>
+                    <div class="story-card__author">
+                        <strong>Sarah P.</strong>
+                        <span>TA &rarr; Primary Teacher</span>
+                    </div>
+                    <div class="story-card__journey-tag">3 year journey</div>
+                </div>
+                <div class="story-card">
+                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #e8491d, #ff8a50);">
+                        <span>MK</span>
+                    </div>
+                    <div class="story-card__quote">"After 5 years of teaching, I didn't know what was next. The journey planner mapped out my route to becoming a Head of Year. I arrived last September."</div>
+                    <div class="story-card__author">
+                        <strong>Marcus K.</strong>
+                        <span>Teacher &rarr; Head of Year</span>
+                    </div>
+                    <div class="story-card__journey-tag">2 year journey</div>
+                </div>
+                <div class="story-card">
+                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #2e7d32, #66bb6a);">
+                        <span>JW</span>
+                    </div>
+                    <div class="story-card__quote">"From school administrator to business manager - I never thought it was possible. The personalised flightplan gave me the confidence and clarity I needed."</div>
+                    <div class="story-card__author">
+                        <strong>Jasmine W.</strong>
+                        <span>Admin &rarr; Business Manager</span>
+                    </div>
+                    <div class="story-card__journey-tag">4 year journey</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources / Quick Links -->
+    <section class="resources" id="resources">
+        <div class="container">
+            <h2 class="section-title">Resources for your journey</h2>
+            <p class="section-subtitle">Everything you need to prepare for takeoff</p>
+            <div class="resources__grid">
+                <a href="#" class="resource-card">
+                    <div class="resource-card__icon" style="background: #e3f2fd;">
+                        <svg viewBox="0 0 32 32" width="32" height="32"><rect x="4" y="4" width="24" height="24" rx="3" fill="none" stroke="#0057b8" stroke-width="2"/><path d="M10 12h12 M10 16h12 M10 20h8" stroke="#0057b8" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="resource-card__title">Qualifications guide</h3>
+                    <p class="resource-card__desc">Understand the qualifications needed for every role in education.</p>
+                </a>
+                <a href="#" class="resource-card">
+                    <div class="resource-card__icon" style="background: #fce4ec;">
+                        <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="16" r="12" fill="none" stroke="#e8491d" stroke-width="2"/><path d="M16 8v8l5 5" stroke="#e8491d" stroke-width="2" fill="none"/></svg>
+                    </div>
+                    <h3 class="resource-card__title">CPD opportunities</h3>
+                    <p class="resource-card__desc">Find courses, workshops and training to build your skills.</p>
+                </a>
+                <a href="#" class="resource-card">
+                    <div class="resource-card__icon" style="background: #e8f5e9;">
+                        <svg viewBox="0 0 32 32" width="32" height="32"><path d="M16 4 L20 12 L28 14 L22 20 L24 28 L16 24 L8 28 L10 20 L4 14 L12 12Z" fill="none" stroke="#2e7d32" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="resource-card__title">Funding & bursaries</h3>
+                    <p class="resource-card__desc">Discover financial support available for career changers in education.</p>
+                </a>
+                <a href="#" class="resource-card">
+                    <div class="resource-card__icon" style="background: #f3e5f5;">
+                        <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="12" r="6" fill="none" stroke="#6a1b9a" stroke-width="2"/><path d="M6 28 c0-6 5-10 10-10 s10 4 10 10" fill="none" stroke="#6a1b9a" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="resource-card__title">Mentoring network</h3>
+                    <p class="resource-card__desc">Connect with experienced professionals who've completed the journey.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-banner__content">
+                <h2 class="cta-banner__title">Ready for takeoff?</h2>
+                <p class="cta-banner__text">Create your free account and get a personalised career flightplan in minutes.</p>
+                <div class="cta-banner__actions">
+                    <a href="#" class="btn btn--white">Create free account</a>
+                    <a href="#" class="btn btn--outline-white">Browse destinations</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="/" class="footer__logo">
+                        <svg class="footer__logo-icon" viewBox="0 0 32 32" width="28" height="28">
+                            <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                            <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                            <circle cx="16" cy="8" r="2" fill="#0a1628"/>
+                        </svg>
+                        <span>flightplan</span>
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="#">Teaching roles</a>
+                    <a href="#">Leadership roles</a>
+                    <a href="#">Support roles</a>
+                    <a href="#">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="#">Career guides</a>
+                    <a href="#">Qualifications</a>
+                    <a href="#">CPD finder</a>
+                    <a href="#">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="#">Our mission</a>
+                    <a href="#">For schools</a>
+                    <a href="#">Contact us</a>
+                    <a href="#">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
