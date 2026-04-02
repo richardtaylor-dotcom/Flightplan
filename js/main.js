@@ -13,18 +13,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Role search suggestions
+    // Role search suggestions with links to destination pages
+    var basePath = window.location.pathname.includes('/destinations/') ? '' : 'destinations/';
+    if (basePath === '' && !window.location.pathname.includes('/destinations/')) basePath = 'destinations/';
+
     const roles = [
-        'Teacher', 'Head of Department', 'Head of Year', 'SENCO',
-        'Assistant Headteacher', 'Deputy Headteacher', 'Headteacher',
-        'CEO / Executive Head', 'Pastoral Lead', 'Lead Practitioner',
-        'Teaching Assistant', 'Higher Level Teaching Assistant (HLTA)',
-        'Cover Supervisor', 'School Business Manager', 'IT Manager',
-        'Librarian', 'Exams Officer', 'Data Manager',
-        'Curriculum Lead', 'Phase Leader', 'Key Stage Coordinator',
-        'Ofsted Inspector', 'Education Consultant', 'MAT Director',
-        'Director of Teaching & Learning', 'Director of Sixth Form',
-        'Safeguarding Lead', 'Attendance Officer'
+        { name: 'Academies Director', slug: 'academies-director' },
+        { name: 'Principal', slug: 'principal' },
+        { name: 'Deputy Principal', slug: 'deputy-principal' },
+        { name: 'Vice Principal', slug: 'vice-principal' },
+        { name: 'Curriculum Advisor', slug: 'curriculum-advisor' },
+        { name: 'Assistant Principal', slug: 'assistant-principal' },
+        { name: 'SENCO', slug: 'senco' },
+        { name: 'Director of Learning', slug: 'director-of-learning' },
+        { name: 'Head of Learning', slug: 'head-of-learning' },
+        { name: 'Phase Leader', slug: 'phase-leader' },
+        { name: 'Deputy Director of Learning', slug: 'deputy-director-of-learning' },
+        { name: 'Coordinator of Learning', slug: 'coordinator-of-learning' },
+        { name: 'Second in Charge', slug: 'second-in-charge' },
+        { name: 'Lead Practitioner', slug: 'lead-practitioner' },
+        { name: 'Teacher of Subject', slug: 'teacher-of-subject' },
+        { name: 'Class Teacher', slug: 'class-teacher' },
+        { name: 'SEN Teacher', slug: 'sen-teacher' },
+        { name: 'Intervention Teacher', slug: 'intervention-teacher' },
+        { name: 'Teaching Assistant', slug: 'teaching-assistant' },
+        { name: 'SEN Teaching Assistant', slug: 'sen-teaching-assistant' },
+        { name: 'Higher Level Teaching Assistant', slug: 'higher-level-teaching-assistant' },
+        { name: 'SEN Higher Level Teaching Assistant', slug: 'sen-higher-level-teaching-assistant' },
+        { name: 'Cover Supervisor', slug: 'cover-supervisor' },
+        { name: 'Technician', slug: 'technician' },
+        { name: 'Nursery Manager', slug: 'nursery-manager' },
+        { name: 'Deputy Nursery Manager', slug: 'deputy-nursery-manager' },
+        { name: 'Nursery Assistant', slug: 'nursery-assistant' },
+        { name: 'Office Manager', slug: 'office-manager' },
+        { name: 'Academy Administrator', slug: 'academy-administrator' },
+        { name: 'Receptionist', slug: 'receptionist' },
+        { name: 'Personal Assistant', slug: 'personal-assistant' },
+        { name: 'Executive Assistant', slug: 'executive-assistant' },
+        { name: 'Student Services Manager', slug: 'student-services-manager' },
+        { name: 'Student Services Officer', slug: 'student-services-officer' },
+        { name: 'Assistant SENCO', slug: 'assistant-senco' },
+        { name: 'Safeguarding Manager', slug: 'safeguarding-manager' },
+        { name: 'Safeguarding Officer', slug: 'safeguarding-officer' },
+        { name: 'Safeguarding Administrator', slug: 'safeguarding-administrator' },
+        { name: 'Library Manager', slug: 'library-manager' },
+        { name: 'Library Assistant', slug: 'library-assistant' },
+        { name: 'Careers Manager', slug: 'careers-manager' },
+        { name: 'Careers Officer', slug: 'careers-officer' },
+        { name: 'Exams Manager', slug: 'exams-manager' },
+        { name: 'Exams Officer', slug: 'exams-officer' },
+        { name: 'Exams Administrator', slug: 'exams-administrator' },
+        { name: 'Lead Invigilator', slug: 'lead-invigilator' },
+        { name: 'Invigilator', slug: 'invigilator' },
+        { name: 'Attendance Manager', slug: 'attendance-manager' },
+        { name: 'Attendance Officer', slug: 'attendance-officer' },
+        { name: 'Deputy Attendance Officer', slug: 'deputy-attendance-officer' },
+        { name: 'Attendance Administrator', slug: 'attendance-administrator' },
+        { name: 'Data Manager', slug: 'data-manager' },
+        { name: 'Data Officer', slug: 'data-officer' },
+        { name: 'Data Administrator', slug: 'data-administrator' },
+        { name: 'Cover Manager', slug: 'cover-manager' },
+        { name: 'Lunchtime Supervisor', slug: 'lunchtime-supervisor' },
+        { name: 'Music Tutor', slug: 'music-tutor' },
+        { name: 'School Counsellor', slug: 'school-counsellor' },
+        { name: 'Assistant Headteacher', slug: 'assistant-headteacher' }
     ];
 
     const searchInput = document.getElementById('roleSearch');
@@ -39,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const matches = roles.filter(r => r.toLowerCase().includes(query));
+            const matches = roles.filter(r => r.name.toLowerCase().includes(query));
             if (matches.length === 0) {
                 suggestionsEl.classList.remove('search-box__suggestions--open');
                 suggestionsEl.innerHTML = '';
@@ -47,16 +99,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             suggestionsEl.innerHTML = matches.map(m =>
-                `<div class="search-box__suggestion">${m}</div>`
+                `<a href="${basePath}${m.slug}.html" class="search-box__suggestion">${m.name}</a>`
             ).join('');
             suggestionsEl.classList.add('search-box__suggestions--open');
         });
 
         suggestionsEl.addEventListener('click', (e) => {
-            if (e.target.classList.contains('search-box__suggestion')) {
-                searchInput.value = e.target.textContent;
+            var suggestion = e.target.closest('.search-box__suggestion');
+            if (suggestion) {
+                searchInput.value = suggestion.textContent;
                 suggestionsEl.classList.remove('search-box__suggestions--open');
-                suggestionsEl.innerHTML = '';
             }
         });
 
