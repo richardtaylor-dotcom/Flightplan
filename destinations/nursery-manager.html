@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursery Manager - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <svg class="header__logo-icon" viewBox="0 0 32 32" width="32" height="32">
+                    <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                    <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                    <circle cx="16" cy="8" r="2" fill="white"/>
+                </svg>
+                <span class="header__logo-text">flightplan</span>
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#stories" class="header__nav-link">Success Stories</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#stories" class="mobile-nav__link">Success Stories</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html#destinations">Destinations</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>Nursery Manager</span>
+        </div>
+    </div>
+
+    <!-- Destination Hero -->
+    <section class="dest-hero">
+        <div class="container">
+            <div class="dest-hero__inner">
+                <div class="dest-hero__content">
+                    <span class="dest-hero__badge" style="background: #e0f2f1; color: #00695c;">Classroom Support</span>
+                    <h1 class="dest-hero__title">Nursery Manager</h1>
+                    <p class="dest-hero__desc">As a Nursery Manager, you are responsible for the overall leadership and management of a nursery setting, ensuring high-quality early years provision that meets Ofsted requirements and the Early Years Foundation Stage (EYFS) framework. You lead and develop a team of practitioners, manage budgets, maintain parent relationships, and create a safe, stimulating environment where young children can thrive and develop.</p>
+                    <div class="dest-hero__tags">
+                        <span class="dest-hero__tag dest-hero__tag--salary">&pound;28,000 - &pound;38,000</span>
+                        <span class="dest-hero__tag dest-hero__tag--duration">3-5 year journey</span>
+                        <span class="dest-hero__tag dest-hero__tag--sector">Early Years</span>
+                    </div>
+                </div>
+                <div class="dest-info-card">
+                    <h3 class="dest-info-card__title">Role overview</h3>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Salary Range</span>
+                        <span class="dest-info-card__value">&pound;28,000 - &pound;38,000</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Typical Journey</span>
+                        <span class="dest-info-card__value">3-5 years from senior practitioner</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Sector</span>
+                        <span class="dest-info-card__value">Private Nurseries, School Nurseries</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Qualification</span>
+                        <span class="dest-info-card__value">Level 5/6 in Early Years + management</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Reports to</span>
+                        <span class="dest-info-card__value">Owner / Director / Headteacher</span>
+                    </div>
+                    <a href="#" class="dest-info-card__btn" id="speakToAgent" onclick="openFlightAgent(); return false;">Speak to a flight agent</a>
+                    <a href="#" class="dest-info-card__btn dest-info-card__btn--outline">Download role guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="journey-timeline">
+        <div class="container">
+            <h2 class="journey-timeline__title">Your journey to Nursery Manager</h2>
+            <p class="journey-timeline__subtitle">The typical career stops on the way to this destination</p>
+            <div class="timeline">
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 1</div>
+                    <h3 class="timeline__stop-title">Level 2/3 Early Years Qualification</h3>
+                    <p class="timeline__stop-desc">Begin your early years career by completing a Level 2 or Level 3 qualification in Childcare and Education, such as the CACHE Diploma or BTEC in Children's Play, Learning and Development. This gives you the foundational knowledge of child development, safeguarding, and the EYFS framework.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>1-2 years</strong></span>
+                        <span>Cost: <strong>Funded routes available</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 2</div>
+                    <h3 class="timeline__stop-title">Nursery Assistant / Practitioner</h3>
+                    <p class="timeline__stop-desc">Work as a nursery assistant or practitioner, building hands-on experience with children aged 0-5. Develop your skills in planning activities, observing child development, building relationships with parents, and implementing the EYFS. Aim to become a room leader or key person.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>2-3 years</strong></span>
+                        <span>Salary: <strong>&pound;18,000 - &pound;22,000</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 3</div>
+                    <h3 class="timeline__stop-title">Deputy Manager / Senior Practitioner</h3>
+                    <p class="timeline__stop-desc">Progress to Deputy Nursery Manager or Senior Practitioner. Take on responsibilities for staff supervision, Ofsted preparation, parent liaison, and curriculum development. Complete a Level 5 qualification in Leadership and Management for Children's Care or a Foundation Degree in Early Years.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>2-3 years</strong></span>
+                        <span>Qualification: <strong>Level 5 recommended</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 4</div>
+                    <h3 class="timeline__stop-title">Level 5/6 Management Qualification</h3>
+                    <p class="timeline__stop-desc">Complete your Level 5 or Level 6 qualification in Early Years Leadership and Management, or a full degree in Early Childhood Studies. Many nursery chains and local authorities require this level of qualification for manager roles. Build your knowledge of Ofsted requirements, business management, and safeguarding leadership.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>1-2 years</strong></span>
+                        <span>Cost: <strong>Varies (employer support common)</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 5 - Final Destination</div>
+                    <h3 class="timeline__stop-title">Nursery Manager</h3>
+                    <p class="timeline__stop-desc">You've arrived at your destination. As Nursery Manager, you'll lead the entire setting, manage staff recruitment and development, oversee curriculum delivery, maintain Ofsted compliance, manage budgets, build parent partnerships, and ensure every child receives the highest quality early years education and care.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Salary: <strong>&pound;28,000 - &pound;38,000</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <h2 class="skills-section__title">Skills and qualities you'll need</h2>
+            <p class="skills-section__subtitle">The personal attributes that will help you thrive in this role</p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e3f2fd;">&#128101;</div>
+                    <h3 class="skill-card__name">Leadership</h3>
+                    <p class="skill-card__desc">Ability to lead, motivate, and develop a team of practitioners. You'll set the tone for the entire nursery and model the standards you expect from others.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #fce4ec;">&#128218;</div>
+                    <h3 class="skill-card__name">EYFS Expertise</h3>
+                    <p class="skill-card__desc">Thorough knowledge of the Early Years Foundation Stage framework, child development theory, and Ofsted inspection requirements to ensure outstanding provision.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e8f5e9;">&#128176;</div>
+                    <h3 class="skill-card__name">Business Acumen</h3>
+                    <p class="skill-card__desc">Managing budgets, occupancy levels, staffing costs, and funding claims. Nursery managers need to balance quality provision with financial sustainability.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #fff3e0;">&#128483;</div>
+                    <h3 class="skill-card__name">Communication</h3>
+                    <p class="skill-card__desc">Building strong relationships with parents, staff, local authority advisors, and Ofsted inspectors. Clear, warm, and professional communication is essential.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #f3e5f5;">&#128737;</div>
+                    <h3 class="skill-card__name">Safeguarding Leadership</h3>
+                    <p class="skill-card__desc">As the designated safeguarding lead, you must have expert knowledge of child protection procedures and the confidence to act decisively when concerns arise.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e0f7fa;">&#128170;</div>
+                    <h3 class="skill-card__name">Resilience &amp; Energy</h3>
+                    <p class="skill-card__desc">Managing a nursery is demanding. You need stamina, positivity, and the resilience to handle the daily challenges of leading a busy early years setting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Destinations -->
+    <section class="related-dest">
+        <div class="container">
+            <h2 class="related-dest__title">Where could you go next?</h2>
+            <p class="related-dest__subtitle">Continue your journey from Nursery Manager</p>
+            <div class="related-dest__grid">
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><path d="M24 4 L30 18 L44 20 L34 30 L36 44 L24 38 L12 44 L14 30 L4 20 L18 18 Z" fill="white" opacity="0.8"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Area Manager (nursery chain)</h3>
+                        <p class="dest-card__desc">Oversee multiple nursery settings within a chain, supporting managers and driving quality.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;35,000 - &pound;45,000</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #00695c 0%, #4db6ac 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="14" r="7" fill="white" opacity="0.9"/><path d="M10 40 c0-9 7-14 14-14 s14 5 14 14" fill="white" opacity="0.7"/><path d="M36 20 l4-2 v8 l-4-2z" fill="white" opacity="0.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Deputy Nursery Manager</h3>
+                        <p class="dest-card__desc">Support the manager and develop your leadership skills before taking on a setting of your own.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;23,000 - &pound;30,000</span>
+                        </div>
+                        <a href="deputy-nursery-manager.html" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #1565c0 0%, #64b5f6 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><rect x="6" y="6" width="36" height="36" rx="4" fill="none" stroke="white" stroke-width="3" opacity="0.7"/><path d="M14 24 h20 M24 14 v20" stroke="white" stroke-width="3" opacity="0.8"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Early Years Teacher (via EYITT)</h3>
+                        <p class="dest-card__desc">Train as an Early Years Teacher and gain Early Years Teacher Status (EYTS).</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;25,000 - &pound;35,000</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-banner__content">
+                <h2 class="cta-banner__title">Ready for takeoff?</h2>
+                <p class="cta-banner__text">Create your free account and get a personalised career flightplan in minutes.</p>
+                <div class="cta-banner__actions">
+                    <a href="#" class="btn btn--white">Create free account</a>
+                    <a href="#" class="btn btn--outline-white">Browse destinations</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <svg class="footer__logo-icon" viewBox="0 0 32 32" width="28" height="28">
+                            <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                            <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                            <circle cx="16" cy="8" r="2" fill="#0a1628"/>
+                        </svg>
+                        <span>flightplan</span>
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="../index.html">Our mission</a>
+                    <a href="../index.html">For schools</a>
+                    <a href="../index.html">Contact us</a>
+                    <a href="../index.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+</body>
+</html>

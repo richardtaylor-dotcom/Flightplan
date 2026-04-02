@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENCO - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <svg class="header__logo-icon" viewBox="0 0 32 32" width="32" height="32">
+                    <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                    <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                    <circle cx="16" cy="8" r="2" fill="white"/>
+                </svg>
+                <span class="header__logo-text">flightplan</span>
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#stories" class="header__nav-link">Success Stories</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#stories" class="mobile-nav__link">Success Stories</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html#destinations">Destinations</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>SENCO</span>
+        </div>
+    </div>
+
+    <!-- Destination Hero -->
+    <section class="dest-hero">
+        <div class="container">
+            <div class="dest-hero__inner">
+                <div class="dest-hero__content">
+                    <span class="dest-hero__badge" style="background: #e1f5fe; color: #01579b;">Specialist Leadership</span>
+                    <h1 class="dest-hero__title">SENCO</h1>
+                    <p class="dest-hero__desc">As a Special Educational Needs Coordinator (SENCO), you are the school's lead professional for all matters relating to pupils with special educational needs and disabilities (SEND). You coordinate provision, manage the SEND register, liaise with external agencies, support class teachers with differentiation strategies, and ensure that the school meets its statutory obligations under the SEND Code of Practice. In many schools, the SENCO sits on the senior leadership team and plays a vital role in championing inclusive education.</p>
+                    <div class="dest-hero__tags">
+                        <span class="dest-hero__tag dest-hero__tag--salary">&pound;42,000 - &pound;62,000</span>
+                        <span class="dest-hero__tag dest-hero__tag--duration">4-7 year journey</span>
+                        <span class="dest-hero__tag dest-hero__tag--sector">All School Types</span>
+                    </div>
+                </div>
+                <div class="dest-info-card">
+                    <h3 class="dest-info-card__title">Role overview</h3>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Salary Range</span>
+                        <span class="dest-info-card__value">&pound;42,000 - &pound;62,000</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Typical Journey</span>
+                        <span class="dest-info-card__value">4-7 years from qualified teacher</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Sector</span>
+                        <span class="dest-info-card__value">Primary, Secondary, Special, Academies</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Qualification</span>
+                        <span class="dest-info-card__value">QTS + National Award for SEN Coordination</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Reports to</span>
+                        <span class="dest-info-card__value">Headteacher / Principal / Deputy</span>
+                    </div>
+                    <a href="#" class="dest-info-card__btn" id="speakToAgent" onclick="openFlightAgent(); return false;">Speak to a flight agent</a>
+                    <a href="#" class="dest-info-card__btn dest-info-card__btn--outline">Download role guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="journey-timeline">
+        <div class="container">
+            <h2 class="journey-timeline__title">Your journey to SENCO</h2>
+            <p class="journey-timeline__subtitle">The typical career stops on the way to this destination</p>
+            <div class="timeline">
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 1</div>
+                    <h3 class="timeline__stop-title">Qualified Teacher Status (QTS)</h3>
+                    <p class="timeline__stop-desc">Complete your Initial Teacher Training via PGCE, School Direct, or undergraduate route. Develop a strong understanding of adaptive teaching, differentiation, and the Teachers' Standards requirement to meet the needs of all learners including those with SEND.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>1-4 years</strong></span>
+                        <span>Cost: <strong>Funded/Bursaries available</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 2</div>
+                    <h3 class="timeline__stop-title">ECT Induction &amp; Developing SEND Awareness</h3>
+                    <p class="timeline__stop-desc">Complete your ECT induction and develop your understanding of working with pupils with diverse needs. Seek opportunities to work with the existing SENCO, shadow EHCP reviews, and build relationships with external agencies such as educational psychologists and speech and language therapists.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>2-3 years</strong></span>
+                        <span>Focus: <strong>Inclusive practice &amp; differentiation</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 3</div>
+                    <h3 class="timeline__stop-title">SEND Lead / Inclusion Coordinator</h3>
+                    <p class="timeline__stop-desc">Take on a formal role supporting SEND provision, such as SEND Lead, Inclusion Coordinator, or Intervention Lead. Gain experience managing teaching assistants, coordinating interventions, writing provision maps, and contributing to EHCP annual reviews. Some teachers move into this role from a pastoral or year group leadership position.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>2-3 years</strong></span>
+                        <span>Focus: <strong>SEND provision &amp; multi-agency working</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 4</div>
+                    <h3 class="timeline__stop-title">National Award for SEN Coordination</h3>
+                    <p class="timeline__stop-desc">Complete the mandatory National Award for SEN Coordination (NASENCo), a postgraduate-level qualification that is a legal requirement for all new SENCOs. This programme covers the SEND Code of Practice, leading and managing SEND provision, working with families and agencies, and the legal framework around Education, Health and Care Plans.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>1 year (part-time)</strong></span>
+                        <span>Qualification: <strong>NASENCo (mandatory)</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 5 - Final Destination</div>
+                    <h3 class="timeline__stop-title">SENCO</h3>
+                    <p class="timeline__stop-desc">You've arrived. As SENCO, you are the champion of inclusive education in your school. You manage the SEND register, coordinate provision for pupils with EHCPs, lead the TA team, train staff on adaptive teaching, liaise with parents and external agencies, manage the SEND budget, and ensure your school meets its statutory duties. In many schools, this is a senior leadership role with significant strategic influence.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Salary: <strong>&pound;42,000 - &pound;62,000</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <h2 class="skills-section__title">Skills and qualities you'll need</h2>
+            <p class="skills-section__subtitle">The personal attributes that will help you thrive in this role</p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e3f2fd;">&#129505;</div>
+                    <h3 class="skill-card__name">Empathy &amp; Advocacy</h3>
+                    <p class="skill-card__desc">Deep commitment to championing the rights and needs of pupils with SEND. Able to advocate passionately for the most vulnerable learners and their families.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #fce4ec;">&#128218;</div>
+                    <h3 class="skill-card__name">SEND Knowledge</h3>
+                    <p class="skill-card__desc">Thorough understanding of the SEND Code of Practice, EHCP process, categories of need, evidence-based interventions, and the legal framework surrounding SEND provision.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e8f5e9;">&#129309;</div>
+                    <h3 class="skill-card__name">Multi-Agency Working</h3>
+                    <p class="skill-card__desc">Skilled at building productive relationships with educational psychologists, speech therapists, occupational therapists, social workers, and local authority SEND teams.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #fff3e0;">&#128227;</div>
+                    <h3 class="skill-card__name">Communication</h3>
+                    <p class="skill-card__desc">Excellent communicator with the ability to explain complex SEND processes to parents, write detailed EHCPs and reports, and deliver effective training to teaching staff.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #f3e5f5;">&#128200;</div>
+                    <h3 class="skill-card__name">Data &amp; Assessment</h3>
+                    <p class="skill-card__desc">Confident in using assessment data, standardised tests, and progress tracking to identify needs, evaluate interventions, and demonstrate the impact of SEND provision.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e0f7fa;">&#128736;</div>
+                    <h3 class="skill-card__name">Organisation &amp; Management</h3>
+                    <p class="skill-card__desc">Highly organised with the ability to manage complex caseloads, coordinate multiple EHCP reviews, oversee a team of teaching assistants, and manage the SEND budget effectively.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Destinations -->
+    <section class="related-dest">
+        <div class="container">
+            <h2 class="related-dest__title">Where could you go next?</h2>
+            <p class="related-dest__subtitle">Continue your journey from SENCO</p>
+            <div class="related-dest__grid">
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="14" r="7" fill="white" opacity="0.9"/><path d="M10 40 c0-9 7-14 14-14 s14 5 14 14" fill="white" opacity="0.7"/><path d="M36 18 l8-4 v12 l-8-4z" fill="white" opacity="0.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Assistant Principal (Inclusion)</h3>
+                        <p class="dest-card__desc">Combine SENCO expertise with broader senior leadership, overseeing inclusion, safeguarding, and pastoral care across the academy.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;48,000 - &pound;65,000</span>
+                        </div>
+                        <a href="assistant-principal.html" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #01579b 0%, #4fc3f7 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><path d="M24 4 L30 18 L44 20 L34 30 L36 44 L24 38 L12 44 L14 30 L4 20 L18 18 Z" fill="white" opacity="0.8"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Trust SEND Lead</h3>
+                        <p class="dest-card__desc">Lead SEND strategy across a multi-academy trust, quality-assuring provision in every school and driving trust-wide inclusion standards.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;55,000 - &pound;75,000</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #4a148c 0%, #9c27b0 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><rect x="6" y="6" width="36" height="36" rx="4" fill="none" stroke="white" stroke-width="3" opacity="0.7"/><path d="M14 24 h20 M24 14 v20" stroke="white" stroke-width="3" opacity="0.8"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Educational Psychologist</h3>
+                        <p class="dest-card__desc">Retrain as an Educational Psychologist, using your school-based SEND experience as a foundation for doctoral-level practice.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;42,000 - &pound;72,000</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-banner__content">
+                <h2 class="cta-banner__title">Ready for takeoff?</h2>
+                <p class="cta-banner__text">Create your free account and get a personalised career flightplan in minutes.</p>
+                <div class="cta-banner__actions">
+                    <a href="#" class="btn btn--white">Create free account</a>
+                    <a href="#" class="btn btn--outline-white">Browse destinations</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <svg class="footer__logo-icon" viewBox="0 0 32 32" width="28" height="28">
+                            <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                            <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                            <circle cx="16" cy="8" r="2" fill="#0a1628"/>
+                        </svg>
+                        <span>flightplan</span>
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="../index.html">Our mission</a>
+                    <a href="../index.html">For schools</a>
+                    <a href="../index.html">Contact us</a>
+                    <a href="../index.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+</body>
+</html>
