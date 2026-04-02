@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Assistant - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <svg class="header__logo-icon" viewBox="0 0 32 32" width="32" height="32">
+                    <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                    <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                    <circle cx="16" cy="8" r="2" fill="white"/>
+                </svg>
+                <span class="header__logo-text">flightplan</span>
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#stories" class="header__nav-link">Success Stories</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#stories" class="mobile-nav__link">Success Stories</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html#destinations">Destinations</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>Executive Assistant</span>
+        </div>
+    </div>
+
+    <!-- Destination Hero -->
+    <section class="dest-hero">
+        <div class="container">
+            <div class="dest-hero__inner">
+                <div class="dest-hero__content">
+                    <span class="dest-hero__badge" style="background: #e3f2fd; color: #1565c0;">Administration</span>
+                    <h1 class="dest-hero__title">Executive Assistant</h1>
+                    <p class="dest-hero__desc">As an Executive Assistant in a multi-academy trust or large academy, you provide high-level administrative and strategic support to the CEO, Executive Principal, or trust board. You manage complex diaries, coordinate board meetings, handle confidential trust-level communications, and act as a key liaison between senior executives and stakeholders across the organisation.</p>
+                    <div class="dest-hero__tags">
+                        <span class="dest-hero__tag dest-hero__tag--salary">&pound;27,000 - &pound;35,000</span>
+                        <span class="dest-hero__tag dest-hero__tag--duration">3-5 year journey</span>
+                        <span class="dest-hero__tag dest-hero__tag--sector">MATs &amp; Large Academies</span>
+                    </div>
+                </div>
+                <div class="dest-info-card">
+                    <h3 class="dest-info-card__title">Role overview</h3>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Salary Range</span>
+                        <span class="dest-info-card__value">&pound;27,000 - &pound;35,000</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Typical Journey</span>
+                        <span class="dest-info-card__value">3-5 years from PA/admin role</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Sector</span>
+                        <span class="dest-info-card__value">Multi-Academy Trusts, Large Academies</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Qualification</span>
+                        <span class="dest-info-card__value">Level 4 Business Admin recommended</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Reports to</span>
+                        <span class="dest-info-card__value">CEO / Executive Principal</span>
+                    </div>
+                    <a href="#" class="dest-info-card__btn" id="speakToAgent" onclick="openFlightAgent(); return false;">Speak to a flight agent</a>
+                    <a href="#" class="dest-info-card__btn dest-info-card__btn--outline">Download role guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="journey-timeline">
+        <div class="container">
+            <h2 class="journey-timeline__title">Your journey to Executive Assistant</h2>
+            <p class="journey-timeline__subtitle">The typical career stops on the way to this destination</p>
+            <div class="timeline">
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 1</div>
+                    <h3 class="timeline__stop-title">Administrative Assistant</h3>
+                    <p class="timeline__stop-desc">Begin building your administrative career in a school or office setting. Develop core skills in filing, data entry, correspondence, and office systems. Get comfortable with the pace and demands of a busy professional environment.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>1-2 years</strong></span>
+                        <span>Salary: <strong>&pound;18,000 - &pound;22,000</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 2</div>
+                    <h3 class="timeline__stop-title">Personal Assistant / Senior Administrator</h3>
+                    <p class="timeline__stop-desc">Progress to a PA role supporting a senior leader, or take on a senior admin position. Develop diary management, minute-taking, and stakeholder liaison skills. Build experience in the education sector and understand school governance structures.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>2-3 years</strong></span>
+                        <span>Salary: <strong>&pound;23,000 - &pound;30,000</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 3</div>
+                    <h3 class="timeline__stop-title">Build Strategic &amp; Governance Skills</h3>
+                    <p class="timeline__stop-desc">Develop understanding of trust governance, board meeting procedures, and strategic planning processes. Complete a Level 4 qualification in Business Administration or a governance-related course. Gain experience working with trustees and external stakeholders.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>6-12 months</strong></span>
+                        <span>Qualification: <strong>Level 4 Business Admin</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 4 - Final Destination</div>
+                    <h3 class="timeline__stop-title">Executive Assistant</h3>
+                    <p class="timeline__stop-desc">You've arrived at your destination. As EA to a CEO or trust executive, you operate at the highest level of school administration, managing board communications, coordinating trust-wide initiatives, handling sensitive strategic matters, and ensuring seamless executive operations across the organisation.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Salary: <strong>&pound;27,000 - &pound;35,000</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <h2 class="skills-section__title">Skills and qualities you'll need</h2>
+            <p class="skills-section__subtitle">The personal attributes that will help you thrive in this role</p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e3f2fd;">&#127919;</div>
+                    <h3 class="skill-card__name">Strategic Awareness</h3>
+                    <p class="skill-card__desc">Understanding the bigger picture of trust operations, governance, and strategic priorities so you can anticipate needs and add value beyond basic admin.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #fce4ec;">&#128274;</div>
+                    <h3 class="skill-card__name">Absolute Discretion</h3>
+                    <p class="skill-card__desc">Handling the most sensitive trust information including HR matters, financial data, and strategic plans with complete confidentiality and professionalism.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e8f5e9;">&#128172;</div>
+                    <h3 class="skill-card__name">Stakeholder Management</h3>
+                    <p class="skill-card__desc">Confident liaising with trustees, local authority officials, DfE contacts, headteachers, and other senior professionals on behalf of the executive.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #fff3e0;">&#128203;</div>
+                    <h3 class="skill-card__name">Governance Knowledge</h3>
+                    <p class="skill-card__desc">Understanding trust board structures, committee cycles, articles of association, and the ability to produce accurate board papers and minutes.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #f3e5f5;">&#128197;</div>
+                    <h3 class="skill-card__name">Advanced Organisation</h3>
+                    <p class="skill-card__desc">Managing multiple executive diaries, coordinating cross-trust events, and juggling competing priorities with precision and calm efficiency.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e0f7fa;">&#129504;</div>
+                    <h3 class="skill-card__name">Emotional Intelligence</h3>
+                    <p class="skill-card__desc">Reading situations accurately, managing relationships diplomatically, and supporting the executive through high-pressure periods with empathy and professionalism.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Destinations -->
+    <section class="related-dest">
+        <div class="container">
+            <h2 class="related-dest__title">Where could you go next?</h2>
+            <p class="related-dest__subtitle">Continue your journey from Executive Assistant</p>
+            <div class="related-dest__grid">
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><rect x="8" y="10" width="32" height="28" rx="3" fill="none" stroke="white" stroke-width="2.5" opacity="0.8"/><path d="M16 10 V6 h16 v4" fill="none" stroke="white" stroke-width="2.5" opacity="0.7"/><path d="M14 22 h20 M14 28 h20" stroke="white" stroke-width="2" opacity="0.6"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">School Business Manager</h3>
+                        <p class="dest-card__desc">Move into strategic management of school finance, HR, premises, and operations.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;35,000 - &pound;50,000</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="16" r="8" fill="white" opacity="0.8"/><path d="M12 40 c0-8 5-14 12-14 s12 6 12 14" fill="white" opacity="0.6"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Governance Professional</h3>
+                        <p class="dest-card__desc">Specialise in trust governance, company secretary duties, and board management.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;30,000 - &pound;45,000</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><rect x="6" y="6" width="36" height="36" rx="4" fill="none" stroke="white" stroke-width="3" opacity="0.7"/><path d="M14 24 h20 M24 14 v20" stroke="white" stroke-width="3" opacity="0.8"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Trust Operations Manager</h3>
+                        <p class="dest-card__desc">Oversee operational functions across multiple schools within the trust.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;35,000 - &pound;48,000</span>
+                        </div>
+                        <a href="#" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-banner__content">
+                <h2 class="cta-banner__title">Ready for takeoff?</h2>
+                <p class="cta-banner__text">Create your free account and get a personalised career flightplan in minutes.</p>
+                <div class="cta-banner__actions">
+                    <a href="#" class="btn btn--white">Create free account</a>
+                    <a href="#" class="btn btn--outline-white">Browse destinations</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <svg class="footer__logo-icon" viewBox="0 0 32 32" width="28" height="28">
+                            <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                            <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                            <circle cx="16" cy="8" r="2" fill="#0a1628"/>
+                        </svg>
+                        <span>flightplan</span>
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="../index.html">Our mission</a>
+                    <a href="../index.html">For schools</a>
+                    <a href="../index.html">Contact us</a>
+                    <a href="../index.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+</body>
+</html>
