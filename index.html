@@ -159,567 +159,126 @@
         </div>
     </section>
 
-    <!-- All Destinations -->
-    <section class="destinations" id="destinations">
+    <!-- Departure Board -->
+    <section class="departure-board" id="destinations">
         <div class="container">
-            <h2 class="section-title">Explore all destinations</h2>
-            <p class="section-subtitle">59 roles across education. Find the one that's right for you.</p>
+            <h2 class="departure-board__title">
+                <span class="departure-board__title-icon">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M1 13h14M3 9l2-6h6l2 6" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5" r="1.5" fill="white"/></svg>
+                </span>
+                Departures
+            </h2>
+            <p class="departure-board__subtitle">59 career destinations now boarding. Select a category or browse the full board.</p>
 
-            <!-- Leadership -->
-            <div class="dest-category">
-                <div class="dest-category__header">
-                    <div class="dest-category__accent" style="background: linear-gradient(to bottom, #6a1b9a, #ab47bc);"></div>
-                    <h3 class="dest-category__title">Leadership</h3>
-                    <span class="dest-category__subtitle">7 destinations</span>
-                </div>
-                <div class="dest-category__grid">
-                    <a href="destinations/academies-director.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Academies Director</h3>
-                            <p class="dest-card__desc">Lead multiple academies across a trust.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/principal.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Principal</h3>
-                            <p class="dest-card__desc">Lead an academy and its community.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/deputy-principal.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #7b1fa2 0%, #ce93d8 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Deputy Principal</h3>
-                            <p class="dest-card__desc">Deputise for the Principal and lead operations.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/vice-principal.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #8e24aa 0%, #ba68c8 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Vice Principal</h3>
-                            <p class="dest-card__desc">Drive strategic priorities across the academy.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/curriculum-advisor.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #9c27b0 0%, #e1bee7 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Curriculum Advisor</h3>
-                            <p class="dest-card__desc">Shape curriculum strategy across the trust.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/assistant-principal.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #ab47bc 0%, #e1bee7 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Assistant Principal</h3>
-                            <p class="dest-card__desc">Step into senior leadership and drive improvement.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/senco.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #7c4dff 0%, #b388ff 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">SENCO</h3>
-                            <p class="dest-card__desc">Coordinate special educational needs provision.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                </div>
+            <div class="departure-board__filter">
+                <button class="departure-board__filter-btn departure-board__filter-btn--active" data-filter="all">All departures</button>
+                <button class="departure-board__filter-btn" data-filter="leadership">Leadership</button>
+                <button class="departure-board__filter-btn" data-filter="dept-leadership">Dept. Leadership</button>
+                <button class="departure-board__filter-btn" data-filter="teaching">Teaching</button>
+                <button class="departure-board__filter-btn" data-filter="classroom-support">Classroom Support</button>
+                <button class="departure-board__filter-btn" data-filter="admin">Administration</button>
+                <button class="departure-board__filter-btn" data-filter="student-services">Student Services</button>
+                <button class="departure-board__filter-btn" data-filter="specialist">Specialist</button>
+                <button class="departure-board__filter-btn" data-filter="exams-data">Exams, Data &amp; Attendance</button>
             </div>
 
-            <!-- Department Leadership -->
-            <div class="dest-category">
-                <div class="dest-category__header">
-                    <div class="dest-category__accent" style="background: linear-gradient(to bottom, #0057b8, #00a0e1);"></div>
-                    <h3 class="dest-category__title">Department Leadership</h3>
-                    <span class="dest-category__subtitle">6 destinations</span>
-                </div>
-                <div class="dest-category__grid">
-                    <a href="destinations/director-of-learning.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #0057b8 0%, #42a5f5 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Director of Learning</h3>
-                            <p class="dest-card__desc">Lead a faculty or multiple departments.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/head-of-learning.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #1565c0 0%, #64b5f6 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Head of Learning</h3>
-                            <p class="dest-card__desc">Lead a department and its teaching team.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/phase-leader.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #1976d2 0%, #90caf9 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Phase Leader</h3>
-                            <p class="dest-card__desc">Lead a key stage or phase across the academy.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/deputy-director-of-learning.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #1e88e5 0%, #bbdefb 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Deputy Director of Learning</h3>
-                            <p class="dest-card__desc">Support the Director in leading a faculty.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/coordinator-of-learning.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #2196f3 0%, #bbdefb 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Coordinator of Learning</h3>
-                            <p class="dest-card__desc">Coordinate a curriculum area or programme.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/second-in-charge.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #42a5f5 0%, #e3f2fd 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Second in Charge</h3>
-                            <p class="dest-card__desc">Deputy to Head of Department.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            <table class="board">
+                <thead>
+                    <tr>
+                        <th>Flight</th>
+                        <th>Destination</th>
+                        <th>Airline</th>
+                        <th>Gate</th>
+                        <th style="text-align:right">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Leadership -->
+                    <tr class="board__category-row" data-category="leadership"><td colspan="5"><span class="board__category-label"><span class="board__category-dot" style="background:#ab47bc;"></span> Leadership</span></td></tr>
+                    <tr class="board__row" data-category="leadership" onclick="location.href='destinations/academies-director.html'"><td class="board__flight">FP-001</td><td class="board__destination"><a href="destinations/academies-director.html">Academies Director</a></td><td class="board__airline">Leadership</td><td class="board__gate">T1</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/academies-director.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="leadership" onclick="location.href='destinations/principal.html'"><td class="board__flight">FP-002</td><td class="board__destination"><a href="destinations/principal.html">Principal</a></td><td class="board__airline">Leadership</td><td class="board__gate">T1</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/principal.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="leadership" onclick="location.href='destinations/deputy-principal.html'"><td class="board__flight">FP-003</td><td class="board__destination"><a href="destinations/deputy-principal.html">Deputy Principal</a></td><td class="board__airline">Leadership</td><td class="board__gate">T1</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/deputy-principal.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="leadership" onclick="location.href='destinations/vice-principal.html'"><td class="board__flight">FP-004</td><td class="board__destination"><a href="destinations/vice-principal.html">Vice Principal</a></td><td class="board__airline">Leadership</td><td class="board__gate">T1</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/vice-principal.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="leadership" onclick="location.href='destinations/curriculum-advisor.html'"><td class="board__flight">FP-005</td><td class="board__destination"><a href="destinations/curriculum-advisor.html">Curriculum Advisor</a></td><td class="board__airline">Leadership</td><td class="board__gate">T2</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/curriculum-advisor.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="leadership" onclick="location.href='destinations/assistant-principal.html'"><td class="board__flight">FP-006</td><td class="board__destination"><a href="destinations/assistant-principal.html">Assistant Principal</a></td><td class="board__airline">Leadership</td><td class="board__gate">T3</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/assistant-principal.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="leadership" onclick="location.href='destinations/senco.html'"><td class="board__flight">FP-007</td><td class="board__destination"><a href="destinations/senco.html">SENCO</a></td><td class="board__airline">Leadership</td><td class="board__gate">T3</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/senco.html" class="board__view-link">View &rarr;</a></td></tr>
 
-            <!-- Classroom Teaching -->
-            <div class="dest-category">
-                <div class="dest-category__header">
-                    <div class="dest-category__accent" style="background: linear-gradient(to bottom, #2e7d32, #66bb6a);"></div>
-                    <h3 class="dest-category__title">Classroom Teaching</h3>
-                    <span class="dest-category__subtitle">5 destinations</span>
-                </div>
-                <div class="dest-category__grid">
-                    <a href="destinations/lead-practitioner.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Lead Practitioner</h3>
-                            <p class="dest-card__desc">Model outstanding practice and coach others.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/teacher-of-subject.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #388e3c 0%, #81c784 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Teacher of Subject</h3>
-                            <p class="dest-card__desc">Specialist secondary subject teacher.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/class-teacher.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #43a047 0%, #a5d6a7 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Class Teacher</h3>
-                            <p class="dest-card__desc">Lead your own classroom in primary or secondary.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/sen-teacher.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #4caf50 0%, #c8e6c9 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">SEN Teacher</h3>
-                            <p class="dest-card__desc">Specialist teaching for pupils with SEND.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/intervention-teacher.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #66bb6a 0%, #e8f5e9 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Intervention Teacher</h3>
-                            <p class="dest-card__desc">Targeted support to close learning gaps.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                    <!-- Department Leadership -->
+                    <tr class="board__category-row" data-category="dept-leadership"><td colspan="5"><span class="board__category-label"><span class="board__category-dot" style="background:#42a5f5;"></span> Department Leadership</span></td></tr>
+                    <tr class="board__row" data-category="dept-leadership" onclick="location.href='destinations/director-of-learning.html'"><td class="board__flight">FP-010</td><td class="board__destination"><a href="destinations/director-of-learning.html">Director of Learning</a></td><td class="board__airline">Dept. Leadership</td><td class="board__gate">T2</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/director-of-learning.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="dept-leadership" onclick="location.href='destinations/head-of-learning.html'"><td class="board__flight">FP-011</td><td class="board__destination"><a href="destinations/head-of-learning.html">Head of Learning</a></td><td class="board__airline">Dept. Leadership</td><td class="board__gate">T2</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/head-of-learning.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="dept-leadership" onclick="location.href='destinations/phase-leader.html'"><td class="board__flight">FP-012</td><td class="board__destination"><a href="destinations/phase-leader.html">Phase Leader</a></td><td class="board__airline">Dept. Leadership</td><td class="board__gate">T2</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/phase-leader.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="dept-leadership" onclick="location.href='destinations/deputy-director-of-learning.html'"><td class="board__flight">FP-013</td><td class="board__destination"><a href="destinations/deputy-director-of-learning.html">Deputy Director of Learning</a></td><td class="board__airline">Dept. Leadership</td><td class="board__gate">T2</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/deputy-director-of-learning.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="dept-leadership" onclick="location.href='destinations/coordinator-of-learning.html'"><td class="board__flight">FP-014</td><td class="board__destination"><a href="destinations/coordinator-of-learning.html">Coordinator of Learning</a></td><td class="board__airline">Dept. Leadership</td><td class="board__gate">T2</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/coordinator-of-learning.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="dept-leadership" onclick="location.href='destinations/second-in-charge.html'"><td class="board__flight">FP-015</td><td class="board__destination"><a href="destinations/second-in-charge.html">Second in Charge</a></td><td class="board__airline">Dept. Leadership</td><td class="board__gate">T2</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/second-in-charge.html" class="board__view-link">View &rarr;</a></td></tr>
 
-            <!-- Classroom Support -->
-            <div class="dest-category">
-                <div class="dest-category__header">
-                    <div class="dest-category__accent" style="background: linear-gradient(to bottom, #00838f, #4dd0e1);"></div>
-                    <h3 class="dest-category__title">Classroom Support</h3>
-                    <span class="dest-category__subtitle">9 destinations</span>
-                </div>
-                <div class="dest-category__grid">
-                    <a href="destinations/teaching-assistant.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #00838f 0%, #4dd0e1 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Teaching Assistant</h3>
-                            <p class="dest-card__desc">Support pupils and teachers in the classroom.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/sen-teaching-assistant.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #00897b 0%, #80cbc4 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">SEN Teaching Assistant</h3>
-                            <p class="dest-card__desc">Specialist support for pupils with SEND.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/higher-level-teaching-assistant.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #00695c 0%, #4db6ac 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Higher Level TA</h3>
-                            <p class="dest-card__desc">Take on more responsibility and lead classes.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/sen-higher-level-teaching-assistant.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #00796b 0%, #80cbc4 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">SEN Higher Level TA</h3>
-                            <p class="dest-card__desc">Advanced SEND support and class leadership.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/cover-supervisor.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #26a69a 0%, #b2dfdb 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Cover Supervisor</h3>
-                            <p class="dest-card__desc">Supervise classes in the absence of teachers.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/technician.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #009688 0%, #e0f2f1 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Technician</h3>
-                            <p class="dest-card__desc">Lab, ICT or workshop technical support.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/nursery-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #00bcd4 0%, #e0f7fa 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Nursery Manager</h3>
-                            <p class="dest-card__desc">Lead an early years setting.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/deputy-nursery-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #26c6da 0%, #e0f7fa 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Deputy Nursery Manager</h3>
-                            <p class="dest-card__desc">Support the Nursery Manager day-to-day.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/nursery-assistant.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #4dd0e1 0%, #e0f7fa 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Nursery Assistant</h3>
-                            <p class="dest-card__desc">Care and support in early years.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                    <!-- Teaching -->
+                    <tr class="board__category-row" data-category="teaching"><td colspan="5"><span class="board__category-label"><span class="board__category-dot" style="background:#66bb6a;"></span> Classroom Teaching</span></td></tr>
+                    <tr class="board__row" data-category="teaching" onclick="location.href='destinations/lead-practitioner.html'"><td class="board__flight">FP-020</td><td class="board__destination"><a href="destinations/lead-practitioner.html">Lead Practitioner</a></td><td class="board__airline">Teaching</td><td class="board__gate">T3</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/lead-practitioner.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="teaching" onclick="location.href='destinations/teacher-of-subject.html'"><td class="board__flight">FP-021</td><td class="board__destination"><a href="destinations/teacher-of-subject.html">Teacher of Subject</a></td><td class="board__airline">Teaching</td><td class="board__gate">T3</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/teacher-of-subject.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="teaching" onclick="location.href='destinations/class-teacher.html'"><td class="board__flight">FP-022</td><td class="board__destination"><a href="destinations/class-teacher.html">Class Teacher</a></td><td class="board__airline">Teaching</td><td class="board__gate">T3</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/class-teacher.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="teaching" onclick="location.href='destinations/sen-teacher.html'"><td class="board__flight">FP-023</td><td class="board__destination"><a href="destinations/sen-teacher.html">SEN Teacher</a></td><td class="board__airline">Teaching</td><td class="board__gate">T3</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/sen-teacher.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="teaching" onclick="location.href='destinations/intervention-teacher.html'"><td class="board__flight">FP-024</td><td class="board__destination"><a href="destinations/intervention-teacher.html">Intervention Teacher</a></td><td class="board__airline">Teaching</td><td class="board__gate">T3</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/intervention-teacher.html" class="board__view-link">View &rarr;</a></td></tr>
 
-            <!-- Administration -->
-            <div class="dest-category">
-                <div class="dest-category__header">
-                    <div class="dest-category__accent" style="background: linear-gradient(to bottom, #e8491d, #ff8a50);"></div>
-                    <h3 class="dest-category__title">Administration</h3>
-                    <span class="dest-category__subtitle">5 destinations</span>
-                </div>
-                <div class="dest-category__grid">
-                    <a href="destinations/office-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #e8491d 0%, #ff8a50 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Office Manager</h3>
-                            <p class="dest-card__desc">Lead the academy's administrative operations.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/academy-administrator.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #ef6c00 0%, #ffb74d 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Academy Administrator</h3>
-                            <p class="dest-card__desc">Keep the academy running smoothly.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/receptionist.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #f57c00 0%, #ffcc80 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Receptionist</h3>
-                            <p class="dest-card__desc">The welcoming face of the academy.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/personal-assistant.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #ff9800 0%, #ffe0b2 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Personal Assistant</h3>
-                            <p class="dest-card__desc">Support senior leaders with organisation.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/executive-assistant.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #fb8c00 0%, #ffe0b2 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Executive Assistant</h3>
-                            <p class="dest-card__desc">High-level support to the Principal or CEO.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                    <!-- Classroom Support -->
+                    <tr class="board__category-row" data-category="classroom-support"><td colspan="5"><span class="board__category-label"><span class="board__category-dot" style="background:#4dd0e1;"></span> Classroom Support</span></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/teaching-assistant.html'"><td class="board__flight">FP-030</td><td class="board__destination"><a href="destinations/teaching-assistant.html">Teaching Assistant</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T4</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/teaching-assistant.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/sen-teaching-assistant.html'"><td class="board__flight">FP-031</td><td class="board__destination"><a href="destinations/sen-teaching-assistant.html">SEN Teaching Assistant</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T4</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/sen-teaching-assistant.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/higher-level-teaching-assistant.html'"><td class="board__flight">FP-032</td><td class="board__destination"><a href="destinations/higher-level-teaching-assistant.html">Higher Level TA</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T4</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/higher-level-teaching-assistant.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/sen-higher-level-teaching-assistant.html'"><td class="board__flight">FP-033</td><td class="board__destination"><a href="destinations/sen-higher-level-teaching-assistant.html">SEN Higher Level TA</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T4</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/sen-higher-level-teaching-assistant.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/cover-supervisor.html'"><td class="board__flight">FP-034</td><td class="board__destination"><a href="destinations/cover-supervisor.html">Cover Supervisor</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T4</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/cover-supervisor.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/technician.html'"><td class="board__flight">FP-035</td><td class="board__destination"><a href="destinations/technician.html">Technician</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T4</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/technician.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/nursery-manager.html'"><td class="board__flight">FP-036</td><td class="board__destination"><a href="destinations/nursery-manager.html">Nursery Manager</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T5</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/nursery-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/deputy-nursery-manager.html'"><td class="board__flight">FP-037</td><td class="board__destination"><a href="destinations/deputy-nursery-manager.html">Deputy Nursery Manager</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T5</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/deputy-nursery-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="classroom-support" onclick="location.href='destinations/nursery-assistant.html'"><td class="board__flight">FP-038</td><td class="board__destination"><a href="destinations/nursery-assistant.html">Nursery Assistant</a></td><td class="board__airline">Classroom Support</td><td class="board__gate">T5</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/nursery-assistant.html" class="board__view-link">View &rarr;</a></td></tr>
 
-            <!-- Student Services -->
-            <div class="dest-category">
-                <div class="dest-category__header">
-                    <div class="dest-category__accent" style="background: linear-gradient(to bottom, #c62828, #ef5350);"></div>
-                    <h3 class="dest-category__title">Student Services &amp; Safeguarding</h3>
-                    <span class="dest-category__subtitle">6 destinations</span>
-                </div>
-                <div class="dest-category__grid">
-                    <a href="destinations/student-services-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Student Services Manager</h3>
-                            <p class="dest-card__desc">Lead the student services team.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/student-services-officer.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #d32f2f 0%, #ef9a9a 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Student Services Officer</h3>
-                            <p class="dest-card__desc">Frontline support for student welfare.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/assistant-senco.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #e53935 0%, #ffcdd2 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Assistant SENCO</h3>
-                            <p class="dest-card__desc">Support the SENCO with SEND provision.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/safeguarding-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #b71c1c 0%, #e57373 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Safeguarding Manager</h3>
-                            <p class="dest-card__desc">Lead safeguarding across the academy.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/safeguarding-officer.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #c62828 0%, #ffcdd2 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Safeguarding Officer</h3>
-                            <p class="dest-card__desc">Monitor and respond to safeguarding concerns.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/safeguarding-administrator.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #e53935 0%, #ffebee 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Safeguarding Administrator</h3>
-                            <p class="dest-card__desc">Admin support for safeguarding records.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                    <!-- Administration -->
+                    <tr class="board__category-row" data-category="admin"><td colspan="5"><span class="board__category-label"><span class="board__category-dot" style="background:#ff8a50;"></span> Administration</span></td></tr>
+                    <tr class="board__row" data-category="admin" onclick="location.href='destinations/office-manager.html'"><td class="board__flight">FP-040</td><td class="board__destination"><a href="destinations/office-manager.html">Office Manager</a></td><td class="board__airline">Administration</td><td class="board__gate">T5</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/office-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="admin" onclick="location.href='destinations/academy-administrator.html'"><td class="board__flight">FP-041</td><td class="board__destination"><a href="destinations/academy-administrator.html">Academy Administrator</a></td><td class="board__airline">Administration</td><td class="board__gate">T5</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/academy-administrator.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="admin" onclick="location.href='destinations/receptionist.html'"><td class="board__flight">FP-042</td><td class="board__destination"><a href="destinations/receptionist.html">Receptionist</a></td><td class="board__airline">Administration</td><td class="board__gate">T5</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/receptionist.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="admin" onclick="location.href='destinations/personal-assistant.html'"><td class="board__flight">FP-043</td><td class="board__destination"><a href="destinations/personal-assistant.html">Personal Assistant</a></td><td class="board__airline">Administration</td><td class="board__gate">T5</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/personal-assistant.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="admin" onclick="location.href='destinations/executive-assistant.html'"><td class="board__flight">FP-044</td><td class="board__destination"><a href="destinations/executive-assistant.html">Executive Assistant</a></td><td class="board__airline">Administration</td><td class="board__gate">T5</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/executive-assistant.html" class="board__view-link">View &rarr;</a></td></tr>
 
-            <!-- Specialist Services -->
-            <div class="dest-category">
-                <div class="dest-category__header">
-                    <div class="dest-category__accent" style="background: linear-gradient(to bottom, #bf360c, #ff7043);"></div>
-                    <h3 class="dest-category__title">Specialist Services</h3>
-                    <span class="dest-category__subtitle">8 destinations</span>
-                </div>
-                <div class="dest-category__grid">
-                    <a href="destinations/careers-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #bf360c 0%, #ff7043 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Careers Manager</h3>
-                            <p class="dest-card__desc">Lead careers education and guidance.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/careers-officer.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #d84315 0%, #ff8a65 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Careers Officer</h3>
-                            <p class="dest-card__desc">Guide students through career choices.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/library-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #e65100 0%, #ffab91 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Library Manager</h3>
-                            <p class="dest-card__desc">Lead the academy's learning resource centre.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/library-assistant.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #f4511e 0%, #ffccbc 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Library Assistant</h3>
-                            <p class="dest-card__desc">Support the library and promote reading.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/cover-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #ff5722 0%, #ffccbc 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Cover Manager</h3>
-                            <p class="dest-card__desc">Organise cover for absent staff.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/music-tutor.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #dd2c00 0%, #ff8a80 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Music Tutor</h3>
-                            <p class="dest-card__desc">Peripatetic instrumental or vocal teaching.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/school-counsellor.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #ff3d00 0%, #ffab91 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">School Counsellor</h3>
-                            <p class="dest-card__desc">Therapeutic support for student wellbeing.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/lunchtime-supervisor.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #ff6e40 0%, #fbe9e7 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Lunchtime Supervisor</h3>
-                            <p class="dest-card__desc">Supervise students during break times.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                    <!-- Student Services & Safeguarding -->
+                    <tr class="board__category-row" data-category="student-services"><td colspan="5"><span class="board__category-label"><span class="board__category-dot" style="background:#ef5350;"></span> Student Services &amp; Safeguarding</span></td></tr>
+                    <tr class="board__row" data-category="student-services" onclick="location.href='destinations/student-services-manager.html'"><td class="board__flight">FP-050</td><td class="board__destination"><a href="destinations/student-services-manager.html">Student Services Manager</a></td><td class="board__airline">Student Services</td><td class="board__gate">T6</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/student-services-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="student-services" onclick="location.href='destinations/student-services-officer.html'"><td class="board__flight">FP-051</td><td class="board__destination"><a href="destinations/student-services-officer.html">Student Services Officer</a></td><td class="board__airline">Student Services</td><td class="board__gate">T6</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/student-services-officer.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="student-services" onclick="location.href='destinations/assistant-senco.html'"><td class="board__flight">FP-052</td><td class="board__destination"><a href="destinations/assistant-senco.html">Assistant SENCO</a></td><td class="board__airline">Student Services</td><td class="board__gate">T6</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/assistant-senco.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="student-services" onclick="location.href='destinations/safeguarding-manager.html'"><td class="board__flight">FP-053</td><td class="board__destination"><a href="destinations/safeguarding-manager.html">Safeguarding Manager</a></td><td class="board__airline">Safeguarding</td><td class="board__gate">T6</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/safeguarding-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="student-services" onclick="location.href='destinations/safeguarding-officer.html'"><td class="board__flight">FP-054</td><td class="board__destination"><a href="destinations/safeguarding-officer.html">Safeguarding Officer</a></td><td class="board__airline">Safeguarding</td><td class="board__gate">T6</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/safeguarding-officer.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="student-services" onclick="location.href='destinations/safeguarding-administrator.html'"><td class="board__flight">FP-055</td><td class="board__destination"><a href="destinations/safeguarding-administrator.html">Safeguarding Administrator</a></td><td class="board__airline">Safeguarding</td><td class="board__gate">T6</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/safeguarding-administrator.html" class="board__view-link">View &rarr;</a></td></tr>
 
-            <!-- Examinations & Data -->
-            <div class="dest-category">
-                <div class="dest-category__header">
-                    <div class="dest-category__accent" style="background: linear-gradient(to bottom, #37474f, #78909c);"></div>
-                    <h3 class="dest-category__title">Examinations, Data &amp; Attendance</h3>
-                    <span class="dest-category__subtitle">12 destinations</span>
-                </div>
-                <div class="dest-category__grid">
-                    <a href="destinations/exams-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #37474f 0%, #78909c 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Exams Manager</h3>
-                            <p class="dest-card__desc">Lead all examination administration.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/exams-officer.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #455a64 0%, #90a4ae 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Exams Officer</h3>
-                            <p class="dest-card__desc">Coordinate exam entries and logistics.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/exams-administrator.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #546e7a 0%, #b0bec5 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Exams Administrator</h3>
-                            <p class="dest-card__desc">Administrative support for the exams team.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/lead-invigilator.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #607d8b 0%, #cfd8dc 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Lead Invigilator</h3>
-                            <p class="dest-card__desc">Oversee invigilation teams during exams.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/invigilator.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #78909c 0%, #eceff1 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Invigilator</h3>
-                            <p class="dest-card__desc">Supervise students during examinations.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/data-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #263238 0%, #546e7a 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Data Manager</h3>
-                            <p class="dest-card__desc">Lead data systems and reporting.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/data-officer.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #37474f 0%, #90a4ae 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Data Officer</h3>
-                            <p class="dest-card__desc">Maintain and analyse academy data.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/data-administrator.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #455a64 0%, #cfd8dc 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Data Administrator</h3>
-                            <p class="dest-card__desc">Data entry and system maintenance.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/attendance-manager.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #263238 0%, #78909c 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Attendance Manager</h3>
-                            <p class="dest-card__desc">Lead attendance strategy and improvement.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/attendance-officer.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #37474f 0%, #b0bec5 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Attendance Officer</h3>
-                            <p class="dest-card__desc">Monitor and follow up on attendance.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/deputy-attendance-officer.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #546e7a 0%, #cfd8dc 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Deputy Attendance Officer</h3>
-                            <p class="dest-card__desc">Support attendance monitoring and reporting.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                    <a href="destinations/attendance-administrator.html" class="dest-card dest-card--compact">
-                        <div class="dest-card__image" style="background: linear-gradient(135deg, #607d8b 0%, #eceff1 100%);"></div>
-                        <div class="dest-card__body">
-                            <h3 class="dest-card__title">Attendance Administrator</h3>
-                            <p class="dest-card__desc">Admin support for attendance records.</p>
-                            <span class="dest-card__link">View destination &rarr;</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                    <!-- Specialist -->
+                    <tr class="board__category-row" data-category="specialist"><td colspan="5"><span class="board__category-label"><span class="board__category-dot" style="background:#ff7043;"></span> Specialist Services</span></td></tr>
+                    <tr class="board__row" data-category="specialist" onclick="location.href='destinations/careers-manager.html'"><td class="board__flight">FP-060</td><td class="board__destination"><a href="destinations/careers-manager.html">Careers Manager</a></td><td class="board__airline">Careers</td><td class="board__gate">T7</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/careers-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="specialist" onclick="location.href='destinations/careers-officer.html'"><td class="board__flight">FP-061</td><td class="board__destination"><a href="destinations/careers-officer.html">Careers Officer</a></td><td class="board__airline">Careers</td><td class="board__gate">T7</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/careers-officer.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="specialist" onclick="location.href='destinations/library-manager.html'"><td class="board__flight">FP-062</td><td class="board__destination"><a href="destinations/library-manager.html">Library Manager</a></td><td class="board__airline">Learning Resources</td><td class="board__gate">T7</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/library-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="specialist" onclick="location.href='destinations/library-assistant.html'"><td class="board__flight">FP-063</td><td class="board__destination"><a href="destinations/library-assistant.html">Library Assistant</a></td><td class="board__airline">Learning Resources</td><td class="board__gate">T7</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/library-assistant.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="specialist" onclick="location.href='destinations/cover-manager.html'"><td class="board__flight">FP-064</td><td class="board__destination"><a href="destinations/cover-manager.html">Cover Manager</a></td><td class="board__airline">Operations</td><td class="board__gate">T7</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/cover-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="specialist" onclick="location.href='destinations/music-tutor.html'"><td class="board__flight">FP-065</td><td class="board__destination"><a href="destinations/music-tutor.html">Music Tutor</a></td><td class="board__airline">Specialist Teaching</td><td class="board__gate">T7</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/music-tutor.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="specialist" onclick="location.href='destinations/school-counsellor.html'"><td class="board__flight">FP-066</td><td class="board__destination"><a href="destinations/school-counsellor.html">School Counsellor</a></td><td class="board__airline">Student Welfare</td><td class="board__gate">T7</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/school-counsellor.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="specialist" onclick="location.href='destinations/lunchtime-supervisor.html'"><td class="board__flight">FP-067</td><td class="board__destination"><a href="destinations/lunchtime-supervisor.html">Lunchtime Supervisor</a></td><td class="board__airline">Student Welfare</td><td class="board__gate">T7</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/lunchtime-supervisor.html" class="board__view-link">View &rarr;</a></td></tr>
 
+                    <!-- Exams, Data & Attendance -->
+                    <tr class="board__category-row" data-category="exams-data"><td colspan="5"><span class="board__category-label"><span class="board__category-dot" style="background:#78909c;"></span> Examinations, Data &amp; Attendance</span></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/exams-manager.html'"><td class="board__flight">FP-070</td><td class="board__destination"><a href="destinations/exams-manager.html">Exams Manager</a></td><td class="board__airline">Examinations</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/exams-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/exams-officer.html'"><td class="board__flight">FP-071</td><td class="board__destination"><a href="destinations/exams-officer.html">Exams Officer</a></td><td class="board__airline">Examinations</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/exams-officer.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/exams-administrator.html'"><td class="board__flight">FP-072</td><td class="board__destination"><a href="destinations/exams-administrator.html">Exams Administrator</a></td><td class="board__airline">Examinations</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/exams-administrator.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/lead-invigilator.html'"><td class="board__flight">FP-073</td><td class="board__destination"><a href="destinations/lead-invigilator.html">Lead Invigilator</a></td><td class="board__airline">Examinations</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/lead-invigilator.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/invigilator.html'"><td class="board__flight">FP-074</td><td class="board__destination"><a href="destinations/invigilator.html">Invigilator</a></td><td class="board__airline">Examinations</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/invigilator.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/data-manager.html'"><td class="board__flight">FP-075</td><td class="board__destination"><a href="destinations/data-manager.html">Data Manager</a></td><td class="board__airline">Data Services</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/data-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/data-officer.html'"><td class="board__flight">FP-076</td><td class="board__destination"><a href="destinations/data-officer.html">Data Officer</a></td><td class="board__airline">Data Services</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/data-officer.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/data-administrator.html'"><td class="board__flight">FP-077</td><td class="board__destination"><a href="destinations/data-administrator.html">Data Administrator</a></td><td class="board__airline">Data Services</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--departing">Departing</span><a href="destinations/data-administrator.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/attendance-manager.html'"><td class="board__flight">FP-078</td><td class="board__destination"><a href="destinations/attendance-manager.html">Attendance Manager</a></td><td class="board__airline">Attendance</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/attendance-manager.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/attendance-officer.html'"><td class="board__flight">FP-079</td><td class="board__destination"><a href="destinations/attendance-officer.html">Attendance Officer</a></td><td class="board__airline">Attendance</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/attendance-officer.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/deputy-attendance-officer.html'"><td class="board__flight">FP-080</td><td class="board__destination"><a href="destinations/deputy-attendance-officer.html">Deputy Attendance Officer</a></td><td class="board__airline">Attendance</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--ontime">On Time</span><a href="destinations/deputy-attendance-officer.html" class="board__view-link">View &rarr;</a></td></tr>
+                    <tr class="board__row" data-category="exams-data" onclick="location.href='destinations/attendance-administrator.html'"><td class="board__flight">FP-081</td><td class="board__destination"><a href="destinations/attendance-administrator.html">Attendance Administrator</a></td><td class="board__airline">Attendance</td><td class="board__gate">T8</td><td class="board__status"><span class="board__status-badge board__status-badge--boarding">Boarding</span><a href="destinations/attendance-administrator.html" class="board__view-link">View &rarr;</a></td></tr>
+                </tbody>
+            </table>
+            <p class="departure-board__count">Showing 59 destinations &bull; All flights operated by Flightplan Education</p>
         </div>
     </section>
-
     <!-- How It Works / Journey Planner -->
     <section class="how-it-works" id="journeys">
         <div class="container">

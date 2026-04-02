@@ -1020,7 +1020,268 @@ select { font-family: inherit; }
     opacity: 0.6;
 }
 
-/* ===== Destination Categories ===== */
+/* ===== Departure Board ===== */
+.departure-board {
+    padding: 60px 0;
+    background: var(--blue-900);
+    color: var(--white);
+}
+
+.departure-board__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.departure-board__title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.departure-board__title-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--orange-600);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.departure-board__subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 32px;
+}
+
+.departure-board__filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.departure-board__filter-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.departure-board__filter-btn:hover,
+.departure-board__filter-btn--active {
+    background: var(--orange-600);
+    color: var(--white);
+    border-color: var(--orange-600);
+}
+
+/* Board table */
+.board {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: rgba(0,0,0,0.3);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.board thead th {
+    padding: 14px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.4);
+    text-align: left;
+    background: rgba(0,0,0,0.4);
+    border-bottom: 2px solid rgba(255,255,255,0.06);
+}
+
+.board thead th:last-child {
+    text-align: right;
+}
+
+.board__category-row td {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(255,255,255,0.04);
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.board__category-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.board__category-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.board__row {
+    transition: background 0.15s;
+    cursor: pointer;
+}
+
+.board__row:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+.board__row td {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+}
+
+.board__flight {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--orange-400);
+    letter-spacing: 0.5px;
+}
+
+.board__destination {
+    font-weight: 600;
+    color: var(--white);
+    font-size: 15px;
+}
+
+.board__destination a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.board__destination a:hover {
+    text-decoration: underline;
+}
+
+.board__airline {
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+}
+
+.board__gate {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+}
+
+.board__status {
+    text-align: right;
+}
+
+.board__status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.board__status-badge--boarding {
+    background: rgba(46,125,50,0.2);
+    color: #66bb6a;
+    border: 1px solid rgba(46,125,50,0.3);
+}
+
+.board__status-badge--ontime {
+    background: rgba(0,114,229,0.15);
+    color: #64b5f6;
+    border: 1px solid rgba(0,114,229,0.3);
+}
+
+.board__status-badge--departing {
+    background: rgba(232,73,29,0.2);
+    color: var(--orange-400);
+    border: 1px solid rgba(232,73,29,0.3);
+}
+
+.board__view-link {
+    display: none;
+}
+
+.board__row:hover .board__status-badge {
+    display: none;
+}
+
+.board__row:hover .board__view-link {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--orange-600);
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* Board counter */
+.departure-board__count {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.5px;
+}
+
+/* Responsive board */
+@media (max-width: 768px) {
+    .board thead { display: none; }
+    .board, .board tbody, .board tr, .board td {
+        display: block;
+    }
+    .board__category-row { display: none; }
+    .board__row {
+        padding: 16px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 4px 12px;
+    }
+    .board__row td {
+        padding: 0;
+        border: none;
+    }
+    .board__row td:nth-child(1) { grid-row: 1; grid-column: 1; }
+    .board__row td:nth-child(2) { grid-row: 1; grid-column: 2; }
+    .board__row td:nth-child(3) { display: none; }
+    .board__row td:nth-child(4) { display: none; }
+    .board__row td:nth-child(5) { grid-row: 1; grid-column: 3; }
+    .departure-board__filter {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+    }
+    .departure-board__filter-btn {
+        white-space: nowrap;
+    }
+}
+
+/* ===== Destination Categories (legacy - keep for compatibility) ===== */
 .dest-category {
     margin-bottom: 48px;
 }

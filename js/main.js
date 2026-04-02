@@ -119,6 +119,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Departure board category filter
+    const filterBtns = document.querySelectorAll('.departure-board__filter-btn');
+    const boardRows = document.querySelectorAll('.board__row');
+    const categoryRows = document.querySelectorAll('.board__category-row');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('departure-board__filter-btn--active'));
+            btn.classList.add('departure-board__filter-btn--active');
+            const filter = btn.dataset.filter;
+
+            boardRows.forEach(row => {
+                row.style.display = (filter === 'all' || row.dataset.category === filter) ? '' : 'none';
+            });
+            categoryRows.forEach(row => {
+                row.style.display = (filter === 'all' || row.dataset.category === filter) ? '' : 'none';
+            });
+
+            // Update count
+            const countEl = document.querySelector('.departure-board__count');
+            if (countEl) {
+                const visible = [...boardRows].filter(r => r.style.display !== 'none').length;
+                countEl.textContent = `Showing ${visible} destination${visible !== 1 ? 's' : ''} \u2022 All flights operated by Flightplan Education`;
+            }
+        });
+    });
+
     // Mobile menu
     const menuBtn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
