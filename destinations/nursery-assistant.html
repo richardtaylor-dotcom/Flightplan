@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursery Assistant - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <svg class="header__logo-icon" viewBox="0 0 32 32" width="32" height="32">
+                    <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                    <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                    <circle cx="16" cy="8" r="2" fill="white"/>
+                </svg>
+                <span class="header__logo-text">flightplan</span>
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#stories" class="header__nav-link">Success Stories</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#stories" class="mobile-nav__link">Success Stories</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html#destinations">Destinations</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>Nursery Assistant</span>
+        </div>
+    </div>
+
+    <!-- Destination Hero -->
+    <section class="dest-hero">
+        <div class="container">
+            <div class="dest-hero__inner">
+                <div class="dest-hero__content">
+                    <span class="dest-hero__badge" style="background: #e0f2f1; color: #00695c;">Classroom Support</span>
+                    <h1 class="dest-hero__title">Nursery Assistant</h1>
+                    <p class="dest-hero__desc">As a Nursery Assistant, you provide hands-on care and support for children aged 0-5 in an early years setting. You help create a warm, stimulating environment where young children can play, learn, and develop. Working under the guidance of qualified practitioners, you assist with activities, mealtimes, nappy changing, and outdoor play, while building trusting relationships with children and their families.</p>
+                    <div class="dest-hero__tags">
+                        <span class="dest-hero__tag dest-hero__tag--salary">&pound;18,000 - &pound;22,000</span>
+                        <span class="dest-hero__tag dest-hero__tag--duration">1-3 month journey</span>
+                        <span class="dest-hero__tag dest-hero__tag--sector">Early Years</span>
+                    </div>
+                </div>
+                <div class="dest-info-card">
+                    <h3 class="dest-info-card__title">Role overview</h3>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Salary Range</span>
+                        <span class="dest-info-card__value">&pound;18,000 - &pound;22,000</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Typical Journey</span>
+                        <span class="dest-info-card__value">1-3 months with Level 2 qualification</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Sector</span>
+                        <span class="dest-info-card__value">Private Nurseries, Pre-schools</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Qualification</span>
+                        <span class="dest-info-card__value">Level 2 Childcare (or working towards)</span>
+                    </div>
+                    <div class="dest-info-card__row">
+                        <span class="dest-info-card__label">Reports to</span>
+                        <span class="dest-info-card__value">Room Leader / Nursery Manager</span>
+                    </div>
+                    <a href="#" class="dest-info-card__btn" id="speakToAgent" onclick="openFlightAgent(); return false;">Speak to a flight agent</a>
+                    <a href="#" class="dest-info-card__btn dest-info-card__btn--outline">Download role guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="journey-timeline">
+        <div class="container">
+            <h2 class="journey-timeline__title">Your journey to Nursery Assistant</h2>
+            <p class="journey-timeline__subtitle">The typical career stops on the way to this destination</p>
+            <div class="timeline">
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 1</div>
+                    <h3 class="timeline__stop-title">GCSEs &amp; Childcare Experience</h3>
+                    <p class="timeline__stop-desc">Ensure you have GCSEs in English and Maths (grade C/4 or above). Gain experience with young children through babysitting, volunteering at playgroups, helping at holiday clubs, or assisting in nursery settings. A genuine love for working with young children is the most important starting point.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>1-3 months</strong></span>
+                        <span>Cost: <strong>Free (volunteering)</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 2</div>
+                    <h3 class="timeline__stop-title">Level 2 Childcare Qualification</h3>
+                    <p class="timeline__stop-desc">Complete a Level 2 qualification in Childcare such as the CACHE Certificate in an Introduction to Early Years Education and Care, or begin a Level 2 Apprenticeship in Early Years Practitioner. Some nurseries will employ you and support you to gain your qualification while working.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Duration: <strong>3-12 months</strong></span>
+                        <span>Cost: <strong>Often funded or apprenticeship</strong></span>
+                    </div>
+                </div>
+                <div class="timeline__stop">
+                    <div class="timeline__dot"></div>
+                    <div class="timeline__stop-number">Stop 3 - Final Destination</div>
+                    <h3 class="timeline__stop-title">Nursery Assistant</h3>
+                    <p class="timeline__stop-desc">You've arrived at your destination. As a Nursery Assistant, you'll support children's play and learning, help with personal care routines, set up and tidy activities, observe children's development, build relationships with families, and contribute to a nurturing environment where every child feels safe, happy, and valued.</p>
+                    <div class="timeline__stop-meta">
+                        <span>Salary: <strong>&pound;18,000 - &pound;22,000</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <h2 class="skills-section__title">Skills and qualities you'll need</h2>
+            <p class="skills-section__subtitle">The personal attributes that will help you thrive in this role</p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e3f2fd;">&#128156;</div>
+                    <h3 class="skill-card__name">Warmth &amp; Caring Nature</h3>
+                    <p class="skill-card__desc">A genuine love for young children and a natural warmth that helps them feel safe and secure. Children need to trust you as they navigate the world away from home.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #fce4ec;">&#9203;</div>
+                    <h3 class="skill-card__name">Patience</h3>
+                    <p class="skill-card__desc">Young children are learning everything for the first time. Patience during mealtimes, toilet training, and emotional outbursts is essential for this role.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e8f5e9;">&#127912;</div>
+                    <h3 class="skill-card__name">Creativity</h3>
+                    <p class="skill-card__desc">Ability to set up engaging, age-appropriate activities that stimulate learning through play. From messy play to storytelling, creativity keeps children excited to learn.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #fff3e0;">&#128170;</div>
+                    <h3 class="skill-card__name">Energy &amp; Stamina</h3>
+                    <p class="skill-card__desc">Working with young children is physically demanding. You'll be on your feet all day, lifting, bending, and keeping up with active toddlers. Good energy levels are essential.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #f3e5f5;">&#128483;</div>
+                    <h3 class="skill-card__name">Communication</h3>
+                    <p class="skill-card__desc">Communicating with young children requires clear, simple language. You'll also need to share information with parents warmly and professionally each day.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card__icon" style="background: #e0f7fa;">&#129309;</div>
+                    <h3 class="skill-card__name">Teamwork</h3>
+                    <p class="skill-card__desc">Nursery teams work closely together throughout the day. Being a reliable, supportive team member who communicates well is vital to the smooth running of the room.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Destinations -->
+    <section class="related-dest">
+        <div class="container">
+            <h2 class="related-dest__title">Where could you go next?</h2>
+            <p class="related-dest__subtitle">Continue your journey from Nursery Assistant</p>
+            <div class="related-dest__grid">
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #00695c 0%, #4db6ac 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="14" r="7" fill="white" opacity="0.9"/><path d="M10 40 c0-9 7-14 14-14 s14 5 14 14" fill="white" opacity="0.7"/><path d="M36 20 l4-2 v8 l-4-2z" fill="white" opacity="0.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Deputy Nursery Manager</h3>
+                        <p class="dest-card__desc">Progress through room leader to deputy, supporting the running of the whole setting.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;23,000 - &pound;30,000</span>
+                        </div>
+                        <a href="deputy-nursery-manager.html" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><path d="M24 4 L30 18 L44 20 L34 30 L36 44 L24 38 L12 44 L14 30 L4 20 L18 18 Z" fill="white" opacity="0.8"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Nursery Manager</h3>
+                        <p class="dest-card__desc">Lead your own nursery setting with full responsibility for quality, staff, and operations.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;28,000 - &pound;38,000</span>
+                        </div>
+                        <a href="nursery-manager.html" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+                <div class="dest-card">
+                    <div class="dest-card__image" style="background: linear-gradient(135deg, #1565c0 0%, #64b5f6 100%);">
+                        <div class="dest-card__icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="14" r="7" fill="white" opacity="0.9"/><path d="M10 40 c0-9 7-14 14-14 s14 5 14 14" fill="white" opacity="0.7"/><circle cx="36" cy="14" r="4" fill="white" opacity="0.5"/></svg>
+                        </div>
+                    </div>
+                    <div class="dest-card__body">
+                        <h3 class="dest-card__title">Teaching Assistant</h3>
+                        <p class="dest-card__desc">Move into a school-based support role, working with older children in primary settings.</p>
+                        <div class="dest-card__meta">
+                            <span class="dest-card__salary">&pound;18,000 - &pound;23,000</span>
+                        </div>
+                        <a href="teaching-assistant.html" class="dest-card__link">View destination &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-banner__content">
+                <h2 class="cta-banner__title">Ready for takeoff?</h2>
+                <p class="cta-banner__text">Create your free account and get a personalised career flightplan in minutes.</p>
+                <div class="cta-banner__actions">
+                    <a href="#" class="btn btn--white">Create free account</a>
+                    <a href="#" class="btn btn--outline-white">Browse destinations</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <svg class="footer__logo-icon" viewBox="0 0 32 32" width="28" height="28">
+                            <path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/>
+                            <path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/>
+                            <circle cx="16" cy="8" r="2" fill="#0a1628"/>
+                        </svg>
+                        <span>flightplan</span>
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="../index.html">Our mission</a>
+                    <a href="../index.html">For schools</a>
+                    <a href="../index.html">Contact us</a>
+                    <a href="../index.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+</body>
+</html>
