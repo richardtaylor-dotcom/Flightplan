@@ -97,7 +97,7 @@
                         <span class="dest-info-card__label">Reports to</span>
                         <span class="dest-info-card__value">Deputy / Headteacher</span>
                     </div>
-                    <a href="#" class="dest-info-card__btn">Plan my journey here</a>
+                    <a href="#" class="dest-info-card__btn" id="speakToAgent" onclick="openFlightAgent(); return false;">Speak to a flight agent</a>
                     <a href="#" class="dest-info-card__btn dest-info-card__btn--outline">Download role guide</a>
                 </div>
             </div>
@@ -328,5 +328,32 @@
 
     <script src="../js/main.js"></script>
     <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        // Try Superchat's global API first
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        // Fallback: find and click the Superchat widget launcher button
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            // If it's wrapped in a clickable parent, click that
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        // Last resort: look for any superchat-related clickable element
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
 </body>
 </html>
