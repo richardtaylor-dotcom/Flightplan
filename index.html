@@ -58,95 +58,63 @@
             <h1 class="hero__title">Where do you want your <span class="hero__title-highlight">career to take you?</span></h1>
             <p class="hero__subtitle">Plan your journey through education. From where you are now to where you want to be.</p>
 
-            <!-- Search Box -->
+            <!-- Departure Wizard -->
             <div class="search-box">
-                <div class="search-box__tabs">
-                    <button class="search-box__tab search-box__tab--active" data-tab="explore">Explore roles</button>
-                    <button class="search-box__tab" data-tab="plan">Plan a journey</button>
-                </div>
                 <div class="search-box__body">
-                    <div class="search-box__panel search-box__panel--active" id="panel-explore">
-                        <div class="search-box__field">
-                            <label class="search-box__label">Where do you want to go?</label>
-                            <div class="search-box__input-wrap">
-                                <svg class="search-box__icon" viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5 L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                                <input type="text" class="search-box__input" placeholder="e.g. Principal, SENCO, Teaching Assistant, Data Manager..." id="roleSearch">
-                            </div>
-                            <div class="search-box__suggestions" id="searchSuggestions"></div>
-                        </div>
-                        <button class="search-box__btn">Search destinations</button>
-                    </div>
-                    <div class="search-box__panel" id="panel-plan">
-                        <div class="search-box__field search-box__field--half">
-                            <label class="search-box__label">Where are you now?</label>
-                            <select class="search-box__select" id="fromRole">
+                    <div class="search-box__panel search-box__panel--active" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;">
+                        <div class="search-box__field" style="flex:1;min-width:280px;">
+                            <label class="search-box__label" for="heroDeparture">Where are you departing from?</label>
+                            <select class="search-box__select" id="heroDeparture">
                                 <option value="">Select your current role</option>
                                 <optgroup label="Classroom Support">
-                                    <option value="nursery-assistant">Nursery Assistant</option>
-                                    <option value="teaching-assistant">Teaching Assistant</option>
-                                    <option value="sen-teaching-assistant">SEN Teaching Assistant</option>
-                                    <option value="hlta">Higher Level Teaching Assistant</option>
-                                    <option value="cover-supervisor">Cover Supervisor</option>
-                                    <option value="technician">Technician</option>
+                                    <option value="nursery_assistant">Early Years / Nursery Assistant</option>
+                                    <option value="ta">Teaching Assistant</option>
+                                    <option value="sen_ta">SEN Teaching Assistant</option>
+                                    <option value="hlta">Higher Level Teaching Assistant (HLTA)</option>
+                                    <option value="cover_supervisor">Cover Supervisor</option>
                                 </optgroup>
                                 <optgroup label="Teaching">
-                                    <option value="class-teacher">Class Teacher</option>
-                                    <option value="teacher-of-subject">Teacher of Subject</option>
-                                    <option value="sen-teacher">SEN Teacher</option>
-                                    <option value="intervention-teacher">Intervention Teacher</option>
-                                    <option value="lead-practitioner">Lead Practitioner</option>
+                                    <option value="teacher">Teacher (Secondary)</option>
+                                    <option value="primary_teacher">Class Teacher (Primary)</option>
+                                    <option value="sen_teacher">SEN Teacher</option>
+                                    <option value="coord">Coordinator of Learning</option>
+                                    <option value="second">Second in Charge</option>
+                                    <option value="lead_prac">Lead Practitioner</option>
+                                    <option value="hol">Head of Learning</option>
+                                    <option value="dol">Director of Learning</option>
+                                    <option value="phase_leader">Phase Leader (Primary)</option>
                                 </optgroup>
-                                <optgroup label="Middle Leadership">
-                                    <option value="second-in-charge">Second in Charge</option>
-                                    <option value="coordinator-of-learning">Coordinator of Learning</option>
-                                    <option value="head-of-learning">Head of Learning</option>
-                                    <option value="director-of-learning">Director of Learning</option>
-                                    <option value="phase-leader">Phase Leader</option>
+                                <optgroup label="SEND / Inclusion">
+                                    <option value="deputy_senco">Deputy SENCo</option>
+                                    <option value="senco">SENCo</option>
+                                    <option value="inclusion_officer">Inclusion Officer</option>
+                                    <option value="inclusion_manager">Inclusion Manager</option>
                                 </optgroup>
-                                <optgroup label="Senior Leadership">
-                                    <option value="assistant-principal">Assistant Principal</option>
-                                    <option value="vice-principal">Vice Principal</option>
-                                    <option value="deputy-principal">Deputy Principal</option>
-                                </optgroup>
-                                <optgroup label="Academy Support">
-                                    <option value="receptionist">Receptionist</option>
-                                    <option value="academy-administrator">Academy Administrator</option>
-                                    <option value="office-manager">Office Manager</option>
-                                    <option value="data-administrator">Data Administrator</option>
-                                    <option value="exams-officer">Exams Officer</option>
-                                    <option value="attendance-officer">Attendance Officer</option>
-                                    <option value="library-assistant">Library Assistant</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        <div class="search-box__field search-box__field--half">
-                            <label class="search-box__label">Where do you want to go?</label>
-                            <select class="search-box__select" id="toRole">
-                                <option value="">Select your destination</option>
-                                <optgroup label="Leadership">
+                                <optgroup label="Academy Leadership">
+                                    <option value="asst_principal">Assistant Principal</option>
+                                    <option value="vice_principal">Vice Principal / Head of College</option>
+                                    <option value="deputy_principal">Deputy Principal</option>
                                     <option value="principal">Principal</option>
-                                    <option value="deputy-principal">Deputy Principal</option>
-                                    <option value="vice-principal">Vice Principal</option>
-                                    <option value="assistant-principal">Assistant Principal</option>
-                                    <option value="academies-director">Academies Director</option>
                                 </optgroup>
-                                <optgroup label="Teaching &amp; Department Leadership">
-                                    <option value="class-teacher">Class Teacher</option>
-                                    <option value="lead-practitioner">Lead Practitioner</option>
-                                    <option value="head-of-learning">Head of Learning</option>
-                                    <option value="director-of-learning">Director of Learning</option>
-                                    <option value="senco">SENCO</option>
+                                <optgroup label="Student &amp; Academy Support">
+                                    <option value="admin">Academy Administrator</option>
+                                    <option value="office_manager">Office Manager</option>
+                                    <option value="student_services_officer">Student Services Officer</option>
+                                    <option value="student_services_manager">Student Services Manager</option>
+                                    <option value="attendance_officer">Attendance Officer</option>
+                                    <option value="attendance_manager">Attendance Manager</option>
+                                    <option value="exams_officer">Exams Officer</option>
+                                    <option value="exams_manager">Exams Manager</option>
+                                    <option value="safeguarding_officer">Safeguarding Officer</option>
+                                    <option value="family_liaison">Family Liaison Officer</option>
                                 </optgroup>
-                                <optgroup label="Academy Support">
-                                    <option value="office-manager">Office Manager</option>
-                                    <option value="data-manager">Data Manager</option>
-                                    <option value="exams-manager">Exams Manager</option>
-                                    <option value="safeguarding-manager">Safeguarding Manager</option>
-                                    <option value="careers-manager">Careers Manager</option>
+                                <optgroup label="Technical / Specialist">
+                                    <option value="technician">Subject Technician</option>
+                                    <option value="curriculum_advisor">Curriculum Advisor</option>
                                 </optgroup>
                             </select>
                         </div>
-                        <button class="search-box__btn" id="planJourneyBtn">Plan my journey</button>
+                        <button class="search-box__btn" id="startWizardBtn">Start my flight plan</button>
                     </div>
                 </div>
             </div>

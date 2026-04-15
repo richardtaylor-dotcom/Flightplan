@@ -13,15 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Plan my journey button → wizard
-    const planBtn = document.getElementById('planJourneyBtn');
-    if (planBtn) {
-        planBtn.addEventListener('click', () => {
-            const from = document.getElementById('fromRole').value;
-            const to = document.getElementById('toRole').value;
+    // Hero departure → wizard
+    const startBtn = document.getElementById('startWizardBtn');
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            const from = document.getElementById('heroDeparture').value;
             const params = new URLSearchParams();
             if (from) params.set('from', from);
-            if (to) params.set('to', to);
             window.location.href = 'wizard.html' + (params.toString() ? '?' + params.toString() : '');
         });
     }
