@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Your Journey - Flightplan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset & Variables ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--blue-900:#0a1628;--blue-700:#003580;--blue-600:#0057b8;--blue-500:#0072e5;--blue-400:#00a0e1;--blue-50:#e3f2fd;--orange-600:#e8491d;--orange-400:#ff8a50;--green-600:#2e7d32;--green-400:#66bb6a;--purple-600:#6a1b9a;--gray-50:#f8f9fa;--gray-100:#f1f3f5;--gray-200:#e9ecef;--gray-300:#dee2e6;--gray-500:#6c757d;--gray-700:#495057;--gray-900:#212529;--white:#fff;--shadow-sm:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 12px rgba(0,0,0,.1);--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--lat-border:#dee2e6;--lat-warning:#e65100;--lat-success:#2e7d32;--lat-info:#0057b8}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--gray-900);line-height:1.6;background:var(--white);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+select{font-family:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ===== Header ===== */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);box-shadow:var(--shadow-sm)}
+.header__container{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.header__logo{display:flex;align-items:center;gap:10px;color:var(--blue-600)}
+.header__logo-text{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.header__nav{display:flex;gap:32px}
+.header__nav-link{font-size:15px;font-weight:500;color:var(--gray-700);transition:color .2s}
+.header__nav-link:hover{color:var(--blue-600)}
+.header__actions{display:flex;align-items:center;gap:16px}
+.header__sign-in{font-size:15px;font-weight:600;color:var(--blue-600);padding:8px 20px;border:2px solid var(--blue-600);border-radius:50px;transition:all .2s}
+.header__sign-in:hover{background:var(--blue-600);color:var(--white)}
+.header__menu-btn{display:none;flex-direction:column;gap:5px;padding:8px}
+.header__menu-btn span{display:block;width:24px;height:2px;background:var(--gray-900);border-radius:2px}
+
+/* ===== Progress Bar ===== */
+.progress-bar{max-width:720px;margin:0 auto;padding:0 24px 24px}
+.progress-bar__labels{display:flex;justify-content:space-between;font-size:13px;color:var(--gray-500);margin-bottom:8px;font-weight:500}
+.progress-bar__track{height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden}
+.progress-bar__fill{height:100%;background:var(--blue-600);border-radius:2px;transition:width .4s ease}
+
+/* ===== Wizard ===== */
+.wizard{max-width:720px;margin:96px auto 60px;padding:0 24px}
+.wizard-step{display:none;animation:fadeIn .3s ease}
+.wizard-step--active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.wizard-step__title{font-size:20px;font-weight:700;color:var(--blue-900);margin-bottom:6px}
+.wizard-step__hint{font-size:14px;color:var(--gray-500);margin-bottom:24px;line-height:1.5}
+.wizard-label{display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.wizard-select{width:100%;padding:14px 16px;border:2px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;background:var(--white);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%236c757d' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer;outline:none;transition:border-color .2s}
+.wizard-select:focus{border-color:var(--blue-500)}
+.wizard-fieldset{border:none;padding:0;margin:0 0 24px}
+.wizard-fieldset legend{font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:12px}
+
+/* ===== Option Cards (radio) ===== */
+.card-grid{display:grid;gap:12px}
+.card-grid--2col{grid-template-columns:repeat(2,1fr)}
+.card-grid--3col{grid-template-columns:repeat(3,1fr)}
+.option-card{display:flex;flex-direction:column;padding:16px 20px;border:2px solid var(--gray-200);border-radius:var(--radius-sm);cursor:pointer;transition:border-color .2s,background .2s}
+.option-card input[type="radio"]{position:absolute;opacity:0;width:0;height:0}
+.option-card:hover{border-color:var(--blue-400)}
+.option-card:has(input:checked){border-color:var(--blue-600);background:var(--blue-50)}
+.option-card:focus-within{outline:2px solid var(--blue-600);outline-offset:2px}
+.option-card__label{font-size:15px;font-weight:600;color:var(--gray-900)}
+.option-card__desc{font-size:13px;color:var(--gray-500);margin-top:2px}
+
+/* ===== Check Cards (checkbox) ===== */
+.check-card{display:flex;align-items:center;gap:14px;padding:14px 18px;border:2px solid var(--gray-200);border-radius:var(--radius-sm);cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:8px}
+.check-card input[type="checkbox"]{width:20px;height:20px;flex-shrink:0;accent-color:var(--blue-600)}
+.check-card:hover{border-color:var(--blue-400)}
+.check-card:has(input:checked){border-color:var(--blue-600);background:#eef4ff}
+.check-card:focus-within{outline:2px solid var(--blue-600);outline-offset:2px}
+.check-card__text{font-size:14px;color:var(--gray-900)}
+
+/* ===== Navigation ===== */
+.wizard-nav{display:flex;justify-content:space-between;margin-top:32px;gap:12px}
+.wizard-nav__btn{padding:12px 28px;font-size:14px;font-weight:600;border-radius:50px;cursor:pointer;transition:all .2s}
+.wizard-nav__btn--back{background:transparent;color:var(--gray-700);border:2px solid var(--gray-300)}
+.wizard-nav__btn--back:hover{border-color:var(--gray-500)}
+.wizard-nav__btn--next{background:var(--blue-600);color:var(--white);border:2px solid var(--blue-600)}
+.wizard-nav__btn--next:hover:not(:disabled){background:var(--blue-700);border-color:var(--blue-700)}
+.wizard-nav__btn:disabled{opacity:.4;cursor:not-allowed}
+.wizard-nav__btn--cta{display:block;width:100%;height:44px;background:var(--blue-900);color:var(--white);border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;margin-top:24px;transition:background .2s}
+.wizard-nav__btn--cta:hover:not(:disabled){background:#0d2040}
+.wizard-nav__btn--cta:disabled{opacity:.4;cursor:not-allowed}
+.cross-family-note{font-size:13px;color:var(--gray-500);margin-top:12px;line-height:1.5;font-style:italic}
+
+/* ===== Boarding Pass ===== */
+.boarding-pass{max-width:800px;margin:96px auto 60px;padding:0 24px}
+.bp-card{background:var(--white);border-radius:var(--radius-md);border:1px solid var(--lat-border);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.bp-hero{background:var(--blue-900);color:var(--white);padding:32px}
+.bp-hero__eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:.7;margin-bottom:16px}
+.bp-hero__route{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bp-hero__point{flex:1;min-width:120px}
+.bp-hero__point--to{text-align:right}
+.bp-hero__point-role{font-size:20px;font-weight:700}
+.bp-hero__point-sub{font-size:12px;opacity:.7;margin-top:4px}
+.bp-hero__arrow{font-size:24px;opacity:.5;flex-shrink:0}
+.bp-hero__bridge{font-size:13px;opacity:.7;text-align:center;flex-shrink:0}
+.bp-stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--gray-50)}
+.bp-stat{text-align:center;padding:20px 12px;border-right:1px solid var(--lat-border)}
+.bp-stat:last-child{border-right:none}
+.bp-stat__value{font-size:18px;font-weight:700;color:var(--blue-900)}
+.bp-stat__label{font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.bp-stat__dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.bp-stat__dot--green{background:var(--green-600)}
+.bp-stat__dot--amber{background:var(--orange-600)}
+.bp-stat__dot--red{background:#c62828}
+.bp-section{padding:32px}
+.bp-section+.bp-section{border-top:1px solid var(--gray-200)}
+.bp-section__heading{font-size:18px;font-weight:700;color:var(--blue-900);margin-bottom:20px}
+.bp-alert{padding:14px 18px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;margin-bottom:24px;line-height:1.5}
+.bp-alert--success{background:#e8f5e9;color:var(--green-600);border:1px solid #c8e6c9}
+.bp-alert--info{background:var(--blue-50);color:var(--blue-600);border:1px solid #bbdefb}
+.bp-alert--warning{background:#fff3e0;color:var(--lat-warning);border:1px solid #ffe0b2}
+.bp-phase-strip{padding:12px 18px;margin-bottom:20px;border-left:4px solid var(--blue-900);background:#f0f4ff;border-radius:0 8px 8px 0}
+.bp-phase-strip__title{font-size:14px;font-weight:700;color:var(--blue-900)}
+.bp-phase-strip__desc{font-size:13px;color:var(--gray-500)}
+.bp-leg{display:flex;gap:16px;margin-bottom:24px}
+.bp-leg__badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--white);flex-shrink:0;margin-top:2px}
+.bp-leg__badge--standard{background:var(--gray-500)}
+.bp-leg__badge--done{background:var(--green-600)}
+.bp-leg__badge--bridge{background:var(--lat-warning)}
+.bp-leg__content{flex:1}
+.bp-leg__title{font-size:14px;font-weight:600;color:var(--blue-900);margin-bottom:4px}
+.bp-leg__desc{font-size:13px;color:var(--gray-700);line-height:1.6;margin-bottom:10px}
+.bp-leg__tags{display:flex;flex-wrap:wrap;gap:6px}
+.bp-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:50px;font-size:11px;font-weight:600}
+.bp-tag--qual{background:#e3f2fd;color:#1565c0}
+.bp-tag--exp{background:#e8f5e9;color:var(--green-600)}
+.bp-tag--dev{background:#fff3e0;color:var(--lat-warning)}
+.bp-tag--held{text-decoration:line-through;opacity:.6}
+.bp-skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.bp-skill-card{background:var(--gray-50);border:1px solid var(--lat-border);border-radius:var(--radius-sm);padding:16px}
+.bp-skill-card__title{font-size:13px;font-weight:700;color:var(--blue-900);margin-bottom:4px}
+.bp-skill-card__desc{font-size:12px;color:var(--gray-700);line-height:1.5}
+.bp-turbulence-card{border-left:3px solid var(--lat-warning);background:#fff8f0;border-radius:0 8px 8px 0;padding:16px;margin-bottom:10px}
+.bp-turbulence-card__title{font-size:13px;font-weight:700;color:var(--lat-warning);margin-bottom:4px}
+.bp-turbulence-card__desc{font-size:12px;color:var(--lat-warning);opacity:.85;line-height:1.5}
+.bp-timeline{display:flex;gap:0;margin-bottom:8px}
+.bp-timeline__phase{flex:1;padding:14px;border-top:4px solid}
+.bp-timeline__phase:first-child{border-color:var(--gray-300);background:var(--gray-50)}
+.bp-timeline__phase:nth-child(2){border-color:var(--blue-400);background:#f0f7ff}
+.bp-timeline__phase:last-child{border-color:var(--green-400);background:#f0faf0}
+.bp-timeline__label{font-size:12px;font-weight:700;color:var(--blue-900)}
+.bp-timeline__sub{font-size:11px;color:var(--gray-500);margin-top:2px}
+.bp-disclaimer{font-size:12px;font-style:italic;color:var(--gray-500);margin-top:8px;line-height:1.5}
+.bp-cta{background:var(--blue-900);color:var(--white);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.bp-cta__text{font-size:15px;font-weight:500}
+.bp-cta__btn{padding:12px 24px;background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.5);border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;transition:border-color .2s}
+.bp-cta__btn:hover{border-color:var(--white)}
+.bp-actions{text-align:center;margin-top:24px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.bp-print-btn{padding:12px 24px;background:var(--gray-50);color:var(--gray-700);border:2px solid var(--gray-300);border-radius:50px;font-size:13px;font-weight:600;cursor:pointer}
+.bp-print-btn:hover{border-color:var(--gray-500)}
+.bp-reset-link{font-size:14px;color:var(--blue-600);cursor:pointer;background:none;border:none;font-weight:500;padding:12px}
+.bp-specialist-note{padding:20px;background:#fff3e0;border:1px solid #ffe0b2;border-radius:var(--radius-sm);font-size:13px;color:var(--lat-warning);line-height:1.6;margin-bottom:24px}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+.header__nav{display:none}.header__sign-in{display:none}.header__menu-btn{display:flex}
+.bp-stats{grid-template-columns:repeat(2,1fr)}.bp-skills-grid{grid-template-columns:1fr}
+.bp-hero__route{flex-direction:column;text-align:center}.bp-hero__point--to{text-align:center}
+.bp-cta{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+.card-grid--2col{grid-template-columns:1fr}.card-grid--3col{grid-template-columns:1fr}
+.bp-timeline{flex-direction:column}.bp-stats{grid-template-columns:1fr}
+.wizard{padding:0 16px}.boarding-pass{padding:0 16px}
+}
+@media print{
+.header,.wizard,.bp-actions,.bp-cta{display:none!important}
+.boarding-pass{margin:0;padding:0}.bp-card{box-shadow:none;border:1px solid #ccc}
+.bp-hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.bp-timeline{flex-wrap:wrap}*{color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+<div class="header__container">
+<a href="index.html" class="header__logo">
+<svg class="header__logo-icon" viewBox="0 0 32 32" width="32" height="32"><path d="M16 2 L28 10 L28 14 L4 14 L4 10 Z" fill="currentColor"/><path d="M8 16 L24 16 L22 28 L10 28 Z" fill="currentColor" opacity="0.7"/><circle cx="16" cy="8" r="2" fill="white"/></svg>
+<span class="header__logo-text">flightplan</span>
+</a>
+<nav class="header__nav">
+<a href="index.html#destinations" class="header__nav-link">Destinations</a>
+<a href="index.html#journeys" class="header__nav-link">Career Journeys</a>
+<a href="index.html#stories" class="header__nav-link">Success Stories</a>
+<a href="index.html#resources" class="header__nav-link">Resources</a>
+</nav>
+<div class="header__actions">
+<a href="#" class="header__sign-in">Sign in</a>
+<button class="header__menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+</div>
+</div>
+</header>
+<div id="announcer" class="sr-only" aria-live="polite"></div>
+
+<!-- Wizard -->
+<div class="wizard" id="wizard">
+<div class="progress-bar">
+<div class="progress-bar__labels"><span id="stepLabel">Step 1 of 5</span><span id="percentLabel">0%</span></div>
+<div class="progress-bar__track"><div class="progress-bar__fill" id="progressFill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>
+</div>
+
+<!-- Step 1 -->
+<div class="wizard-step wizard-step--active" data-step="1">
+<h2 class="wizard-step__title">Where are you departing from?</h2>
+<p class="wizard-step__hint">Select the role that best describes your current position at Leigh Academies Trust.</p>
+<label class="wizard-label" for="currentRole">Current role</label>
+<select class="wizard-select" id="currentRole">
+<option value="">— Select your current role —</option>
+<optgroup label="Classroom Support">
+<option value="nursery_assistant">Early Years / Nursery Assistant</option>
+<option value="ta">Teaching Assistant</option>
+<option value="sen_ta">SEN Teaching Assistant</option>
+<option value="hlta">Higher Level Teaching Assistant (HLTA)</option>
+<option value="cover_supervisor">Cover Supervisor</option>
+</optgroup>
+<optgroup label="Teaching">
+<option value="teacher">Teacher (Secondary)</option>
+<option value="primary_teacher">Class Teacher (Primary)</option>
+<option value="sen_teacher">SEN Teacher</option>
+<option value="coord">Coordinator of Learning</option>
+<option value="second">Second in Charge</option>
+<option value="lead_prac">Lead Practitioner</option>
+<option value="hol">Head of Learning</option>
+<option value="dol">Director of Learning</option>
+<option value="phase_leader">Phase Leader (Primary)</option>
+</optgroup>
+<optgroup label="SEND / Inclusion">
+<option value="deputy_senco">Deputy SENCo</option>
+<option value="senco">SENCo</option>
+<option value="inclusion_officer">Inclusion Officer</option>
+<option value="inclusion_manager">Inclusion Manager</option>
+</optgroup>
+<optgroup label="Academy Leadership">
+<option value="asst_principal">Assistant Principal</option>
+<option value="vice_principal">Vice Principal / Head of College</option>
+<option value="deputy_principal">Deputy Principal</option>
+<option value="principal">Principal</option>
+</optgroup>
+<optgroup label="Student &amp; Academy Support">
+<option value="admin">Academy Administrator</option>
+<option value="office_manager">Office Manager</option>
+<option value="student_services_officer">Student Services Officer</option>
+<option value="student_services_manager">Student Services Manager</option>
+<option value="attendance_officer">Attendance Officer</option>
+<option value="attendance_manager">Attendance Manager</option>
+<option value="exams_officer">Exams Officer</option>
+<option value="exams_manager">Exams Manager</option>
+<option value="safeguarding_officer">Safeguarding Officer</option>
+<option value="family_liaison">Family Liaison Officer</option>
+</optgroup>
+<optgroup label="Technical / Specialist">
+<option value="technician">Subject Technician</option>
+<option value="curriculum_advisor">Curriculum Advisor</option>
+</optgroup>
+</select>
+<div class="wizard-nav"><div></div><button class="wizard-nav__btn wizard-nav__btn--next" id="next1" disabled>Next</button></div>
+</div>
+
+<!-- Step 2 -->
+<div class="wizard-step" data-step="2">
+<h2 class="wizard-step__title">Tell us about your experience</h2>
+<p class="wizard-step__hint">This helps us understand your experience level and shape your flight plan.</p>
+<fieldset class="wizard-fieldset">
+<legend>How long have you been in this role?</legend>
+<div class="card-grid card-grid--2col">
+<label class="option-card"><input type="radio" name="timeInRole" value="under_1"><span class="option-card__label">Under 1 year</span><span class="option-card__desc">Still settling in</span></label>
+<label class="option-card"><input type="radio" name="timeInRole" value="1_2"><span class="option-card__label">1–2 years</span><span class="option-card__desc">Building experience</span></label>
+<label class="option-card"><input type="radio" name="timeInRole" value="3_5"><span class="option-card__label">3–5 years</span><span class="option-card__desc">Well established</span></label>
+<label class="option-card"><input type="radio" name="timeInRole" value="6_9"><span class="option-card__label">6–9 years</span><span class="option-card__desc">Highly experienced</span></label>
+<label class="option-card"><input type="radio" name="timeInRole" value="10_plus"><span class="option-card__label">10+ years</span><span class="option-card__desc">Expert practitioner</span></label>
+</div>
+</fieldset>
+<fieldset class="wizard-fieldset">
+<legend>How long have you worked at LAT overall?</legend>
+<div class="card-grid card-grid--3col">
+<label class="option-card"><input type="radio" name="timeAtLAT" value="under_1"><span class="option-card__label">Under 1 year</span></label>
+<label class="option-card"><input type="radio" name="timeAtLAT" value="1_3"><span class="option-card__label">1–3 years</span></label>
+<label class="option-card"><input type="radio" name="timeAtLAT" value="3_plus"><span class="option-card__label">3+ years</span></label>
+</div>
+</fieldset>
+<div class="wizard-nav"><button class="wizard-nav__btn wizard-nav__btn--back" id="back2">Back</button><button class="wizard-nav__btn wizard-nav__btn--next" id="next2" disabled>Next</button></div>
+</div>
+
+<!-- Step 3 -->
+<div class="wizard-step" data-step="3">
+<h2 class="wizard-step__title">Which qualifications do you currently hold?</h2>
+<p class="wizard-step__hint">Tick all that apply — completed items will be marked on your boarding pass.</p>
+<fieldset class="wizard-fieldset">
+<legend class="sr-only">Qualifications</legend>
+<label class="check-card"><input type="checkbox" name="quals" value="gcse"><span class="check-card__text">GCSEs in English &amp; Maths (Grade 4+ / A*–C)</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="l3"><span class="check-card__text">Level 3 qualification (A-levels, NVQ Level 3, Diploma)</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="degree"><span class="check-card__text">Degree (any subject)</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="qts"><span class="check-card__text">Qualified Teacher Status (QTS)</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="pgce"><span class="check-card__text">PGCE or equivalent teaching qualification</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="hlta_status"><span class="check-card__text">HLTA status</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="npqml"><span class="check-card__text">NPQ for Middle Leadership (NPQML)</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="npqsl"><span class="check-card__text">NPQ for Senior Leadership (NPQSL)</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="npqh"><span class="check-card__text">NPQ for Headship (NPQH)</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="nasenco"><span class="check-card__text">NASENCo qualification</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="masters"><span class="check-card__text">Postgraduate / Master's qualification</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="safeguarding_l2"><span class="check-card__text">Level 2 Safeguarding training</span></label>
+<label class="check-card"><input type="checkbox" name="quals" value="safeguarding_l3"><span class="check-card__text">Level 3 / DSL Safeguarding training</span></label>
+</fieldset>
+<div class="wizard-nav"><button class="wizard-nav__btn wizard-nav__btn--back" id="back3">Back</button><button class="wizard-nav__btn wizard-nav__btn--next" id="next3">Next</button></div>
+</div>
+
+<!-- Step 4 -->
+<div class="wizard-step" data-step="4">
+<h2 class="wizard-step__title">What experience have you already gained?</h2>
+<p class="wizard-step__hint">Select everything that genuinely applies — this directly shapes your flight briefing.</p>
+<fieldset class="wizard-fieldset">
+<legend class="sr-only">Experience</legend>
+<label class="check-card"><input type="checkbox" name="exps" value="led_staff"><span class="check-card__text">Line managed or supervised colleagues</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="led_curriculum"><span class="check-card__text">Led on curriculum planning or delivery</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="data_analysis"><span class="check-card__text">Used pupil data to inform planning or intervention</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="coached"><span class="check-card__text">Coached or mentored colleagues</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="cpd_delivery"><span class="check-card__text">Designed or delivered CPD / staff training</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="whole_school"><span class="check-card__text">Led a whole-school project or improvement initiative</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="slt_contribution"><span class="check-card__text">Contributed to or sat on a senior leadership team</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="send_experience"><span class="check-card__text">Supported pupils with SEND or worked with EHCPs</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="parent_engagement"><span class="check-card__text">Led parent, carer, or community engagement</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="budget"><span class="check-card__text">Managed a budget or resources</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="ofsted"><span class="check-card__text">Contributed to an Ofsted inspection or self-evaluation</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="acting_up"><span class="check-card__text">Acted up into or covered a more senior role</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="performance_mgmt"><span class="check-card__text">Led performance management reviews for staff</span></label>
+<label class="check-card"><input type="checkbox" name="exps" value="external_agency"><span class="check-card__text">Worked with external agencies (e.g. CAMHS, social care, EWO)</span></label>
+</fieldset>
+<div class="wizard-nav"><button class="wizard-nav__btn wizard-nav__btn--back" id="back4">Back</button><button class="wizard-nav__btn wizard-nav__btn--next" id="next4">Next</button></div>
+</div>
+
+<!-- Step 5 -->
+<div class="wizard-step" data-step="5">
+<h2 class="wizard-step__title">Where do you want to fly to?</h2>
+<p class="wizard-step__hint">Any destination is available — cross-family routes will show the required stopovers clearly.</p>
+<label class="wizard-label" for="destRole">Destination role</label>
+<select class="wizard-select" id="destRole">
+<option value="">— Select your destination —</option>
+</select>
+<p class="cross-family-note">Cross-family routes — for example, moving from a support role into teaching and then leadership — are fully supported and will show the required bridge steps in your boarding pass.</p>
+<div class="wizard-nav"><button class="wizard-nav__btn wizard-nav__btn--back" id="back5">Back</button></div>
+<button class="wizard-nav__btn wizard-nav__btn--cta" id="issueBtn" disabled>Issue my boarding pass ✈</button>
+</div>
+</div>
+
+<!-- Boarding Pass -->
+<div class="boarding-pass" id="boardingPass" style="display:none"></div>
+
+<script>
+// ===== ROLE DATA =====
+const ROLES={
+nursery_assistant:{label:'Early Years / Nursery Assistant',tier:0,family:'support'},
+ta:{label:'Teaching Assistant',tier:1,family:'support'},
+sen_ta:{label:'SEN Teaching Assistant',tier:1,family:'support'},
+hlta:{label:'Higher Level Teaching Assistant (HLTA)',tier:2,family:'support'},
+cover_supervisor:{label:'Cover Supervisor',tier:2,family:'support'},
+teacher:{label:'Teacher (Secondary)',tier:3,family:'teaching'},
+primary_teacher:{label:'Class Teacher (Primary)',tier:3,family:'teaching'},
+sen_teacher:{label:'SEN Teacher',tier:3,family:'teaching'},
+coord:{label:'Coordinator of Learning',tier:4,family:'teaching'},
+second:{label:'Second in Charge',tier:4,family:'teaching'},
+lead_prac:{label:'Lead Practitioner',tier:4,family:'teaching'},
+hol:{label:'Head of Learning',tier:5,family:'teaching'},
+dol:{label:'Director of Learning',tier:5,family:'teaching'},
+phase_leader:{label:'Phase Leader (Primary)',tier:5,family:'teaching'},
+deputy_senco:{label:'Deputy SENCo',tier:4,family:'send'},
+senco:{label:'SENCo',tier:5,family:'send'},
+inclusion_officer:{label:'Inclusion Officer',tier:3,family:'send'},
+inclusion_manager:{label:'Inclusion Manager',tier:5,family:'send'},
+asst_principal:{label:'Assistant Principal',tier:6,family:'leadership'},
+vice_principal:{label:'Vice Principal / Head of College',tier:7,family:'leadership'},
+deputy_principal:{label:'Deputy Principal',tier:7,family:'leadership'},
+principal:{label:'Principal',tier:8,family:'leadership'},
+admin:{label:'Academy Administrator',tier:1,family:'ops'},
+office_manager:{label:'Office Manager',tier:3,family:'ops'},
+student_services_officer:{label:'Student Services Officer',tier:2,family:'ops'},
+student_services_manager:{label:'Student Services Manager',tier:3,family:'ops'},
+attendance_officer:{label:'Attendance Officer',tier:2,family:'ops'},
+attendance_manager:{label:'Attendance Manager',tier:3,family:'ops'},
+exams_officer:{label:'Exams Officer',tier:2,family:'ops'},
+exams_manager:{label:'Exams Manager',tier:3,family:'ops'},
+safeguarding_officer:{label:'Safeguarding Officer',tier:3,family:'ops'},
+family_liaison:{label:'Family Liaison Officer',tier:2,family:'ops'},
+technician:{label:'Subject Technician',tier:2,family:'tech'},
+curriculum_advisor:{label:'Curriculum Advisor',tier:5,family:'teaching'}
+};
+
+const ROLE_GROUPS=[
+{label:'Classroom Support',roles:['nursery_assistant','ta','sen_ta','hlta','cover_supervisor']},
+{label:'Teaching',roles:['teacher','primary_teacher','sen_teacher','coord','second','lead_prac','hol','dol','phase_leader']},
+{label:'SEND / Inclusion',roles:['deputy_senco','senco','inclusion_officer','inclusion_manager']},
+{label:'Academy Leadership',roles:['asst_principal','vice_principal','deputy_principal','principal']},
+{label:'Student & Academy Support',roles:['admin','office_manager','student_services_officer','student_services_manager','attendance_officer','attendance_manager','exams_officer','exams_manager','safeguarding_officer','family_liaison']},
+{label:'Technical / Specialist',roles:['technician','curriculum_advisor']}
+];
+
+// ===== MAPPED ROUTES =====
+const MAPPED_ROUTES={
+'ta>hlta':{
+legs:[
+{title:'Build breadth of classroom experience',desc:'Develop experience across multiple year groups and pupil needs — including SEND, EAL, and complex needs. Two-plus years is the expected minimum before HLTA assessment.',tags:[{label:'2+ years as TA',type:'exp',ck:'none'},{label:'SEND support experience',type:'exp',ck:'send_experience'},{label:'Small group teaching',type:'exp',ck:'none'}]},
+{title:'Achieve formal qualifications',desc:'GCSEs in English and Maths are essential. A Level 3 qualification and HLTA status (via formal assessment) are the key formal milestones.',tags:[{label:'GCSEs English & Maths',type:'qual',ck:'gcse'},{label:'Level 3 qualification',type:'qual',ck:'l3'},{label:'HLTA status',type:'qual',ck:'hlta_status'}]},
+{title:'Take on wider responsibilities',desc:'Lead small group interventions, cover whole classes, mentor newer TAs, and contribute to lesson planning. These are the activities HLTA assessment will draw on as evidence.',tags:[{label:'Whole-class supervision',type:'dev',ck:'none'},{label:'Mentoring TAs',type:'dev',ck:'coached'},{label:'Contributing to planning',type:'dev',ck:'led_curriculum'}]}
+],
+skills:[{title:'Adaptive teaching',desc:'Adjusting your approach for different learners in real-time.'},{title:'Whole-class management',desc:'Confidently managing behaviour and engagement for a full class.'},{title:'Assessment for learning',desc:'Using formative assessment to check understanding and adapt.'},{title:'Intervention planning',desc:'Designing and delivering targeted support for small groups.'}],
+challenges:[{title:'The status vs. responsibility gap',desc:'You may take on teacher-level responsibilities without the recognition or pay.'},{title:'Whole-class teaching confidence',desc:'Moving from supporting to leading a class is a significant step.'},{title:'Being taken seriously as a leader',desc:'Establishing your authority when mentoring peers can be challenging.'}],
+timeline:[{label:'Now–6 months',sub:'Breadth, SEND experience'},{label:'6–18 months',sub:'Level 3, HLTA preparation'},{label:'18–24 months',sub:'HLTA assessment & appointment'}]
+},
+'ta>teacher':{
+legs:[
+{title:'Secure a degree',desc:'Required for all QTS routes. Many TAs study part-time or via distance learning. If you already hold a degree, you can move directly to ITT.',tags:[{label:'Degree (any subject)',type:'qual',ck:'degree'}]},
+{title:'Gain Qualified Teacher Status via ITT',desc:'School Direct (salaried) is ideal for experienced TAs. The Assessment Only route may apply if you can demonstrate QTS standards already.',tags:[{label:'Qualified Teacher Status (QTS)',type:'qual',ck:'qts'},{label:'PGCE or equivalent',type:'qual',ck:'pgce'},{label:'Strong classroom evidence portfolio',type:'exp',ck:'none'}]},
+{title:'Establish yourself as a qualified teacher',desc:'Use your ECT years to consolidate. Your TA background is a genuine advantage.',tags:[{label:'ECT induction support',type:'dev',ck:'none'},{label:'Curriculum delivery',type:'exp',ck:'led_curriculum'},{label:'Subject knowledge development',type:'dev',ck:'none'}]}
+],
+skills:[{title:'Curriculum planning',desc:'Designing sequences of learning aligned to national standards.'},{title:'Behaviour for learning',desc:'Establishing routines and expectations that enable great learning.'},{title:'Data literacy',desc:'Interpreting assessment data to drive your teaching decisions.'},{title:'Professional accountability',desc:'Owning outcomes for your classes and pupils.'}],
+challenges:[{title:'The shift in status',desc:'Moving from support to lead role changes every professional relationship.'},{title:'Workload shock',desc:'Planning, marking, reporting and admin are a significant step up.'},{title:'Subject knowledge gaps',desc:'Teaching at depth requires going beyond what you covered as a TA.'},{title:'Imposter syndrome',desc:'Feeling like you don\'t belong is common — your experience is your strength.'}],
+timeline:[{label:'Now–1 year',sub:'Complete degree (if needed)'},{label:'1–2 years',sub:'ITT programme'},{label:'2–3 years',sub:'ECT induction & early career'}]
+},
+'teacher>coord':{
+legs:[
+{title:'Demonstrate sustained classroom impact',desc:'Consistent strong-or-better teaching with measurable pupil progress over at least 3 years.',tags:[{label:'QTS',type:'qual',ck:'qts'},{label:'3+ years teaching',type:'exp',ck:'none'},{label:'Impact on outcomes',type:'exp',ck:'data_analysis'}]},
+{title:'Build leadership experience within your department',desc:'Lead a working group, mentor an ECT or TA, run enrichment or intervention programmes.',tags:[{label:'Curriculum leadership',type:'dev',ck:'led_curriculum'},{label:'Mentoring colleagues',type:'dev',ck:'coached'},{label:'Data analysis for attainment',type:'dev',ck:'data_analysis'}]},
+{title:'Begin middle leadership development',desc:'Complete NPQML or a Trust-equivalent programme.',tags:[{label:'NPQML',type:'qual',ck:'npqml'},{label:'Trust middle leadership CPD',type:'dev',ck:'none'}]}
+],
+skills:[{title:'People leadership',desc:'Motivating and developing colleagues effectively.'},{title:'Curriculum design at scale',desc:'Planning across year groups and key stages.'},{title:'Data-led decision making',desc:'Using assessment data to drive departmental strategy.'},{title:'Managing up and across',desc:'Influencing senior leaders and peers without direct authority.'}],
+challenges:[{title:'Managing former peers',desc:'The dynamic changes when you become their line manager.'},{title:'Time and workload',desc:'Balancing teaching load with leadership responsibilities.'},{title:'Accountability without authority',desc:'Being held to account for outcomes you don\'t fully control.'},{title:'The evidence gap',desc:'Demonstrating impact beyond your own classroom.'}],
+timeline:[{label:'Now–12 months',sub:'Build evidence, take responsibility'},{label:'12–24 months',sub:'NPQML, lead projects'},{label:'2–3 years',sub:'Apply for Coordinator of Learning'}]
+},
+'teacher>hol':{
+legs:[
+{title:'Progress through middle leadership',desc:'Head of Learning requires a track record of leading people, not just curriculum. Move through Coordinator or Second in Charge first.',tags:[{label:'QTS',type:'qual',ck:'qts'},{label:'Middle leadership experience',type:'exp',ck:'led_curriculum'},{label:'Line management',type:'exp',ck:'led_staff'}]},
+{title:'Develop people and performance management',desc:'Take responsibility for formal appraisals, lesson observations, supporting staff through difficulties.',tags:[{label:'Performance management',type:'exp',ck:'performance_mgmt'},{label:'Coaching & developing staff',type:'exp',ck:'coached'},{label:'HR processes training',type:'dev',ck:'none'}]},
+{title:'Lead at whole-department level',desc:'Full ownership of department outcomes, curriculum intent, staff wellbeing, and resource management.',tags:[{label:'NPQML',type:'qual',ck:'npqml'},{label:'Budget management',type:'exp',ck:'budget'},{label:'Whole-school contribution',type:'exp',ck:'whole_school'}]}
+],
+skills:[{title:'Strategic curriculum thinking',desc:'Designing a coherent curriculum across the whole department.'},{title:'Difficult conversations',desc:'Addressing underperformance with empathy and clarity.'},{title:'Resource and budget management',desc:'Making the most of limited departmental resources.'},{title:'Quality assurance',desc:'Monitoring and improving teaching quality across your team.'}],
+challenges:[{title:'The accountability shift',desc:'You are now accountable for everyone\'s results, not just your own.'},{title:'Supporting struggling staff',desc:'Helping colleagues improve without damaging the relationship.'},{title:'Workload at scale',desc:'Managing a team\'s needs alongside your own teaching.'},{title:'Maintaining your own teaching quality',desc:'Your classroom practice must remain strong while you lead.'}],
+timeline:[{label:'Now–2 years',sub:'Build via Coord / 2iC'},{label:'2–3 years',sub:'NPQML, performance mgmt'},{label:'3–4 years',sub:'Apply for Head of Learning'}]
+},
+'hol>asst_principal':{
+legs:[
+{title:'Lead beyond your department',desc:'Whole-school impact is the defining requirement. Evidence of leading school improvement initiatives and contributing to whole-staff CPD is essential.',tags:[{label:'Whole-school leadership',type:'exp',ck:'whole_school'},{label:'CPD delivery',type:'exp',ck:'cpd_delivery'},{label:'SLT contribution',type:'exp',ck:'slt_contribution'}]},
+{title:'Complete NPQSL and seek acting-up experience',desc:'NPQSL is the standard qualification. Acting-up in SLT, leading strategic projects, or taking on a whole-school responsibility area builds lived experience.',tags:[{label:'NPQSL',type:'qual',ck:'npqsl'},{label:'Acting up / secondment',type:'dev',ck:'acting_up'},{label:'Strategic project leadership',type:'dev',ck:'none'}]},
+{title:'Build a track record of school improvement',desc:'Evidence of data-led improvement, Ofsted readiness, and quality assurance at whole-school level.',tags:[{label:'Self-evaluation & Ofsted readiness',type:'exp',ck:'ofsted'},{label:'Data-led school improvement',type:'exp',ck:'data_analysis'},{label:'Performance management of staff',type:'exp',ck:'performance_mgmt'}]}
+],
+skills:[{title:'Strategic thinking',desc:'Seeing the big picture and translating vision into action.'},{title:'Executive communication',desc:'Presenting confidently to governors, parents, and inspectors.'},{title:'Coaching and developing leaders',desc:'Growing the next generation of middle leaders.'},{title:'Financial and resource literacy',desc:'Understanding school budgets and resource allocation.'}],
+challenges:[{title:'The visibility shift',desc:'You are now visible to the whole school community at all times.'},{title:'Breadth over depth',desc:'You must lead across areas you may not be expert in.'},{title:'Managing former peers',desc:'Your relationship with fellow middle leaders changes.'},{title:'The pace of SLT',desc:'The volume and speed of decision-making increases dramatically.'}],
+timeline:[{label:'Now–18 months',sub:'NPQSL, whole-school projects'},{label:'18 months–3 years',sub:'Acting-up, QA leadership'},{label:'3–4 years',sub:'Apply for Assistant Principal'}]
+},
+'asst_principal>vice_principal':{
+legs:[
+{title:'Sustained SLT impact over 3+ years',desc:'Demonstrable school improvement outcomes you can speak to specifically.',tags:[{label:'3+ years at SLT level',type:'exp',ck:'none'},{label:'School improvement outcomes',type:'exp',ck:'whole_school'},{label:'NPQSL',type:'qual',ck:'npqsl'}]},
+{title:'Lead strategic whole-school areas',desc:'Own a significant strategic area — behaviour, curriculum, pastoral, or staff development at whole-school scale with budget management.',tags:[{label:'Strategic area ownership',type:'exp',ck:'slt_contribution'},{label:'Finance & resource management',type:'exp',ck:'budget'},{label:'Performance management of leaders',type:'exp',ck:'performance_mgmt'}]},
+{title:'Build towards headship-level qualifications',desc:'NPQH is strongly desirable and signals intent.',tags:[{label:'NPQH',type:'qual',ck:'npqh'},{label:'Master\'s or postgraduate',type:'qual',ck:'masters'},{label:'Executive leadership coaching',type:'dev',ck:'none'}]}
+],
+skills:[{title:'Leading other leaders',desc:'Developing and holding Assistant Principals and middle leaders to account.'},{title:'Governance engagement',desc:'Working effectively with governors and trustees.'},{title:'Crisis and reputational management',desc:'Handling difficult situations that affect the whole school.'},{title:'Succession and talent development',desc:'Building leadership capacity across the organisation.'}],
+challenges:[{title:'The gap is larger than it looks',desc:'The step from AHT to VP requires a significant shift in scope.'},{title:'Deputising for the principal',desc:'Being prepared to lead the school at short notice.'},{title:'Complex personnel situations',desc:'Handling grievances, capability, and restructuring.'},{title:'Sustaining your own development',desc:'Finding time and space for your own growth at this level.'}],
+timeline:[{label:'Now–2 years',sub:'SLT impact, seek NPQH'},{label:'2–3 years',sub:'Strategic areas, budget ownership'},{label:'3–5 years',sub:'Apply for Vice Principal'}]
+},
+'vice_principal>principal':{
+legs:[
+{title:'Demonstrate whole-school leadership readiness',desc:'Acting-principal experience, Ofsted leadership, and active governance relationships are key.',tags:[{label:'Acting Principal experience',type:'exp',ck:'acting_up'},{label:'Ofsted leadership',type:'exp',ck:'ofsted'},{label:'Governance engagement',type:'exp',ck:'slt_contribution'}]},
+{title:'Complete NPQH',desc:'Expected and may be a formal requirement.',tags:[{label:'NPQH',type:'qual',ck:'npqh'},{label:'Master\'s or postgraduate',type:'qual',ck:'masters'},{label:'Degree',type:'qual',ck:'degree'}]},
+{title:'Build full whole-school accountability',desc:'Simultaneous accountability for outcomes, culture, safeguarding, staff development, and finance.',tags:[{label:'Whole-school outcomes accountability',type:'exp',ck:'slt_contribution'},{label:'Strategic budget management',type:'exp',ck:'budget'},{label:'Safeguarding strategic lead',type:'exp',ck:'safeguarding_l3'}]}
+],
+skills:[{title:'Visionary leadership',desc:'Articulating and sustaining a compelling vision for the school.'},{title:'Culture shaping',desc:'Building the culture you want through consistent action.'},{title:'Financial stewardship',desc:'Managing multi-million pound budgets effectively.'},{title:'Executive resilience',desc:'Sustaining yourself through relentless pressure and scrutiny.'}],
+challenges:[{title:'The loneliness of headship',desc:'The buck stops with you — and very few people understand what that feels like.'},{title:'You are always on',desc:'The role follows you home, into weekends, and through holidays.'},{title:'Decisions with incomplete information',desc:'You rarely have all the facts before you need to act.'},{title:'Sustaining trust during change',desc:'Leading transformational change while keeping staff, parents, and governors on side.'}],
+timeline:[{label:'Now–2 years',sub:'NPQH, acting principal'},{label:'2–3 years',sub:'Full accountability portfolio'},{label:'3–5 years',sub:'Apply for Principal'}]
+},
+'deputy_senco>senco':{
+legs:[
+{title:'Complete the NASENCo qualification',desc:'Statutory requirement, must be completed within 3 years of appointment. It is Master\'s-level and demanding alongside a teaching commitment.',tags:[{label:'NASENCo qualification',type:'qual',ck:'nasenco'},{label:'QTS',type:'qual',ck:'qts'},{label:'Degree',type:'qual',ck:'degree'}]},
+{title:'Take full ownership of SEND provision',desc:'Lead the SEND register, manage all EHCPs end-to-end, chair Annual Reviews, deploy and develop the TA team.',tags:[{label:'Full SEND provision leadership',type:'exp',ck:'send_experience'},{label:'TA management and deployment',type:'exp',ck:'led_staff'},{label:'EHCP and statutory compliance',type:'exp',ck:'send_experience'}]},
+{title:'Lead SEND strategy at whole-school level',desc:'Contribute to the school improvement plan, lead whole-staff SEND CPD, manage the SEND budget.',tags:[{label:'Whole-school inclusion strategy',type:'exp',ck:'whole_school'},{label:'SEND budget management',type:'dev',ck:'budget'},{label:'Whole-staff SEND CPD delivery',type:'dev',ck:'cpd_delivery'}]}
+],
+skills:[{title:'Strategic SEND leadership',desc:'Moving from operational delivery to strategic oversight.'},{title:'High-stakes family communication',desc:'Leading difficult conversations about children\'s needs with empathy.'},{title:'Managing the TA team',desc:'Deploying, developing, and performance-managing support staff.'},{title:'LA and tribunal processes',desc:'Navigating local authority procedures and legal requirements.'}],
+challenges:[{title:'The NASENCo qualification itself',desc:'A Master\'s-level programme alongside a full-time role is demanding.'},{title:'Professional isolation',desc:'The SENCo role can feel lonely — you are often the only specialist.'},{title:'The inclusion vs. resource tension',desc:'Meeting needs with limited funding and staffing.'},{title:'EHCP timescale pressure',desc:'Statutory deadlines create constant urgency.'}],
+timeline:[{label:'Now–12 months',sub:'Enrol NASENCo, increase ownership'},{label:'12–36 months',sub:'NASENCo completion'},{label:'3 years+',sub:'Apply for SENCo'}]
+},
+'admin>office_manager':{
+legs:[
+{title:'Build deep administrative expertise',desc:'At least 3 years in an academy administrator role, developing confidence across finance admin, HR support, compliance, data systems, and front-of-house.',tags:[{label:'GCSEs English & Maths',type:'qual',ck:'gcse'},{label:'Level 3 qualification',type:'qual',ck:'l3'},{label:'3+ years in academy admin',type:'exp',ck:'none'}]},
+{title:'Develop supervisory and systems leadership',desc:'Take on responsibility for supervising colleagues, leading on a specific compliance area, and deputising for the Office Manager.',tags:[{label:'Supervisory experience',type:'dev',ck:'led_staff'},{label:'GDPR and compliance',type:'dev',ck:'none'},{label:'Deputising for Office Manager',type:'dev',ck:'acting_up'}]},
+{title:'Formal management qualification',desc:'An ILM or CMI Level 3 in management, or NVQ Level 4/5 in Business Administration, strengthens your application significantly.',tags:[{label:'ILM / CMI management qualification',type:'qual',ck:'none'},{label:'Finance systems CPD',type:'dev',ck:'none'}]}
+],
+skills:[{title:'Office systems and compliance',desc:'Mastering MIS, finance systems, GDPR, and statutory reporting.'},{title:'People management',desc:'Leading and developing a small admin team.'},{title:'Financial administration',desc:'Managing petty cash, purchase orders, and budget tracking.'},{title:'Stakeholder communication',desc:'Confident written and verbal communication with parents, staff, and agencies.'}],
+challenges:[{title:'The shift from doing to managing',desc:'Stepping back from day-to-day tasks to oversee and delegate.'},{title:'Managing former peers',desc:'Your relationship with colleagues changes when you become their manager.'},{title:'The breadth of accountability',desc:'The office manager touches every part of school operations.'},{title:'Limited formal support structures',desc:'Support staff often have fewer development opportunities than teaching staff.'}],
+timeline:[{label:'Now–18 months',sub:'Build breadth, supervisory tasks'},{label:'18 months–3 years',sub:'ILM/CMI qualification, deputising'},{label:'3 years+',sub:'Apply for Office Manager'}]
+}
+};
+
+// ===== BRIDGE DATA =====
+const BRIDGE_SUPPORT_TO_TEACHING={
+label:'Qualified Teacher (required stopover)',
+summary:'Moving from a support role into teaching — and ultimately into leadership — requires gaining QTS. This is the essential gateway.',
+legs:[
+{title:'Secure a degree',desc:'Required for all QTS routes. Many support staff study part-time or via distance learning whilst in their current role.',tags:[{label:'Degree (any subject)',type:'qual',ck:'degree'}],bridge:true},
+{title:'Complete Initial Teacher Training (ITT)',desc:'School Direct (salaried) lets you train in school on a salary. Assessment Only suits those already working at teacher level.',tags:[{label:'Qualified Teacher Status (QTS)',type:'qual',ck:'qts'},{label:'PGCE or equivalent',type:'qual',ck:'pgce'}],bridge:true},
+{title:'Complete your Early Career Teacher induction',desc:'Use your support-staff experience to accelerate. You will have instincts and relationships that university-route trainees typically lack.',tags:[{label:'ECT induction',type:'dev',ck:'none'},{label:'Subject or phase specialism',type:'dev',ck:'none'}],bridge:true}
+]};
+
+// ===== GENERIC FALLBACK =====
+function generateGenericRoute(from,to){
+return{
+legs:[
+{title:'Review the destination role\'s person specification',desc:'Map your current skills against the essential criteria. Be honest about the gaps.',tags:[{label:'Skills gap analysis',type:'dev',ck:'none'},{label:'Flight Agent review',type:'dev',ck:'none'}]},
+{title:'Address qualification gaps',desc:'Identify any essential qualifications you do not yet hold and plan how to achieve them.',tags:[{label:'Role-specific qualifications',type:'qual',ck:'none'},{label:'Trust-funded CPD',type:'dev',ck:'none'}]},
+{title:'Build relevant experience',desc:'Seek projects, secondments, or acting-up arrangements that develop the required experience.',tags:[{label:'Targeted developmental experience',type:'exp',ck:'none'},{label:'Mentoring from current role holder',type:'dev',ck:'none'}]}
+],
+skills:[{title:'Self-awareness',desc:'Understanding your strengths and development areas clearly.'},{title:'Initiative',desc:'Proactively seeking opportunities to grow.'},{title:'Adaptability',desc:'Being open to new challenges and ways of working.'},{title:'Professional networking',desc:'Building relationships with people already in the role.'}],
+challenges:[{title:'Finding the right opportunities',desc:'The development experiences you need may not be readily available.'},{title:'Patience and persistence',desc:'Career transitions take time — stay committed to the long game.'},{title:'Building credibility',desc:'Establishing yourself as a serious candidate for a different type of role.'}],
+timeline:[{label:'Now–6 months',sub:'Research and gap analysis'},{label:'6–18 months',sub:'Qualifications and development'},{label:'18 months+',sub:'Application and transition'}],
+isGeneric:true
+};}
+
+// ===== STATE =====
+const state={step:1,currentRole:null,timeInRole:null,timeAtLAT:null,quals:new Set(),exps:new Set(),destRole:null};
+
+// ===== WIZARD LOGIC =====
+function goToStep(n){
+state.step=n;
+document.querySelectorAll('.wizard-step').forEach(s=>s.classList.remove('wizard-step--active'));
+const step=document.querySelector(`[data-step="${n}"]`);
+if(step)step.classList.add('wizard-step--active');
+const pct=Math.round((n/5)*100);
+document.getElementById('progressFill').style.width=pct+'%';
+document.getElementById('progressFill').setAttribute('aria-valuenow',pct);
+document.getElementById('stepLabel').textContent=`Step ${n} of 5`;
+document.getElementById('percentLabel').textContent=pct+'%';
+document.getElementById('announcer').textContent=`Step ${n} of 5`;
+if(n===5)populateDestSelect();
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function validateStep(n){
+if(n===1)return!!state.currentRole;
+if(n===2)return!!state.timeInRole&&!!state.timeAtLAT;
+if(n===3||n===4)return true;
+if(n===5)return!!state.destRole;
+return true;
+}
+
+function updateNextBtn(n){
+const btn=document.getElementById('next'+n);
+if(btn)btn.disabled=!validateStep(n);
+if(n===5){const ib=document.getElementById('issueBtn');if(ib)ib.disabled=!validateStep(5);}
+}
+
+function populateDestSelect(){
+const sel=document.getElementById('destRole');
+sel.innerHTML='<option value="">— Select your destination —</option>';
+ROLE_GROUPS.forEach(g=>{
+const og=document.createElement('optgroup');
+og.label=g.label;
+g.roles.forEach(r=>{
+if(r===state.currentRole)return;
+const o=document.createElement('option');
+o.value=r;o.textContent=ROLES[r].label;
+og.appendChild(o);
+});
+if(og.children.length)sel.appendChild(og);
+});
+if(state.destRole&&state.destRole!==state.currentRole){sel.value=state.destRole;}
+}
+
+// ===== ROUTE COMPUTATION =====
+function getFlightType(diff){
+if(diff>2)return'Long-haul';if(diff>0)return'Short-haul';if(diff===0)return'Lateral transfer';return'Career change';
+}
+
+function computeRoute(){
+const from=ROLES[state.currentRole],to=ROLES[state.destRole];
+const tierDiff=to.tier-from.tier;
+const flightType=getFlightType(tierDiff);
+const crossFamily=from.family!==to.family;
+const isLeadershipDest=['asst_principal','vice_principal','deputy_principal','principal'].includes(state.destRole);
+const isOpsToLeadership=from.family==='ops'&&isLeadershipDest;
+const needsBridge=(from.family==='support'&&(to.family==='teaching'||isLeadershipDest));
+const key=state.currentRole+'>'+state.destRole;
+let routeData=MAPPED_ROUTES[key]||null;
+let bridgeLegs=[];
+let showSpecialistNote=isOpsToLeadership;
+
+if(needsBridge){
+bridgeLegs=BRIDGE_SUPPORT_TO_TEACHING.legs;
+if(!routeData){
+const teacherToDestKey='teacher>'+state.destRole;
+routeData=MAPPED_ROUTES[teacherToDestKey]||generateGenericRoute(from,to);
+}
+}else if(!routeData){
+routeData=generateGenericRoute(from,to);
+}
+
+const allLegs=[...bridgeLegs,...(showSpecialistNote?[]:routeData.legs)];
+let done=0,total=0;
+allLegs.forEach(l=>{l.tags.forEach(t=>{
+if(t.ck==='none')return;total++;
+if(t.type==='qual'&&state.quals.has(t.ck))done++;
+else if((t.type==='exp'||t.type==='dev')&&state.exps.has(t.ck))done++;
+});});
+const readiness=total>0?Math.round(done/total*100):50;
+
+return{from:{key:state.currentRole,...from},to:{key:state.destRole,...to},flightType,crossFamily,needsBridge,bridgeLegs,routeData,showSpecialistNote,stopovers:allLegs.length,readiness,allLegs};
+}
+
+// ===== BOARDING PASS RENDERING =====
+function tagHtml(t){
+const held=(t.ck!=='none')&&((t.type==='qual'&&state.quals.has(t.ck))||((t.type==='exp'||t.type==='dev')&&state.exps.has(t.ck)));
+const cls=`bp-tag bp-tag--${t.type}${held?' bp-tag--held':''}`;
+return `<span class="${cls}">${held?'✓ ':''}${t.label}</span>`;
+}
+
+function legBadge(leg,idx,allHeld){
+if(leg.bridge)return `<div class="bp-leg__badge bp-leg__badge--bridge">↔</div>`;
+if(allHeld)return `<div class="bp-leg__badge bp-leg__badge--done">✓</div>`;
+return `<div class="bp-leg__badge bp-leg__badge--standard">${idx}</div>`;
+}
+
+function renderBoardingPass(route){
+const bp=document.getElementById('boardingPass');
+const timeLabel={'under_1':'Under 1 year','1_2':'1–2 years','3_5':'3–5 years','6_9':'6–9 years','10_plus':'10+ years'}[state.timeInRole]||'';
+const dotCls=route.readiness>=70?'green':route.readiness>=40?'amber':'red';
+const alertCls=route.readiness>=70?'success':route.readiness>=40?'info':'warning';
+const alertMsg=route.readiness>=70?'You are flight-ready! Many of the requirements for this destination are already in your portfolio.':route.readiness>=40?'You are boarding soon. A focused development plan will close the remaining gaps.':'You are in the early planning stage. This is an ambitious journey — but every destination is reachable with the right flight plan.';
+
+let heroRoute=`<div class="bp-hero__point"><div class="bp-hero__point-role">${route.from.label}</div><div class="bp-hero__point-sub">${timeLabel} in post</div></div>`;
+if(route.needsBridge)heroRoute+=`<div class="bp-hero__arrow">→</div><div class="bp-hero__bridge">via: Qualified Teacher</div>`;
+heroRoute+=`<div class="bp-hero__arrow">→</div><div class="bp-hero__point bp-hero__point--to"><div class="bp-hero__point-role">${route.to.label}</div><div class="bp-hero__point-sub">Destination</div></div>`;
+
+let legsHtml='';
+if(route.showSpecialistNote){
+legsHtml=`<div class="bp-specialist-note"><strong>Specialist route:</strong> Moving from an operational/support family into senior leadership typically requires a bespoke plan. The standard teaching pathway may not apply. Please speak with your Flight Agent to design a personalised route that recognises your operational expertise and identifies the bridge qualifications or experiences needed.</div>`;
+}else{
+let legIdx=1;
+if(route.needsBridge){
+legsHtml+=`<div class="bp-phase-strip"><div class="bp-phase-strip__title">Phase 1 — Cross the bridge</div><div class="bp-phase-strip__desc">Gain Qualified Teacher Status to unlock the teaching and leadership pathway</div></div>`;
+route.bridgeLegs.forEach(l=>{
+const allHeld=l.tags.length>0&&l.tags.every(t=>t.ck==='none'?false:(t.type==='qual'&&state.quals.has(t.ck))||((t.type==='exp'||t.type==='dev')&&state.exps.has(t.ck)));
+legsHtml+=`<div class="bp-leg">${legBadge(l,legIdx,allHeld)}<div class="bp-leg__content"><div class="bp-leg__title">${l.title}</div><div class="bp-leg__desc">${l.desc}</div><div class="bp-leg__tags">${l.tags.map(tagHtml).join('')}</div></div></div>`;
+legIdx++;
+});
+legsHtml+=`<div class="bp-phase-strip"><div class="bp-phase-strip__title">Phase 2 — Onward flight</div><div class="bp-phase-strip__desc">Progress through the teaching and leadership pathway to your destination</div></div>`;
+}
+route.routeData.legs.forEach(l=>{
+const allHeld=l.tags.length>0&&l.tags.filter(t=>t.ck!=='none').length>0&&l.tags.filter(t=>t.ck!=='none').every(t=>(t.type==='qual'&&state.quals.has(t.ck))||((t.type==='exp'||t.type==='dev')&&state.exps.has(t.ck)));
+legsHtml+=`<div class="bp-leg">${legBadge(l,legIdx,allHeld)}<div class="bp-leg__content"><div class="bp-leg__title">${l.title}</div><div class="bp-leg__desc">${l.desc}</div><div class="bp-leg__tags">${l.tags.map(tagHtml).join('')}</div></div></div>`;
+legIdx++;
+});
+}
+
+const skillsHtml=(route.routeData.skills||[]).map(s=>`<div class="bp-skill-card"><div class="bp-skill-card__title">${s.title}</div><div class="bp-skill-card__desc">${s.desc}</div></div>`).join('');
+const turbHtml=(route.routeData.challenges||[]).map(c=>`<div class="bp-turbulence-card"><div class="bp-turbulence-card__title">${c.title}</div><div class="bp-turbulence-card__desc">${c.desc}</div></div>`).join('');
+const tlHtml=(route.routeData.timeline||[]).map(t=>`<div class="bp-timeline__phase"><div class="bp-timeline__label">${t.label}</div><div class="bp-timeline__sub">${t.sub}</div></div>`).join('');
+const genericNote=route.routeData.isGeneric?`<div class="bp-alert bp-alert--info" style="margin-top:16px">A specific flight plan for this exact route will be built with your Flight Agent. The steps above are a starting point.</div>`:'';
+const timeWarning=state.timeInRole==='under_1'?`<div class="bp-alert bp-alert--warning">You have been in your current role for under 1 year. Consider building more experience before transitioning — but it is never too early to plan.</div>`:'';
+
+bp.innerHTML=`<div class="bp-card">
+<div class="bp-hero"><div class="bp-hero__eyebrow">FLIGHT PLAN · BOARDING PASS</div><div class="bp-hero__route">${heroRoute}</div></div>
+<div class="bp-stats">
+<div class="bp-stat"><div class="bp-stat__value">${route.flightType}</div><div class="bp-stat__label">Flight type</div></div>
+<div class="bp-stat"><div class="bp-stat__value">${route.stopovers}</div><div class="bp-stat__label">Stopovers</div></div>
+<div class="bp-stat"><div class="bp-stat__value"><span class="bp-stat__dot bp-stat__dot--${dotCls}"></span>${route.readiness}%</div><div class="bp-stat__label">Readiness</div></div>
+<div class="bp-stat"><div class="bp-stat__value">${route.crossFamily?'Cross-family ↔':'Same family'}</div><div class="bp-stat__label">Route</div></div>
+</div>
+<div class="bp-section"><div class="bp-section__heading">🛫 Flight legs — what you need to do</div><div class="bp-alert bp-alert--${alertCls}">${alertMsg}</div>${timeWarning}${legsHtml}${genericNote}</div>
+${skillsHtml?`<div class="bp-section"><div class="bp-section__heading">🎯 Skills to build for this role</div><div class="bp-skills-grid">${skillsHtml}</div></div>`:''}
+${turbHtml?`<div class="bp-section"><div class="bp-section__heading">⚡ Likely turbulence — challenges to prepare for</div>${turbHtml}</div>`:''}
+${tlHtml?`<div class="bp-section"><div class="bp-section__heading">📅 Indicative flight schedule</div><div class="bp-timeline">${tlHtml}</div><p class="bp-disclaimer">Timelines are indicative and depend on your starting point, opportunity, and pace of development. Discuss a specific timeline with your Flight Agent.</p></div>`:''}
+<div class="bp-cta"><span class="bp-cta__text">Ready to board? Speak with your Flight Agent to turn this plan into action.</span><button class="bp-cta__btn" onclick="return false">Contact your Flight Agent →</button></div>
+</div>
+<div class="bp-actions"><button class="bp-print-btn" onclick="window.print()">Print boarding pass</button><button class="bp-reset-link" id="resetBtn">← Start a new flight plan</button></div>`;
+
+document.getElementById('wizard').style.display='none';
+bp.style.display='block';
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded',()=>{
+// Step 1
+const curSel=document.getElementById('currentRole');
+curSel.addEventListener('change',()=>{state.currentRole=curSel.value||null;updateNextBtn(1);});
+document.getElementById('next1').addEventListener('click',()=>{if(validateStep(1))goToStep(2);});
+
+// Step 2
+document.querySelectorAll('input[name="timeInRole"]').forEach(r=>r.addEventListener('change',()=>{state.timeInRole=r.value;updateNextBtn(2);}));
+document.querySelectorAll('input[name="timeAtLAT"]').forEach(r=>r.addEventListener('change',()=>{state.timeAtLAT=r.value;updateNextBtn(2);}));
+document.getElementById('back2').addEventListener('click',()=>goToStep(1));
+document.getElementById('next2').addEventListener('click',()=>{if(validateStep(2))goToStep(3);});
+
+// Step 3
+document.querySelectorAll('input[name="quals"]').forEach(cb=>cb.addEventListener('change',()=>{if(cb.checked)state.quals.add(cb.value);else state.quals.delete(cb.value);}));
+document.getElementById('back3').addEventListener('click',()=>goToStep(2));
+document.getElementById('next3').addEventListener('click',()=>goToStep(4));
+
+// Step 4
+document.querySelectorAll('input[name="exps"]').forEach(cb=>cb.addEventListener('change',()=>{if(cb.checked)state.exps.add(cb.value);else state.exps.delete(cb.value);}));
+document.getElementById('back4').addEventListener('click',()=>goToStep(3));
+document.getElementById('next4').addEventListener('click',()=>goToStep(5));
+
+// Step 5
+const destSel=document.getElementById('destRole');
+destSel.addEventListener('change',()=>{state.destRole=destSel.value||null;updateNextBtn(5);});
+document.getElementById('back5').addEventListener('click',()=>goToStep(4));
+document.getElementById('issueBtn').addEventListener('click',()=>{if(validateStep(5)){const route=computeRoute();renderBoardingPass(route);}});
+
+// Reset
+document.addEventListener('click',(e)=>{
+if(e.target.id==='resetBtn'){
+state.step=1;state.currentRole=null;state.timeInRole=null;state.timeAtLAT=null;state.quals.clear();state.exps.clear();state.destRole=null;
+curSel.value='';destSel.value='';
+document.querySelectorAll('input[type="radio"]').forEach(r=>r.checked=false);
+document.querySelectorAll('input[name="quals"],input[name="exps"]').forEach(c=>c.checked=false);
+document.getElementById('boardingPass').style.display='none';
+document.getElementById('wizard').style.display='block';
+goToStep(1);updateNextBtn(1);
+}
+});
+
+// URL params
+const params=new URLSearchParams(window.location.search);
+if(params.get('from')&&ROLES[params.get('from')]){state.currentRole=params.get('from');curSel.value=params.get('from');updateNextBtn(1);}
+if(params.get('to')&&ROLES[params.get('to')]){state.destRole=params.get('to');}
+
+goToStep(1);
+});
+</script>
+</body>
+</html>
