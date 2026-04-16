@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPD &amp; Training - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .cpd-sections {
+            padding: 4rem 0;
+        }
+        .cpd-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #3d5a80;
+        }
+        .cpd-card:nth-child(even) {
+            border-left-color: #e5a733;
+        }
+        .cpd-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2b3e50;
+            margin: 0 0 1rem 0;
+        }
+        .cpd-card__text {
+            color: #555;
+            line-height: 1.7;
+            margin: 0 0 1rem 0;
+            font-size: 1.05rem;
+        }
+        .cpd-card__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem;
+        }
+        .cpd-card__list li {
+            color: #444;
+            font-size: 0.98rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+        .cpd-card__list li::before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: #3d5a80;
+            font-weight: 700;
+        }
+        .cpd-card:nth-child(even) .cpd-card__list li::before {
+            color: #e5a733;
+        }
+        .cpd-cta {
+            background: linear-gradient(135deg, #2b3e50 0%, #3d5a80 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .cpd-cta__title {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+        }
+        .cpd-cta__text {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
+            margin: 0 0 2rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cpd-cta__actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cpd-cta__btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s;
+            border: none;
+        }
+        .cpd-cta__btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        .cpd-cta__btn--primary {
+            background: #e5a733;
+            color: #2b3e50;
+        }
+        .cpd-cta__btn--outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        .cpd-cta__btn--outline:hover {
+            border-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <img src="../images/logo.png" alt="Flightplan" class="header__logo-img">
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html#resources">Resources</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>CPD &amp; Training</span>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="dest-hero">
+        <div class="container">
+            <div class="dest-hero__inner">
+                <div class="dest-hero__content">
+                    <span class="dest-hero__badge" style="background: #e5a733; color: #2b3e50;">Resources</span>
+                    <h1 class="dest-hero__title">CPD &amp; Training</h1>
+                    <p class="dest-hero__desc">Professional development opportunities through Leigh Academies Trust and KM Training. Whether you are at the start of your career or looking to reach the next level, there are funded programmes, accredited courses, and collaborative networks to support your growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CPD Sections -->
+    <section class="cpd-sections">
+        <div class="container">
+
+            <!-- Trust CPD Programme -->
+            <div class="cpd-card">
+                <h2 class="cpd-card__title">Trust CPD Programme</h2>
+                <p class="cpd-card__text">Leigh Academies Trust runs a comprehensive CPD programme designed for all staff across the trust. With a wide variety of formats and topics, there is something for everyone regardless of your role or experience level.</p>
+                <ul class="cpd-card__list">
+                    <li>Twilight sessions on pedagogy, wellbeing, and specialist topics</li>
+                    <li>INSET days with trust-wide and academy-specific focus</li>
+                    <li>Trust-wide conferences bringing together professionals from every academy</li>
+                    <li>Subject network meetings for curriculum collaboration</li>
+                    <li>Available to both teaching and support staff at all levels</li>
+                </ul>
+            </div>
+
+            <!-- KM Training -->
+            <div class="cpd-card">
+                <h2 class="cpd-card__title">KM Training</h2>
+                <p class="cpd-card__text">KM Training is the trust's dedicated training arm, offering a broad range of accredited courses, apprenticeships, and bespoke training packages. It also delivers the School Direct initial teacher training programme, providing an excellent route into teaching for career changers and graduates.</p>
+                <ul class="cpd-card__list">
+                    <li>Accredited courses across education and business disciplines</li>
+                    <li>Apprenticeships from Level 2 to degree level</li>
+                    <li>Bespoke training tailored to individual academy needs</li>
+                    <li>School Direct ITT for aspiring teachers and career changers</li>
+                    <li>Programmes for teachers, support staff, and leaders</li>
+                </ul>
+            </div>
+
+            <!-- NPQ Programmes -->
+            <div class="cpd-card">
+                <h2 class="cpd-card__title">NPQ Programmes</h2>
+                <p class="cpd-card__text">National Professional Qualifications are delivered through the trust, providing structured leadership development that is nationally recognised. These programmes are fully funded and designed to be completed part-time alongside your current role.</p>
+                <ul class="cpd-card__list">
+                    <li>NPQ in Leading Teaching (NPQLT)</li>
+                    <li>NPQ in Senior Leadership (NPQSL)</li>
+                    <li>NPQ in Headship (NPQH)</li>
+                    <li>NPQ in Executive Leadership (NPQEL)</li>
+                    <li>Fully funded with no cost to participants</li>
+                    <li>Studied part-time alongside your existing role</li>
+                </ul>
+            </div>
+
+            <!-- Apprenticeships -->
+            <div class="cpd-card">
+                <h2 class="cpd-card__title">Apprenticeships</h2>
+                <p class="cpd-card__text">The trust offers a range of apprenticeship programmes funded through the apprenticeship levy, meaning there is no cost to staff. These provide nationally recognised qualifications while you continue working in your role.</p>
+                <ul class="cpd-card__list">
+                    <li>Teaching Assistant apprenticeships (Level 3)</li>
+                    <li>Business Administration apprenticeships (Level 3)</li>
+                    <li>Leadership and Management apprenticeships (Level 5)</li>
+                    <li>Funded through the apprenticeship levy at no cost to staff</li>
+                    <li>Earn while you learn with on-the-job training</li>
+                </ul>
+            </div>
+
+            <!-- Subject Networks -->
+            <div class="cpd-card">
+                <h2 class="cpd-card__title">Subject Networks</h2>
+                <p class="cpd-card__text">Regular subject-specific meetings bring together practitioners from across the trust's academies. These networks are a powerful way to share expertise, improve consistency, and develop your subject knowledge alongside colleagues who share your passion.</p>
+                <ul class="cpd-card__list">
+                    <li>Regular meetings across all curriculum subjects</li>
+                    <li>Best practice sharing between trust academies</li>
+                    <li>Collaborative moderation of student work</li>
+                    <li>Joint curriculum planning and resource development</li>
+                    <li>Opportunities to lead and present to peers</li>
+                </ul>
+            </div>
+
+            <!-- Leadership Development -->
+            <div class="cpd-card">
+                <h2 class="cpd-card__title">Leadership Development</h2>
+                <p class="cpd-card__text">The trust provides tailored leadership development pathways for every stage of your career. Whether you are considering your first leadership step or looking to move into senior roles, there is structured support to help you get there.</p>
+                <ul class="cpd-card__list">
+                    <li>Aspiring leaders programme for those ready for their first step</li>
+                    <li>Middle leadership development with coaching and mentoring</li>
+                    <li>Senior leadership coaching and strategic development</li>
+                    <li>Tailored pathways matched to your career goals</li>
+                    <li>Cross-trust exposure and secondment opportunities</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cpd-cta">
+        <div class="container">
+            <h2 class="cpd-cta__title">Ready to invest in your development?</h2>
+            <p class="cpd-cta__text">Explore your career options and find the right CPD pathway for your next step in education.</p>
+            <div class="cpd-cta__actions">
+                <a href="../wizard.html" class="cpd-cta__btn cpd-cta__btn--primary">Plan my journey</a>
+                <a href="#" class="cpd-cta__btn cpd-cta__btn--outline" onclick="openFlightAgent(); return false;">Speak to a Flightplan Agent</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <img src="../images/logo.png" alt="Flightplan" class="footer__logo-img">
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="../index.html">Our mission</a>
+                    <a href="../index.html">For schools</a>
+                    <a href="../index.html">Contact us</a>
+                    <a href="../index.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+</body>
+</html>

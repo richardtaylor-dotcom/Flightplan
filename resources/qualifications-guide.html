@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualifications Guide - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .qual-section {
+            background: #ffffff;
+            padding: 32px 36px;
+            border-radius: 12px;
+            margin-bottom: 28px;
+            border-left: 5px solid #3d5a80;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .qual-section--gold {
+            border-left-color: #e5a733;
+        }
+        .qual-section__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2332;
+            margin: 0 0 16px 0;
+        }
+        .qual-section__text {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.75;
+            color: #4a5568;
+            margin: 0 0 12px 0;
+        }
+        .qual-section__list {
+            list-style: disc;
+            padding-left: 24px;
+            margin: 0 0 16px 0;
+        }
+        .qual-section__list li {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.75;
+            color: #4a5568;
+            margin-bottom: 6px;
+        }
+        .qual-section__list li strong {
+            color: #1a2332;
+        }
+        .qual-section__subtitle {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2b3e50;
+            margin: 20px 0 10px 0;
+        }
+        .qual-cta {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #3d5a80 0%, #2b3e50 100%);
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+        .qual-cta__title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 20px 0;
+        }
+        .qual-cta__btn {
+            display: inline-block;
+            padding: 14px 36px;
+            background: #e5a733;
+            color: #2b3e50;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .qual-cta__btn:hover {
+            background: #d4962e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <img src="../images/logo.png" alt="Flightplan" class="header__logo-img">
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html#resources">Resources</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>Qualifications Guide</span>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="dest-hero">
+        <div class="container">
+            <div class="dest-hero__inner">
+                <div class="dest-hero__content">
+                    <span class="dest-hero__badge" style="background: #e5a733; color: #2b3e50;">Resources</span>
+                    <h1 class="dest-hero__title">Qualifications Guide</h1>
+                    <p class="dest-hero__desc">Understand what you need for every step of your career journey</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teaching Qualifications -->
+    <section style="padding: 48px 0 0;">
+        <div class="container">
+            <div class="qual-section">
+                <h2 class="qual-section__title">Teaching Qualifications</h2>
+
+                <h3 class="qual-section__subtitle">Qualified Teacher Status (QTS)</h3>
+                <p class="qual-section__text">QTS is the professional status required to teach in maintained schools in England. There are several routes to achieving QTS:</p>
+                <ul class="qual-section__list">
+                    <li><strong>PGCE (Postgraduate Certificate in Education)</strong> &ndash; A one-year postgraduate programme, usually combined with QTS. Offers a blend of academic study and practical classroom experience.</li>
+                    <li><strong>School Direct</strong> &ndash; A school-led training route where you train in a school from day one. A salaried option is available for career changers with relevant work experience.</li>
+                    <li><strong>Assessment Only</strong> &ndash; For experienced unqualified teachers who can demonstrate they already meet the Teachers' Standards without further training.</li>
+                </ul>
+
+                <h3 class="qual-section__subtitle">PGCE (Postgraduate Certificate in Education)</h3>
+                <p class="qual-section__text">A one-year postgraduate qualification that provides both academic grounding in education theory and practical classroom training. Most PGCE programmes are combined with QTS, giving you everything you need to begin teaching. Available through universities and some school-led partnerships.</p>
+
+                <h3 class="qual-section__subtitle">School Direct</h3>
+                <p class="qual-section__text">A school-led training programme where you learn on the job in a real school environment. School Direct offers a tuition fee route (with bursaries available for some subjects) and a salaried route for those with existing work experience. You train as part of a school network and gain QTS upon completion.</p>
+
+                <h3 class="qual-section__subtitle">ECT Induction (Early Career Teacher)</h3>
+                <p class="qual-section__text">After gaining QTS, all new teachers must complete a two-year ECT induction programme. This replaces the former NQT year and provides structured support, mentoring, and a reduced timetable to help you develop your practice in the early stages of your teaching career.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Qualifications (NPQs) -->
+    <section style="padding: 0;">
+        <div class="container">
+            <div class="qual-section qual-section--gold">
+                <h2 class="qual-section__title">Leadership Qualifications (NPQs)</h2>
+                <p class="qual-section__text">National Professional Qualifications (NPQs) are fully funded by the Department for Education and designed to support career progression into leadership roles across education.</p>
+
+                <h3 class="qual-section__subtitle">NPQML / NPQLTD (Leading Teacher Development)</h3>
+                <p class="qual-section__text">Designed for middle leaders and those aspiring to middle leadership positions. This 12&ndash;18 month programme covers leading teams, managing performance, and driving improvement at department or phase level. Fully funded by the DfE.</p>
+
+                <h3 class="qual-section__subtitle">NPQSL (Senior Leadership)</h3>
+                <p class="qual-section__text">For those in or aspiring to senior leadership roles such as Deputy Head or Assistant Head. This 12&ndash;18 month programme focuses on whole-school strategy, organisational management, and creating conditions for effective teaching. Fully funded.</p>
+
+                <h3 class="qual-section__subtitle">NPQH (Headship)</h3>
+                <p class="qual-section__text">The national qualification for those aspiring to become headteachers. This 18-month programme covers school vision, accountability, and leading whole-school improvement. Fully funded.</p>
+
+                <h3 class="qual-section__subtitle">NPQEL (Executive Leadership)</h3>
+                <p class="qual-section__text">For those leading or aspiring to lead across multiple schools, such as CEOs and Executive Headteachers. This 18-month programme addresses trust-wide strategy, governance, and system leadership. Fully funded.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEND Qualifications -->
+    <section style="padding: 0;">
+        <div class="container">
+            <div class="qual-section">
+                <h2 class="qual-section__title">SEND Qualifications</h2>
+
+                <h3 class="qual-section__subtitle">National Award for SEN Coordination (NASENCo)</h3>
+                <p class="qual-section__text">The NASENCo is mandatory for all newly appointed SENCos who must complete it within three years of taking up the role. It is a Master's-level qualification that covers the strategic leadership of SEND provision, working with external agencies, and ensuring compliance with the SEND Code of Practice.</p>
+
+                <h3 class="qual-section__subtitle">Level 3 SEND Qualifications</h3>
+                <p class="qual-section__text">A range of Level 3 qualifications are available for teaching assistants and support staff who work with children and young people with special educational needs and disabilities. These cover areas such as supporting learners with specific needs, understanding autism, and implementing targeted interventions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Staff Qualifications -->
+    <section style="padding: 0;">
+        <div class="container">
+            <div class="qual-section qual-section--gold">
+                <h2 class="qual-section__title">Support Staff Qualifications</h2>
+
+                <h3 class="qual-section__subtitle">HLTA Status &amp; Assessment</h3>
+                <p class="qual-section__text">Higher Level Teaching Assistant (HLTA) status is achieved through a formal assessment process. HLTAs take on more responsibility than standard TAs, including planning and delivering lessons under the direction of a teacher. The assessment demonstrates you meet the national HLTA standards.</p>
+
+                <h3 class="qual-section__subtitle">Level 2 / Level 3 Teaching Assistant Qualifications</h3>
+                <ul class="qual-section__list">
+                    <li><strong>Level 2 Certificate in Supporting Teaching and Learning</strong> &ndash; An entry-level qualification for those starting out as teaching assistants.</li>
+                    <li><strong>Level 3 Diploma in Specialist Support for Teaching and Learning</strong> &ndash; A more advanced qualification for experienced TAs looking to develop specialist skills.</li>
+                </ul>
+
+                <h3 class="qual-section__subtitle">Level 3 Business Administration</h3>
+                <p class="qual-section__text">Ideal for school office staff and administrators looking to formalise their skills. Covers organisational management, project coordination, communication, and business processes relevant to academy and trust settings.</p>
+
+                <h3 class="qual-section__subtitle">CIPD for HR Professionals</h3>
+                <p class="qual-section__text">The Chartered Institute of Personnel and Development (CIPD) qualifications are the gold standard for HR professionals. Level 3 Foundation Certificate in People Practice is ideal for those new to HR, while Level 5 Associate Diploma suits those progressing into HR management roles.</p>
+
+                <h3 class="qual-section__subtitle">ILM / CMI Management Qualifications</h3>
+                <p class="qual-section__text">The Institute of Leadership &amp; Management (ILM) and Chartered Management Institute (CMI) offer qualifications at various levels for aspiring and current managers. These are valuable for office managers, operations leads, and those moving into trust-level management roles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safeguarding -->
+    <section style="padding: 0;">
+        <div class="container">
+            <div class="qual-section">
+                <h2 class="qual-section__title">Safeguarding</h2>
+
+                <h3 class="qual-section__subtitle">Level 2 Safeguarding (All Staff)</h3>
+                <p class="qual-section__text">All staff working in education settings are required to hold a current Level 2 safeguarding qualification. This covers recognising the signs of abuse and neglect, understanding referral processes, and knowing your responsibilities under Keeping Children Safe in Education (KCSIE).</p>
+
+                <h3 class="qual-section__subtitle">Level 3 / Designated Safeguarding Lead (DSL)</h3>
+                <p class="qual-section__text">Designated Safeguarding Leads and deputies must hold Level 3 safeguarding training. This advanced qualification covers managing referrals, inter-agency working, record keeping, and leading the safeguarding culture within a school or trust. DSL training must be refreshed every two years.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding: 0 0 60px;">
+        <div class="container">
+            <div class="qual-cta">
+                <h2 class="qual-cta__title">Not sure which qualifications you need?</h2>
+                <a href="../wizard.html" class="qual-cta__btn">Find your pathway</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <img src="../images/logo.png" alt="Flightplan" class="footer__logo-img">
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="../index.html">Our mission</a>
+                    <a href="../index.html">For schools</a>
+                    <a href="../index.html">Contact us</a>
+                    <a href="../index.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+</body>
+</html>

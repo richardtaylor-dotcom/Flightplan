@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funding &amp; Bursaries - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .funding-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 5px solid #3d5a80;
+        }
+
+        .funding-section:nth-child(even) {
+            border-left-color: #e5a733;
+        }
+
+        .funding-section__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a2a3a;
+            margin: 0 0 1rem 0;
+        }
+
+        .funding-section__text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #4a5568;
+            margin: 0;
+        }
+
+        .funding-sections-wrapper {
+            padding: 4rem 0;
+            background: #f7f8fa;
+        }
+
+        .funding-cta {
+            background: linear-gradient(135deg, #3d5a80 0%, #2b3e50 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .funding-cta__title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0 0 1rem 0;
+        }
+
+        .funding-cta__text {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.85);
+            margin: 0 0 2rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .funding-cta__btn {
+            display: inline-block;
+            background: #e5a733;
+            color: #2b3e50;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .funding-cta__btn:hover {
+            background: #d4952e;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <img src="../images/logo.png" alt="Flightplan" class="header__logo-img">
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html#resources">Resources</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>Funding &amp; Bursaries</span>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="dest-hero">
+        <div class="container">
+            <div class="dest-hero__inner">
+                <div class="dest-hero__content">
+                    <span class="dest-hero__badge" style="background: #e5a733; color: #2b3e50;">Resources</span>
+                    <h1 class="dest-hero__title">Funding &amp; Bursaries</h1>
+                    <p class="dest-hero__desc">Financial support to help you reach your career destination</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funding Sections -->
+    <div class="funding-sections-wrapper">
+        <div class="container">
+
+            <!-- ITT Bursaries & Scholarships -->
+            <div class="funding-section">
+                <h2 class="funding-section__title">ITT Bursaries &amp; Scholarships</h2>
+                <p class="funding-section__text">If you are training to teach, you may be eligible for a tax-free bursary worth up to &pound;28,000, depending on your subject. The highest bursaries are available for shortage subjects including physics, maths, chemistry, computing, and languages. These bursaries are paid directly to you during your training year and do not need to be repaid. In addition, prestigious scholarships are available through subject associations such as the Institute of Physics and the Royal Society of Chemistry, offering both financial support and professional membership benefits.</p>
+            </div>
+
+            <!-- Student Finance -->
+            <div class="funding-section">
+                <h2 class="funding-section__title">Student Finance</h2>
+                <p class="funding-section__text">If you are pursuing an undergraduate degree, you can access student loans for tuition fees and maintenance through Student Finance England. For those undertaking a PGCE, postgraduate loans of up to &pound;12,167 are available to help cover your living costs during training. Repayment is income-contingent, meaning you only start repaying once you earn above the repayment threshold, and any remaining balance is written off after a set period. This makes higher education an accessible route regardless of your current financial situation.</p>
+            </div>
+
+            <!-- Apprenticeship Levy Funding -->
+            <div class="funding-section">
+                <h2 class="funding-section__title">Apprenticeship Levy Funding</h2>
+                <p class="funding-section__text">The Learning Academy Trust (LAT) is a levy-paying employer, which means apprenticeship training is fully funded for staff at no cost to the individual. This opens up a wide range of qualifications and development programmes, including Teaching Assistant qualifications, Business Administration apprenticeships, and Leadership and Management programmes. If you are looking to gain a formal qualification while continuing to work, the apprenticeship route offers an excellent opportunity to develop your skills and progress your career without any personal financial outlay.</p>
+            </div>
+
+            <!-- NPQ Funding -->
+            <div class="funding-section">
+                <h2 class="funding-section__title">NPQ Funding</h2>
+                <p class="funding-section__text">All National Professional Qualifications (NPQs) are fully funded by the Department for Education (DfE), at no cost to the individual or their school. This includes NPQML (Leading Teaching), NPQSL (Senior Leadership), NPQH (Headship), and NPQEL (Executive Leadership). NPQs are designed to support teachers and leaders at every stage of their career, providing evidence-based training that is directly applicable to your role. With full funding available, there has never been a better time to invest in your professional development through an NPQ.</p>
+            </div>
+
+            <!-- Trust CPD Budget -->
+            <div class="funding-section">
+                <h2 class="funding-section__title">Trust CPD Budget</h2>
+                <p class="funding-section__text">Each academy within the trust has a dedicated CPD (Continuing Professional Development) budget to support staff development. This funding can be used for external courses, conferences, professional qualifications, and specialist training. If there is a course or programme that will support your career development, speak to your line manager about accessing the CPD budget. Applications are considered on a case-by-case basis and are aligned with both your professional goals and the strategic priorities of the academy.</p>
+            </div>
+
+            <!-- Career Development Loans -->
+            <div class="funding-section">
+                <h2 class="funding-section__title">Career Development Loans</h2>
+                <p class="funding-section__text">For courses and qualifications that are not covered by other funding routes, Professional and Career Development Loans offer an alternative way to finance your learning. These loans are available from participating banks and can be used to pay for a wide range of vocational and professional courses. Repayment terms are flexible, and you may not need to start repaying until after your course has finished. If you have identified a qualification that will help you progress but falls outside standard funding streams, a Career Development Loan could be the right option for you.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="funding-cta">
+        <div class="container">
+            <h2 class="funding-cta__title">Plan your journey</h2>
+            <p class="funding-cta__text">Plan your journey and see what funding applies to your route</p>
+            <a href="../wizard.html" class="funding-cta__btn">Get started</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <img src="../images/logo.png" alt="Flightplan" class="footer__logo-img">
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="../index.html">Our mission</a>
+                    <a href="../index.html">For schools</a>
+                    <a href="../index.html">Contact us</a>
+                    <a href="../index.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+</body>
+</html>

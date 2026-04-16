@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoring &amp; Coaching - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .resource-section {
+            padding: 3rem 0;
+        }
+        .resource-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #3d5a80;
+        }
+        .resource-card:nth-child(even) {
+            border-left-color: #e5a733;
+        }
+        .resource-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2b3e50;
+            margin: 0 0 1rem 0;
+        }
+        .resource-card__text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #4a5568;
+            margin: 0;
+        }
+        .resource-hero {
+            background: linear-gradient(135deg, #2b3e50 0%, #3d5a80 100%);
+            padding: 4rem 0;
+            color: #ffffff;
+        }
+        .resource-hero__badge {
+            display: inline-block;
+            background: #e5a733;
+            color: #2b3e50;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .resource-hero__title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            color: #ffffff;
+        }
+        .resource-hero__subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin: 0;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        .resource-cta {
+            background: linear-gradient(135deg, #2b3e50 0%, #3d5a80 100%);
+            padding: 4rem 0;
+            text-align: center;
+            color: #ffffff;
+        }
+        .resource-cta__title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+        }
+        .resource-cta__text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0 0 2rem 0;
+        }
+        .resource-cta__actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .resource-cta__btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+        }
+        .resource-cta__btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        .resource-cta__btn--primary {
+            background: #e5a733;
+            color: #2b3e50;
+        }
+        .resource-cta__btn--outline {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        .resource-cta__btn--outline:hover {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+        @media (max-width: 768px) {
+            .resource-hero__title {
+                font-size: 2rem;
+            }
+            .resource-card {
+                padding: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <img src="../images/logo.png" alt="Flightplan" class="header__logo-img">
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="#" class="header__sign-in">Sign in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="#" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html#resources">Resources</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>Mentoring &amp; Coaching</span>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="resource-hero">
+        <div class="container">
+            <span class="resource-hero__badge">Resources</span>
+            <h1 class="resource-hero__title">Mentoring &amp; Coaching</h1>
+            <p class="resource-hero__subtitle">Connect with experienced professionals to guide your career journey</p>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="resource-section">
+        <div class="container">
+
+            <!-- How Mentoring Works at LAT -->
+            <div class="resource-card">
+                <h2 class="resource-card__title">How Mentoring Works at LAT</h2>
+                <p class="resource-card__text">The trust pairs staff with experienced mentors who have completed similar career journeys. Whether you are just starting out or moving into a new role, your mentor provides guidance drawn from real experience, shares insight into the challenges ahead, and helps you navigate each stage of your development with confidence. Mentoring at LAT is built on trust, shared experience, and a genuine commitment to helping every colleague reach their potential.</p>
+            </div>
+
+            <!-- ECT Mentoring -->
+            <div class="resource-card">
+                <h2 class="resource-card__title">ECT Mentoring</h2>
+                <p class="resource-card__text">All Early Career Teachers receive a dedicated mentor throughout their two-year induction period. The structured programme includes regular one-to-one check-ins, classroom observation with actionable feedback, and ongoing support tailored to individual development needs. Your mentor is there to help you build confidence, refine your practice, and ensure you feel supported every step of the way as you establish yourself in the profession.</p>
+            </div>
+
+            <!-- Leadership Coaching -->
+            <div class="resource-card">
+                <h2 class="resource-card__title">Leadership Coaching</h2>
+                <p class="resource-card__text">Aspiring and new leaders can access coaching from experienced senior leaders across the trust. Through focused one-to-one sessions, you will work on specific development goals, build the skills and mindset needed for leadership, and gain the confidence to lead effectively. Whether you are preparing for your first leadership post or stepping up to a more senior role, coaching gives you a dedicated space to reflect, plan, and grow.</p>
+            </div>
+
+            <!-- Peer Networks -->
+            <div class="resource-card">
+                <h2 class="resource-card__title">Peer Networks</h2>
+                <p class="resource-card__text">Connect with colleagues across the trust who are on similar career journeys. Peer networks bring together staff at comparable stages of their development for regular meetups, shared resources, and mutual support. Whether you are an aspiring middle leader, a new teaching assistant, or an experienced administrator exploring your next move, peer networks give you a community of people who understand exactly where you are and where you want to go.</p>
+            </div>
+
+            <!-- Flightplan Agents -->
+            <div class="resource-card">
+                <h2 class="resource-card__title">Flightplan Agents</h2>
+                <p class="resource-card__text">Trained career coaches within the trust who help you make the most of your professional development. Flightplan Agents can help you interpret your boarding pass, plan your next career steps, and connect you with the right development opportunities at the right time. They understand the full range of roles and pathways available across LAT and are available to all staff, no matter where you are in your career journey.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="resource-cta">
+        <div class="container">
+            <h2 class="resource-cta__title">Ready to connect with a mentor?</h2>
+            <p class="resource-cta__text">Speak to a Flightplan Agent to find the right support for your career journey.</p>
+            <div class="resource-cta__actions">
+                <button class="resource-cta__btn resource-cta__btn--primary" onclick="openFlightAgent(); return false;">Speak to a Flightplan Agent</button>
+                <a href="../wizard.html" class="resource-cta__btn resource-cta__btn--outline">Plan my journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <img src="../images/logo.png" alt="Flightplan" class="footer__logo-img">
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="../index.html">Our mission</a>
+                    <a href="../index.html">For schools</a>
+                    <a href="../index.html">Contact us</a>
+                    <a href="../index.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+</body>
+</html>
