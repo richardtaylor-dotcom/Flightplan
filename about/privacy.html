@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Flightplan</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .about-section {
+            background: #ffffff;
+            padding: 32px 36px;
+            border-radius: 12px;
+            margin-bottom: 28px;
+            border-left: 5px solid #3d5a80;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .about-section--gold {
+            border-left-color: #e5a733;
+        }
+        .about-section__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2332;
+            margin: 0 0 16px 0;
+        }
+        .about-section__text {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.75;
+            color: #4a5568;
+            margin: 0 0 12px 0;
+        }
+        .about-section__text a {
+            color: #3d5a80;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .about-section__text a:hover {
+            color: #2b3e50;
+        }
+        .about-section__list {
+            list-style: disc;
+            padding-left: 24px;
+            margin: 0 0 16px 0;
+        }
+        .about-section__list li {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.75;
+            color: #4a5568;
+            margin-bottom: 6px;
+        }
+        .about-section__list li strong {
+            color: #1a2332;
+        }
+        .about-cta {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #3d5a80 0%, #2b3e50 100%);
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+        .about-cta__title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 20px 0;
+        }
+        .about-cta__btn {
+            display: inline-block;
+            padding: 14px 36px;
+            background: #e5a733;
+            color: #2b3e50;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .about-cta__btn:hover {
+            background: #d4962e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">
+                <img src="../images/logo.png" alt="Flightplan" class="header__logo-img">
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html#destinations" class="header__nav-link">Destinations</a>
+                <a href="../index.html#journeys" class="header__nav-link">Career Journeys</a>
+                <a href="../index.html#resources" class="header__nav-link">Resources</a>
+            </nav>
+            <div class="header__actions">
+                <a href="../login.html" class="header__sign-in">Log in</a>
+                <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav__panel">
+            <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+            <a href="../index.html#destinations" class="mobile-nav__link">Destinations</a>
+            <a href="../index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+            <a href="../index.html#resources" class="mobile-nav__link">Resources</a>
+            <a href="../login.html" class="mobile-nav__link">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb__sep">/</span>
+            <a href="../index.html">About</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>Privacy Policy</span>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="dest-hero">
+        <div class="container">
+            <div class="dest-hero__inner">
+                <div class="dest-hero__content">
+                    <span class="dest-hero__badge" style="background: #e5a733; color: #2b3e50;">Legal</span>
+                    <h1 class="dest-hero__title">Privacy Policy</h1>
+                    <p class="dest-hero__desc">How we collect, use, and protect your data on Flightplan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What data we collect -->
+    <section style="padding: 48px 0 0;">
+        <div class="container">
+            <div class="about-section">
+                <h2 class="about-section__title">What data we collect</h2>
+                <p class="about-section__text">When you create an account: your name, email address, and academy. When you use the journey planner: your current role, desired destination, qualifications, and experience. This data is stored securely in our database.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How we use your data -->
+    <section style="padding: 0;">
+        <div class="container">
+            <div class="about-section about-section--gold">
+                <h2 class="about-section__title">How we use your data</h2>
+                <ul class="about-section__list">
+                    <li>To generate your personalised boarding pass.</li>
+                    <li>To allow you to save and retrieve your boarding passes.</li>
+                    <li>To enable Flight Agents to provide you with tailored career advice and recommendations.</li>
+                </ul>
+                <p class="about-section__text">We do not share your personal data with third parties outside of Leigh Academies Trust.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data storage and security -->
+    <section style="padding: 0;">
+        <div class="container">
+            <div class="about-section">
+                <h2 class="about-section__title">Data storage and security</h2>
+                <p class="about-section__text">Your data is stored securely using Supabase, a cloud database platform with encryption at rest and in transit. Access is controlled through row-level security policies. Only you and authorised Flight Agents can view your boarding passes and profile.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Your rights -->
+    <section style="padding: 0;">
+        <div class="container">
+            <div class="about-section about-section--gold">
+                <h2 class="about-section__title">Your rights</h2>
+                <p class="about-section__text">You can view, update, or delete your profile and boarding passes at any time from your My Flightplan dashboard. To request complete deletion of your account, contact us at <a href="mailto:flightplan@leighacademiestrust.org.uk">flightplan@leighacademiestrust.org.uk</a>. This policy is governed by UK GDPR and the Data Protection Act 2018.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cookies -->
+    <section style="padding: 0;">
+        <div class="container">
+            <div class="about-section">
+                <h2 class="about-section__title">Cookies</h2>
+                <p class="about-section__text">Flightplan uses essential cookies for authentication (keeping you logged in). We use the Superchat widget for live support which may set its own cookies. We do not use advertising or tracking cookies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding: 0 0 60px;">
+        <div class="container">
+            <div class="about-cta">
+                <h2 class="about-cta__title">Have questions about your data?</h2>
+                <a href="contact.html" class="about-cta__btn">Contact us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="../index.html" class="footer__logo">
+                        <img src="../images/logo.png" alt="Flightplan" class="footer__logo-img">
+                    </a>
+                    <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Destinations</h4>
+                    <a href="../index.html#destinations">Teaching roles</a>
+                    <a href="../index.html#destinations">Leadership roles</a>
+                    <a href="../index.html#destinations">Support roles</a>
+                    <a href="../index.html#destinations">Specialist roles</a>
+                </div>
+                <div class="footer__links">
+                    <h4>Resources</h4>
+                    <a href="../index.html#resources">Career guides</a>
+                    <a href="../index.html#resources">Qualifications</a>
+                    <a href="../index.html#resources">CPD finder</a>
+                    <a href="../index.html#resources">Salary scales</a>
+                </div>
+                <div class="footer__links">
+                    <h4>About</h4>
+                    <a href="our-mission.html">Our mission</a>
+                    <a href="for-schools.html">For schools</a>
+                    <a href="contact.html">Contact us</a>
+                    <a href="privacy.html">Privacy policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Flightplan. All rights reserved.</p>
+                <p>Helping you land your dream role in education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var launcher = document.querySelector('[data-superchat-launcher]')
+            || document.querySelector('.superchat-launcher')
+            || document.querySelector('iframe[src*="superchat"]');
+        if (launcher && launcher.tagName === 'IFRAME') {
+            var parent = launcher.closest('[role="button"]') || launcher.parentElement;
+            if (parent) parent.click();
+        } else if (launcher) {
+            launcher.click();
+        }
+        if (!launcher) {
+            var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+            for (var i = 0; i < allEls.length; i++) {
+                if (allEls[i].click) { allEls[i].click(); break; }
+            }
+        }
+    }
+    </script>
+    <script src="../js/supabase.min.js"></script>
+    <script src="../js/supabase-config.js"></script>
+</body>
+</html>
