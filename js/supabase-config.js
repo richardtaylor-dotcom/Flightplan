@@ -142,36 +142,74 @@ async function getUserPassesById(userId) {
 }
 
 // ===== Nav Auth State =====
+function setNavLoggedIn(name) {
+    const firstName = (name || '').split(' ')[0] || 'My Flightplan';
+    document.querySelectorAll('.header__sign-in').forEach(link => {
+        link.textContent = firstName;
+        link.href = 'my-flightplan.html';
+        link.style.background = '#3d5a80';
+        link.style.color = '#fff';
+        link.style.borderColor = '#3d5a80';
+    });
+    document.querySelectorAll('.mobile-nav__link').forEach(link => {
+        if (link.textContent.trim() === 'Sign in' || link.textContent.trim() === 'Log in') {
+            link.textContent = firstName + ' — My Flightplan';
+            link.href = 'my-flightplan.html';
+        }
+    });
+}
+
+function setNavLoggedOut() {
+    document.querySelectorAll('.header__sign-in').forEach(link => {
+        link.textContent = 'Log in';
+        link.href = 'login.html';
+        link.style.background = '';
+        link.style.color = '';
+        link.style.borderColor = '';
+    });
+}
+
 async function updateNavForAuth() {
     try {
-        const user = await getCurrentUser();
-        const signInLinks = document.querySelectorAll('.header__sign-in');
-        const mobileSignIn = document.querySelectorAll('.mobile-nav__link[href="login.html"], .mobile-nav__link[href="#"]');
+        const sb = getSupabase();
 
-        if (user) {
+        // Step 1: Instant check from cached name in localStorage
+        const cachedName = localStorage.getItem('fp_user_name');
+        const { data: { session } } = await sb.auth.getSession();
+
+        if (session && cachedName) {
+            // Instant nav update — no network call needed
+            setNavLoggedIn(cachedName);
+        } else if (session) {
+            // Session exists but no cached name — fetch profile
             const profile = await getUserProfile();
-            const firstName = (profile?.full_name || '').split(' ')[0] || 'My Flightplan';
-            signInLinks.forEach(link => {
-                link.textContent = firstName;
-                link.href = 'my-flightplan.html';
-                link.style.background = '#3d5a80';
-                link.style.color = '#fff';
-                link.style.borderColor = '#3d5a80';
-            });
-            mobileSignIn.forEach(link => {
-                link.textContent = firstName + ' — My Flightplan';
-                link.href = 'my-flightplan.html';
-            });
+            if (profile?.full_name) {
+                localStorage.setItem('fp_user_name', profile.full_name);
+                setNavLoggedIn(profile.full_name);
+            } else {
+                setNavLoggedIn('My Flightplan');
+            }
         } else {
-            signInLinks.forEach(link => {
-                link.textContent = 'Log in';
-                link.href = 'login.html';
-            });
-            mobileSignIn.forEach(link => {
-                link.textContent = 'Log in';
-                link.href = 'login.html';
-            });
+            // Not logged in
+            localStorage.removeItem('fp_user_name');
+            setNavLoggedOut();
         }
+
+        // Listen for sign-in/sign-out changes
+        sb.auth.onAuthStateChange(async (event, sess) => {
+            if (event === 'SIGNED_IN' && sess) {
+                const profile = await getUserProfile();
+                if (profile?.full_name) {
+                    localStorage.setItem('fp_user_name', profile.full_name);
+                    setNavLoggedIn(profile.full_name);
+                } else {
+                    setNavLoggedIn('My Flightplan');
+                }
+            } else if (event === 'SIGNED_OUT') {
+                localStorage.removeItem('fp_user_name');
+                setNavLoggedOut();
+            }
+        });
     } catch (e) {
         // Supabase not loaded or not configured — leave nav as-is
     }
