@@ -87,8 +87,15 @@ let currentProfile=null;
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('toast--show');setTimeout(()=>t.classList.remove('toast--show'),2500);}
 
 async function init(){
-const user=await getCurrentUser();
-if(!user){window.location.href='login.html';return;}
+// Wait for Supabase to restore session from storage
+const sb=getSupabase();
+const{data:{session}}=await sb.auth.getSession();
+if(!session){
+// Also listen briefly in case tokens are still being exchanged
+await new Promise(r=>{const t=setTimeout(()=>r(),1500);sb.auth.onAuthStateChange((ev,s)=>{if(ev==='SIGNED_IN'&&s){clearTimeout(t);r();}});});
+const{data:{session:s2}}=await sb.auth.getSession();
+if(!s2){window.location.href='login.html';return;}
+}
 currentProfile=await getUserProfile();
 renderProfile();
 const passes=await getUserPasses();
