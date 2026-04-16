@@ -50,19 +50,33 @@
             <div class="hero__gradient"></div>
         </div>
         <div class="hero__content">
-            <h1 class="hero__title">Where do you want your <span class="hero__title-highlight">career to take you?</span></h1>
-            <p class="hero__subtitle">Plan your journey through education. From where you are now to where you want to be.</p>
+            <div class="hero__badge">Leigh Academies Trust</div>
+            <h1 class="hero__title">Where do you want your <br><span class="hero__title-highlight">career to take you?</span></h1>
+            <p class="hero__subtitle">Your career is a journey. Flightplan helps you map the route from where you are today to where you want to be — with every stop, qualification and milestone laid out for you.</p>
 
             <div class="hero__cta-group">
-                <a href="wizard.html" class="hero__cta hero__cta--primary">Plan my journey</a>
-                <button class="hero__cta hero__cta--secondary" onclick="openFlightAgent()">Speak to a Flightplan Agent</button>
+                <a href="wizard.html" class="hero__cta hero__cta--primary">
+                    <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17 L9 11 L13 14 L17 5"/><path d="M13 5 L17 5 L17 9"/></svg>
+                    Plan my journey
+                </a>
+                <button class="hero__cta hero__cta--secondary" onclick="openFlightAgent()">
+                    <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14 L4 16 L8 14 L16 14 A2 2 0 0 0 18 12 L18 6 A2 2 0 0 0 16 4 L4 4 A2 2 0 0 0 2 6 L2 12 A2 2 0 0 0 4 14Z"/><path d="M7 8h6 M7 11h4"/></svg>
+                    Speak to a Flightplan Agent
+                </button>
+            </div>
+
+            <div class="hero__trust-line">
+                <span>60 career destinations</span>
+                <span>Personalised boarding passes</span>
+                <span>Expert flight agents</span>
             </div>
         </div>
-        <!-- Animated plane -->
-        <div class="hero__plane" id="heroPlane">
-            <svg viewBox="0 0 60 60" width="48" height="48">
-                <path d="M2 38 L18 30 L14 28 L30 20 L26 18 L52 6 L44 22 L40 18 L34 34 L30 30 L24 46 Z" fill="white" opacity="0.9"/>
-            </svg>
+        <!-- Animated planes -->
+        <div class="hero__plane hero__plane--1" id="heroPlane">
+            <svg viewBox="0 0 60 60" width="40" height="40"><path d="M2 38 L18 30 L14 28 L30 20 L26 18 L52 6 L44 22 L40 18 L34 34 L30 30 L24 46 Z" fill="white" opacity="0.7"/></svg>
+        </div>
+        <div class="hero__plane hero__plane--2">
+            <svg viewBox="0 0 60 60" width="24" height="24"><path d="M2 38 L18 30 L14 28 L30 20 L26 18 L52 6 L44 22 L40 18 L34 34 L30 30 L24 46 Z" fill="white" opacity="0.4"/></svg>
         </div>
     </section>
 
@@ -196,40 +210,40 @@
                 <div class="step">
                     <div class="step__number">1</div>
                     <div class="step__icon">
-                        <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="20" fill="none" stroke="#0057b8" stroke-width="2"/><circle cx="24" cy="24" r="4" fill="#0057b8"/><path d="M24 24 L24 12" stroke="#0057b8" stroke-width="2"/></svg>
+                        <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="20" fill="none" stroke="#3d5a80" stroke-width="2"/><circle cx="24" cy="24" r="4" fill="#3d5a80"/><path d="M24 24 L24 12" stroke="#3d5a80" stroke-width="2"/></svg>
                     </div>
                     <h3 class="step__title">Pick your departure point</h3>
                     <p class="step__desc">Tell us your current role, experience and qualifications. Everyone's starting point is different.</p>
                 </div>
                 <div class="step__connector">
-                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#0057b8" stroke-width="2" stroke-dasharray="4 4"/></svg>
+                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#3d5a80" stroke-width="2" stroke-dasharray="4 4"/></svg>
                 </div>
                 <div class="step">
                     <div class="step__number">2</div>
                     <div class="step__icon">
-                        <svg viewBox="0 0 48 48" width="48" height="48"><path d="M4 36 L16 20 L28 28 L44 12" fill="none" stroke="#e8491d" stroke-width="3"/><circle cx="44" cy="12" r="3" fill="#e8491d"/></svg>
+                        <svg viewBox="0 0 48 48" width="48" height="48"><path d="M4 36 L16 20 L28 28 L44 12" fill="none" stroke="#e5a733" stroke-width="3"/><circle cx="44" cy="12" r="3" fill="#e5a733"/></svg>
                     </div>
                     <h3 class="step__title">Choose your destination</h3>
                     <p class="step__desc">Browse roles and find the career destination that excites you most. Dream big or take the next step.</p>
                 </div>
                 <div class="step__connector">
-                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#e8491d" stroke-width="2" stroke-dasharray="4 4"/></svg>
+                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#e5a733" stroke-width="2" stroke-dasharray="4 4"/></svg>
                 </div>
                 <div class="step">
                     <div class="step__number">3</div>
                     <div class="step__icon">
-                        <svg viewBox="0 0 48 48" width="48" height="48"><rect x="6" y="10" width="36" height="28" rx="3" fill="none" stroke="#2e7d32" stroke-width="2"/><path d="M6 18 h36" stroke="#2e7d32" stroke-width="2"/><path d="M14 26 h8 M14 32 h12" stroke="#2e7d32" stroke-width="2"/></svg>
+                        <svg viewBox="0 0 48 48" width="48" height="48"><rect x="6" y="10" width="36" height="28" rx="3" fill="none" stroke="#4a6fa5" stroke-width="2"/><path d="M6 18 h36" stroke="#4a6fa5" stroke-width="2"/><path d="M14 26 h8 M14 32 h12" stroke="#4a6fa5" stroke-width="2"/></svg>
                     </div>
                     <h3 class="step__title">Get your flightplan</h3>
                     <p class="step__desc">Receive a personalised roadmap with qualifications, experience and development milestones to reach your destination.</p>
                 </div>
                 <div class="step__connector">
-                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#2e7d32" stroke-width="2" stroke-dasharray="4 4"/></svg>
+                    <svg viewBox="0 0 60 20" width="60" height="20"><path d="M0 10 Q15 0 30 10 Q45 20 60 10" fill="none" stroke="#4a6fa5" stroke-width="2" stroke-dasharray="4 4"/></svg>
                 </div>
                 <div class="step">
                     <div class="step__number">4</div>
                     <div class="step__icon">
-                        <svg viewBox="0 0 48 48" width="48" height="48"><path d="M8 40 L20 28 L28 34 L40 14" fill="none" stroke="#6a1b9a" stroke-width="3"/><path d="M34 14 L40 14 L40 20" fill="none" stroke="#6a1b9a" stroke-width="3"/></svg>
+                        <svg viewBox="0 0 48 48" width="48" height="48"><path d="M8 40 L20 28 L28 34 L40 14" fill="none" stroke="#d4952e" stroke-width="3"/><path d="M34 14 L40 14 L40 20" fill="none" stroke="#d4952e" stroke-width="3"/></svg>
                     </div>
                     <h3 class="step__title">Track your progress</h3>
                     <p class="step__desc">Check off milestones as you go. Watch your boarding pass fill up as you get closer to your career destination.</p>
@@ -249,7 +263,7 @@
                     </div>
                     <div class="journey-card__line">
                         <div class="journey-card__plane">
-                            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M2 16 L8 13 L6 12 L14 8 L12 7 L22 3 L19 10 L17 8 L14 15 L12 13 L9 20 Z" fill="#0057b8"/></svg>
+                            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M2 16 L8 13 L6 12 L14 8 L12 7 L22 3 L19 10 L17 8 L14 15 L12 13 L9 20 Z" fill="#3d5a80"/></svg>
                         </div>
                     </div>
                     <div class="journey-card__point">
@@ -281,7 +295,7 @@
                         <span>Typical duration: <strong>3-6 years</strong></span>
                         <span>Funding available: <strong>Yes - bursaries &amp; loans</strong></span>
                     </div>
-                    <a href="#" class="btn btn--primary">View full journey</a>
+                    <a href="wizard.html?from=ta" class="btn btn--primary">Plan this journey</a>
                 </div>
             </div>
         </div>
@@ -294,7 +308,7 @@
             <p class="section-subtitle">Real people who planned their career journey and arrived at their destination</p>
             <div class="stories__grid">
                 <div class="story-card">
-                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #0057b8, #00a0e1);">
+                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #3d5a80, #5b82b8);">
                         <span>SP</span>
                     </div>
                     <div class="story-card__quote">"I was a teaching assistant for 8 years. Flightplan showed me the route to becoming a qualified teacher. I'm now an NQT and loving every minute."</div>
@@ -305,7 +319,7 @@
                     <div class="story-card__journey-tag">3 year journey</div>
                 </div>
                 <div class="story-card">
-                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #e8491d, #ff8a50);">
+                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #d4952e, #e5a733);">
                         <span>MK</span>
                     </div>
                     <div class="story-card__quote">"After 5 years of teaching, I didn't know what was next. The journey planner mapped out my route to becoming a Head of Year. I arrived last September."</div>
@@ -316,7 +330,7 @@
                     <div class="story-card__journey-tag">2 year journey</div>
                 </div>
                 <div class="story-card">
-                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #2e7d32, #66bb6a);">
+                    <div class="story-card__avatar" style="background: linear-gradient(135deg, #4a6fa5, #7ba3d4);">
                         <span>JW</span>
                     </div>
                     <div class="story-card__quote">"From school administrator to business manager - I never thought it was possible. The personalised flightplan gave me the confidence and clarity I needed."</div>
@@ -337,29 +351,29 @@
             <p class="section-subtitle">Everything you need to prepare for takeoff</p>
             <div class="resources__grid">
                 <a href="#" class="resource-card">
-                    <div class="resource-card__icon" style="background: #e3f2fd;">
-                        <svg viewBox="0 0 32 32" width="32" height="32"><rect x="4" y="4" width="24" height="24" rx="3" fill="none" stroke="#0057b8" stroke-width="2"/><path d="M10 12h12 M10 16h12 M10 20h8" stroke="#0057b8" stroke-width="2"/></svg>
+                    <div class="resource-card__icon" style="background: #edf2f8;">
+                        <svg viewBox="0 0 32 32" width="32" height="32"><rect x="4" y="4" width="24" height="24" rx="3" fill="none" stroke="#3d5a80" stroke-width="2"/><path d="M10 12h12 M10 16h12 M10 20h8" stroke="#3d5a80" stroke-width="2"/></svg>
                     </div>
                     <h3 class="resource-card__title">Qualifications guide</h3>
                     <p class="resource-card__desc">Understand the qualifications needed for every role in education.</p>
                 </a>
                 <a href="#" class="resource-card">
-                    <div class="resource-card__icon" style="background: #fce4ec;">
-                        <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="16" r="12" fill="none" stroke="#e8491d" stroke-width="2"/><path d="M16 8v8l5 5" stroke="#e8491d" stroke-width="2" fill="none"/></svg>
+                    <div class="resource-card__icon" style="background: #fdf3e0;">
+                        <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="16" r="12" fill="none" stroke="#e5a733" stroke-width="2"/><path d="M16 8v8l5 5" stroke="#e5a733" stroke-width="2" fill="none"/></svg>
                     </div>
                     <h3 class="resource-card__title">CPD opportunities</h3>
                     <p class="resource-card__desc">Find courses, workshops and training to build your skills.</p>
                 </a>
                 <a href="#" class="resource-card">
-                    <div class="resource-card__icon" style="background: #e8f5e9;">
-                        <svg viewBox="0 0 32 32" width="32" height="32"><path d="M16 4 L20 12 L28 14 L22 20 L24 28 L16 24 L8 28 L10 20 L4 14 L12 12Z" fill="none" stroke="#2e7d32" stroke-width="2"/></svg>
+                    <div class="resource-card__icon" style="background: #e8eef6;">
+                        <svg viewBox="0 0 32 32" width="32" height="32"><path d="M16 4 L20 12 L28 14 L22 20 L24 28 L16 24 L8 28 L10 20 L4 14 L12 12Z" fill="none" stroke="#4a6fa5" stroke-width="2"/></svg>
                     </div>
                     <h3 class="resource-card__title">Funding & bursaries</h3>
                     <p class="resource-card__desc">Discover financial support available for career changers in education.</p>
                 </a>
                 <a href="#" class="resource-card">
-                    <div class="resource-card__icon" style="background: #f3e5f5;">
-                        <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="12" r="6" fill="none" stroke="#6a1b9a" stroke-width="2"/><path d="M6 28 c0-6 5-10 10-10 s10 4 10 10" fill="none" stroke="#6a1b9a" stroke-width="2"/></svg>
+                    <div class="resource-card__icon" style="background: #fef8eb;">
+                        <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="12" r="6" fill="none" stroke="#d4952e" stroke-width="2"/><path d="M6 28 c0-6 5-10 10-10 s10 4 10 10" fill="none" stroke="#d4952e" stroke-width="2"/></svg>
                     </div>
                     <h3 class="resource-card__title">Mentoring network</h3>
                     <p class="resource-card__desc">Connect with experienced professionals who've completed the journey.</p>
@@ -373,10 +387,10 @@
         <div class="container">
             <div class="cta-banner__content">
                 <h2 class="cta-banner__title">Ready for takeoff?</h2>
-                <p class="cta-banner__text">Create your free account and get a personalised career flightplan in minutes.</p>
+                <p class="cta-banner__text">Get your personalised career boarding pass in minutes. Every journey starts with a single step.</p>
                 <div class="cta-banner__actions">
-                    <a href="#" class="btn btn--white">Create free account</a>
-                    <a href="#" class="btn btn--outline-white">Browse destinations</a>
+                    <a href="wizard.html" class="btn btn--white">Plan my journey</a>
+                    <button class="btn btn--outline-white" onclick="openFlightAgent()">Speak to a Flightplan Agent</button>
                 </div>
             </div>
         </div>

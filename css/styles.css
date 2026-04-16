@@ -281,8 +281,60 @@ select { font-family: inherit; }
     letter-spacing: -1px;
 }
 
+.hero__badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--orange-400);
+    border: 1px solid rgba(229,167,51,0.4);
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
 .hero__title-highlight {
     color: var(--orange-400);
+}
+
+.hero__trust-line {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.hero__trust-line span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    padding-left: 16px;
+}
+
+.hero__trust-line span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--orange-400);
+}
+
+.hero__plane--2 {
+    position: absolute;
+    z-index: 2;
+    opacity: 0.15;
+    animation: flyAcross2 28s linear infinite 8s;
+}
+
+@keyframes flyAcross2 {
+    0% { transform: translate(-60px, 280px) rotate(-20deg); }
+    100% { transform: translate(calc(100vw + 60px), -60px) rotate(-20deg); }
 }
 
 .hero__subtitle {
