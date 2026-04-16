@@ -735,7 +735,63 @@ const params=new URLSearchParams(window.location.search);
 if(params.get('from')&&ROLES[params.get('from')]){state.currentRole=params.get('from');curSel.value=params.get('from');updateNextBtn(1);}
 if(params.get('to')&&ROLES[params.get('to')]){state.destRole=params.get('to');}
 
+// ===== LOAD SAVED PASS =====
+const viewId=params.get('view');
+const updateId=params.get('update');
+
+if(viewId||updateId){
+(async()=>{
+try{
+const sb=getSupabase();
+const{data:pass}=await sb.from('boarding_passes').select('*').eq('id',viewId||updateId).single();
+if(!pass){alert('Boarding pass not found.');goToStep(1);return;}
+
+if(viewId){
+// View mode: show saved boarding pass directly
+const bp=document.getElementById('boardingPass');
+const rd=pass.route_data||{};
+if(rd.savedHtml){
+bp.innerHTML=rd.savedHtml+`<div class="bp-actions"><button class="bp-print-btn" onclick="window.print()">Print boarding pass</button><button class="bp-reset-link" onclick="location.href='wizard.html'">← Start a new flight plan</button><button class="bp-reset-link" onclick="location.href='wizard.html?update=${viewId}'">Update this plan</button></div>`;
+document.getElementById('wizard').style.display='none';
+bp.style.display='block';
+}else{
+// No saved HTML — re-compute by setting state and running wizard
+state.currentRole=pass.origin_role;state.destRole=pass.dest_role;
+state.timeInRole=pass.time_in_role;state.timeAtLAT=pass.time_at_lat;
+state.quals=new Set(pass.quals||[]);state.exps=new Set(pass.exps||[]);
+const route=computeRoute();renderBoardingPass(route);
+}
+return;
+}
+
+if(updateId){
+// Update mode: pre-fill wizard with saved data
+state.currentRole=pass.origin_role;
+state.destRole=pass.dest_role;
+state.timeInRole=pass.time_in_role;
+state.timeAtLAT=pass.time_at_lat;
+state.quals=new Set(pass.quals||[]);
+state.exps=new Set(pass.exps||[]);
+
+// Pre-fill UI
+curSel.value=state.currentRole||'';updateNextBtn(1);
+const destSel=document.getElementById('destRole');
+if(destSel)destSel.value=state.destRole||'';
+document.querySelectorAll('input[name="timeInRole"]').forEach(r=>{if(r.value===state.timeInRole)r.checked=true;});
+document.querySelectorAll('input[name="timeAtLAT"]').forEach(r=>{if(r.value===state.timeAtLAT)r.checked=true;});
+document.querySelectorAll('.qual-btn').forEach(b=>{if(state.quals.has(b.dataset.val))b.classList.add('selected');});
+document.querySelectorAll('.exp-btn').forEach(b=>{if(state.exps.has(b.dataset.val))b.classList.add('selected');});
+
+// Store the pass ID so save overwrites instead of creating new
+window._updatePassId=updateId;
 goToStep(1);
+return;
+}
+}catch(e){console.error('Load pass error:',e);goToStep(1);}
+})();
+}else{
+goToStep(1);
+}
 });
 
 // ===== SAVE & SHARE (Supabase) =====
@@ -753,11 +809,14 @@ if(typeof getSupabase==='undefined'){alert('Supabase is not configured yet. Cont
 const user=await getCurrentUser();
 if(!user){if(confirm('You need to log in to save your boarding pass. Go to login?')){window.location.href='login.html';}return;}
 saveBtn.disabled=true;saveBtn.textContent='Saving...';
-const passData={currentRole:state.currentRole,destRole:state.destRole,timeInRole:state.timeInRole,timeAtLAT:state.timeAtLAT,quals:[...state.quals],exps:[...state.exps],routeData:{flightType:route.flightType,readiness:route.readiness,stopovers:route.stopovers,crossFamily:route.crossFamily,from:route.from,to:route.to,routeData:route.routeData,allLegs:route.allLegs,needsBridge:route.needsBridge}};
-const{data,error}=await saveBoardingPass(passData);
+const bpHtml=document.getElementById('boardingPass').querySelector('.bp-card')?.outerHTML||'';
+const passData={currentRole:state.currentRole,destRole:state.destRole,timeInRole:state.timeInRole,timeAtLAT:state.timeAtLAT,quals:[...state.quals],exps:[...state.exps],routeData:{flightType:route.flightType,readiness:route.readiness,stopovers:route.stopovers,crossFamily:route.crossFamily,from:route.from,to:route.to,routeData:route.routeData,allLegs:route.allLegs,needsBridge:route.needsBridge,savedHtml:bpHtml}};
+const{data,error}=await saveBoardingPass(passData, window._updatePassId||null);
 if(error){saveBtn.disabled=false;saveBtn.textContent='Save my boarding pass';alert('Error saving: '+error.message);return;}
 saveBtn.textContent='Saved!';saveBtn.style.background='#2e7d32';saveBtn.style.color='#fff';
+window._updatePassId=data.id;
 if(data?.share_token){shareBtn.style.display='';shareBtn.onclick=()=>{const url=window.location.origin+'/shared-pass.html?token='+data.share_token;navigator.clipboard.writeText(url);showWizToast('Share link copied!');};}
+setTimeout(()=>{saveBtn.textContent='Update saved pass';saveBtn.style.background='#e5a733';saveBtn.style.color='#2b3e50';saveBtn.disabled=false;},2000);
 });
 }
 

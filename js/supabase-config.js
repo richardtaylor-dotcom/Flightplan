@@ -77,23 +77,33 @@ async function updateProfile(updates) {
 }
 
 // ===== Boarding Pass Helpers =====
-async function saveBoardingPass(passData) {
+async function saveBoardingPass(passData, existingId) {
     const user = await getCurrentUser();
     if (!user) return { error: 'Not logged in' };
     const sb = getSupabase();
-    const { data, error } = await sb.from('boarding_passes')
-        .insert({
-            user_id: user.id,
-            origin_role: passData.currentRole,
-            dest_role: passData.destRole,
-            time_in_role: passData.timeInRole,
-            time_at_lat: passData.timeAtLAT,
-            quals: passData.quals,
-            exps: passData.exps,
-            route_data: passData.routeData
-        })
-        .select()
-        .single();
+    const row = {
+        user_id: user.id,
+        origin_role: passData.currentRole,
+        dest_role: passData.destRole,
+        time_in_role: passData.timeInRole,
+        time_at_lat: passData.timeAtLAT,
+        quals: passData.quals,
+        exps: passData.exps,
+        route_data: passData.routeData
+    };
+    let data, error;
+    if (existingId) {
+        ({ data, error } = await sb.from('boarding_passes')
+            .update(row)
+            .eq('id', existingId)
+            .select()
+            .single());
+    } else {
+        ({ data, error } = await sb.from('boarding_passes')
+            .insert(row)
+            .select()
+            .single());
+    }
     return { data, error };
 }
 
