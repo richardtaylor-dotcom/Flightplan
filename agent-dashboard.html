@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Agent Dashboard - Flightplan</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/destination.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+.agent-page{max-width:1100px;margin:96px auto 60px;padding:0 24px}
+.agent-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px}
+.agent-header h1{font-size:28px;font-weight:800;color:#2b3e50}
+.agent-header__user{font-size:14px;color:#6c757d}
+.agent-signout{font-size:13px;color:#c62828;cursor:pointer;background:none;border:none;font-weight:600}
+.agent-filters{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.agent-filters input,.agent-filters select{padding:10px 14px;border:2px solid #e9ecef;border-radius:8px;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
+.agent-filters input:focus,.agent-filters select:focus{border-color:#3d5a80}
+.agent-filters input{flex:1;min-width:200px}
+.agent-filters select{min-width:160px}
+.users-table{width:100%;border-collapse:separate;border-spacing:0;background:#2b3e50;border-radius:12px;overflow:hidden;font-size:14px;color:#fff}
+.users-table thead th{padding:14px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.7);text-align:left;background:rgba(0,0,0,.3);border-bottom:2px solid rgba(255,255,255,.06)}
+.users-table tbody tr{cursor:pointer;transition:background .2s}
+.users-table tbody tr:hover{background:rgba(255,255,255,.08)}
+.users-table td{padding:12px 16px;border-top:1px solid rgba(255,255,255,.04)}
+.users-table .user-name{font-weight:600;color:#fff}
+.users-table .user-email{color:rgba(255,255,255,.6);font-size:13px}
+.users-table .user-count{font-family:'Courier New',monospace;color:#e5a733;font-weight:700}
+.user-detail{background:#f8f9fa;border:1px solid #dee2e6;border-radius:12px;padding:24px;margin-bottom:24px;display:none}
+.user-detail--open{display:block}
+.user-detail__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.user-detail__name{font-size:20px;font-weight:700;color:#2b3e50}
+.user-detail__meta{font-size:13px;color:#6c757d}
+.user-detail__passes{display:flex;flex-direction:column;gap:12px}
+.user-pass-card{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.user-pass-card__route{font-size:15px;font-weight:600;color:#2b3e50}
+.user-pass-card__meta{display:flex;gap:16px;font-size:13px;color:#6c757d}
+.user-pass-card__meta .readiness{font-weight:700}
+.user-pass-card__link{font-size:13px;font-weight:600;color:#3d5a80;text-decoration:none}
+.user-pass-card__link:hover{text-decoration:underline}
+.agent-empty{text-align:center;padding:60px 24px;color:#6c757d}
+.agent-empty h2{font-size:20px;color:#2b3e50;margin-bottom:8px}
+.agent-denied{text-align:center;padding:120px 24px}
+.agent-denied h1{font-size:28px;color:#c62828;margin-bottom:12px}
+.agent-denied p{color:#6c757d}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.dot--green{background:#2e7d32}.dot--amber{background:#e5a733}.dot--red{background:#c62828}
+@media(max-width:768px){.users-table thead{display:none}.users-table,.users-table tbody,.users-table tr,.users-table td{display:block}.users-table tbody tr{padding:16px;border-top:1px solid rgba(255,255,255,.06)}.users-table td{padding:4px 0;border:none}}
+</style>
+</head>
+<body>
+<header class="header"><div class="header__container"><a href="index.html" class="header__logo"><img src="images/logo.png" alt="Flightplan" class="header__logo-img"></a><nav class="header__nav"><a href="index.html#destinations" class="header__nav-link">Destinations</a><a href="index.html#journeys" class="header__nav-link">Career Journeys</a><a href="index.html#resources" class="header__nav-link">Resources</a></nav><div class="header__actions"><a href="my-flightplan.html" class="header__sign-in">My Flightplan</a></div></div></header>
+
+<div class="agent-page">
+<div id="accessDenied" class="agent-denied" style="display:none"><h1>Access Denied</h1><p>This page is only available to Flight Agents.</p><p style="margin-top:16px"><a href="index.html" style="color:#3d5a80;font-weight:600">Return to homepage</a></p></div>
+<div id="agentContent" style="display:none">
+<div class="agent-header"><div><h1>Flight Agent Dashboard</h1><p class="agent-header__user">Signed in as <span id="agentName"></span></p></div><button class="agent-signout" id="signOutBtn">Sign out</button></div>
+<div class="agent-filters"><input type="text" id="searchInput" placeholder="Search by name, email or academy..."><select id="filterAcademy"><option value="">All academies</option><option>Leigh Academy</option><option>Leigh Academy Bexley</option><option>Leigh Academy Blackheath</option><option>Leigh Academy Dartford</option><option>Leigh Academy Rainham</option><option>Leigh Academy Tonbridge</option><option>Longfield Academy</option><option>Wilmington Academy</option></select></div>
+<table class="users-table"><thead><tr><th>Name</th><th>Email</th><th>Academy</th><th>Current Role</th><th>Passes</th><th>Joined</th></tr></thead><tbody id="usersBody"></tbody></table>
+<div id="userDetail" class="user-detail"></div>
+<div id="emptyState" class="agent-empty" style="display:none"><h2>No registered users yet</h2><p>Users will appear here once they create an account and save a boarding pass.</p></div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+const ROLE_LABELS={nursery_assistant:'Early Years / Nursery Assistant',ta:'Teaching Assistant',sen_ta:'SEN Teaching Assistant',hlta:'Higher Level Teaching Assistant (HLTA)',cover_supervisor:'Cover Supervisor',teacher:'Teacher (Secondary)',primary_teacher:'Class Teacher (Primary)',sen_teacher:'SEN Teacher',coord:'Coordinator of Learning',second:'Second in Charge',lead_prac:'Lead Practitioner',hol:'Head of Learning',dol:'Director of Learning',phase_leader:'Phase Leader (Primary)',deputy_senco:'Deputy SENCo',senco:'SENCo',inclusion_officer:'Inclusion Officer',inclusion_manager:'Inclusion Manager',asst_principal:'Assistant Principal',vice_principal:'Vice Principal',deputy_principal:'Deputy Principal',principal:'Principal',admin:'Academy Administrator',office_manager:'Office Manager',student_services_officer:'Student Services Officer',student_services_manager:'Student Services Manager',attendance_officer:'Attendance Officer',attendance_manager:'Attendance Manager',exams_officer:'Exams Officer',exams_manager:'Exams Manager',safeguarding_officer:'Safeguarding Officer',family_liaison:'Family Liaison Officer',hr_admin:'HR Administrator',technician:'Subject Technician',curriculum_advisor:'Curriculum Advisor'};
+
+let allUsers=[];
+
+async function init(){
+const user=await getCurrentUser();
+if(!user){window.location.href='login.html';return;}
+const agent=await isFlightAgent();
+if(!agent){document.getElementById('accessDenied').style.display='block';return;}
+const profile=await getUserProfile();
+document.getElementById('agentName').textContent=profile?.full_name||profile?.email||'Agent';
+document.getElementById('agentContent').style.display='block';
+allUsers=await getAllUsers();
+renderUsers(allUsers);
+document.getElementById('searchInput').addEventListener('input',filterUsers);
+document.getElementById('filterAcademy').addEventListener('change',filterUsers);
+document.getElementById('signOutBtn').addEventListener('click',()=>signOut());
+}
+
+function filterUsers(){
+const q=document.getElementById('searchInput').value.toLowerCase();
+const academy=document.getElementById('filterAcademy').value;
+const filtered=allUsers.filter(u=>{
+const matchQ=!q||u.full_name?.toLowerCase().includes(q)||u.email?.toLowerCase().includes(q)||u.academy?.toLowerCase().includes(q);
+const matchA=!academy||u.academy===academy;
+return matchQ&&matchA;
+});
+renderUsers(filtered);
+}
+
+function renderUsers(users){
+const tbody=document.getElementById('usersBody');
+const empty=document.getElementById('emptyState');
+if(!users.length){tbody.innerHTML='';empty.style.display='block';return;}
+empty.style.display='none';
+tbody.innerHTML=users.map(u=>{
+const count=u.boarding_passes?.[0]?.count||0;
+const role=ROLE_LABELS[u.role_current]||u.role_current||'—';
+const date=u.created_at?new Date(u.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'—';
+return `<tr onclick="showUser('${u.id}')"><td class="user-name">${u.full_name||'—'}</td><td class="user-email">${u.email}</td><td>${u.academy||'—'}</td><td>${role}</td><td class="user-count">${count}</td><td>${date}</td></tr>`;
+}).join('');
+}
+
+async function showUser(userId){
+const user=allUsers.find(u=>u.id===userId);
+if(!user)return;
+const passes=await getUserPassesById(userId);
+const detail=document.getElementById('userDetail');
+const role=ROLE_LABELS[user.role_current]||user.role_current||'Not set';
+detail.innerHTML=`
+<div class="user-detail__header"><div><div class="user-detail__name">${user.full_name||'Unknown'}</div><div class="user-detail__meta">${user.email} · ${user.academy||'No academy'} · ${role}</div></div><a href="mailto:${user.email}" style="font-size:13px;font-weight:600;color:#3d5a80">Email this user</a></div>
+<div class="user-detail__passes">${passes.length?passes.map(p=>{
+const from=ROLE_LABELS[p.current_role]||p.current_role;
+const to=ROLE_LABELS[p.dest_role]||p.dest_role;
+const rd=p.route_data||{};
+const readiness=rd.readiness||0;
+const dotCls=readiness>=70?'green':readiness>=40?'amber':'red';
+const date=new Date(p.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+return `<div class="user-pass-card"><div><div class="user-pass-card__route">${from} → ${to}</div><div class="user-pass-card__meta"><span>${rd.flightType||'—'}</span><span class="readiness"><span class="dot dot--${dotCls}"></span>${readiness}%</span><span>${date}</span></div></div><a href="shared-pass.html?token=${p.share_token}" class="user-pass-card__link" target="_blank">View boarding pass →</a></div>`;
+}).join(''):'<p style="color:#6c757d;font-size:14px">This user has no saved boarding passes yet.</p>'}</div>`;
+detail.classList.add('user-detail--open');
+detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>

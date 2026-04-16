@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shared Boarding Pass - Flightplan</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/destination.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+.shared-page{max-width:800px;margin:96px auto 60px;padding:0 24px}
+.shared-banner{padding:16px 20px;background:#edf2f8;border:1px solid #c8d6e5;border-radius:10px;margin-bottom:24px;font-size:14px;color:#3d5a80;display:flex;align-items:center;gap:10px}
+.shared-banner svg{flex-shrink:0}
+.shared-error{text-align:center;padding:120px 24px}
+.shared-error h1{font-size:28px;color:#c62828;margin-bottom:12px}
+.shared-error p{color:#6c757d;margin-bottom:24px}
+.shared-error a{color:#3d5a80;font-weight:600}
+.shared-cta{text-align:center;margin-top:32px;padding:24px;background:#f8f9fa;border-radius:12px}
+.shared-cta p{font-size:15px;color:#495057;margin-bottom:16px}
+.shared-cta a{display:inline-block;padding:12px 28px;background:#e5a733;color:#2b3e50;font-size:14px;font-weight:700;border-radius:50px;text-decoration:none;transition:background .2s}
+.shared-cta a:hover{background:#d4952e}
+.bp-card{background:#fff;border-radius:12px;border:1px solid #dee2e6;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.bp-hero{background:#2b3e50;color:#fff;padding:32px}
+.bp-hero__eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:.7;margin-bottom:16px}
+.bp-hero__route{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bp-hero__point{flex:1;min-width:120px}
+.bp-hero__point--to{text-align:right}
+.bp-hero__point-role{font-size:20px;font-weight:700}
+.bp-hero__point-sub{font-size:12px;opacity:.7;margin-top:4px}
+.bp-hero__arrow{font-size:24px;opacity:.5;flex-shrink:0}
+.bp-stats{display:grid;grid-template-columns:repeat(4,1fr);background:#f8f9fa}
+.bp-stat{text-align:center;padding:20px 12px;border-right:1px solid #dee2e6}
+.bp-stat:last-child{border-right:none}
+.bp-stat__value{font-size:18px;font-weight:700;color:#2b3e50}
+.bp-stat__label{font-size:11px;color:#6c757d;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.bp-stat__dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.bp-stat__dot--green{background:#2e7d32}.bp-stat__dot--amber{background:#e5a733}.bp-stat__dot--red{background:#c62828}
+.bp-section{padding:32px}.bp-section+.bp-section{border-top:1px solid #e9ecef}
+.bp-section__heading{font-size:18px;font-weight:700;color:#2b3e50;margin-bottom:20px}
+.bp-leg{display:flex;gap:16px;margin-bottom:24px}
+.bp-leg__badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;margin-top:2px;background:#6c757d}
+.bp-leg__badge--done{background:#2e7d32}.bp-leg__badge--bridge{background:#e65100}
+.bp-leg__title{font-size:14px;font-weight:600;color:#2b3e50;margin-bottom:4px}
+.bp-leg__desc{font-size:13px;color:#495057;line-height:1.6;margin-bottom:10px}
+.bp-leg__tags{display:flex;flex-wrap:wrap;gap:6px}
+.bp-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:50px;font-size:11px;font-weight:600}
+.bp-tag--qual{background:#edf2f8;color:#1565c0}.bp-tag--exp{background:#e8f5e9;color:#2e7d32}.bp-tag--dev{background:#fff3e0;color:#e65100}
+.bp-tag--held{text-decoration:line-through;opacity:.6}
+.bp-skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.bp-skill-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:16px}
+.bp-skill-card__title{font-size:13px;font-weight:700;color:#2b3e50;margin-bottom:4px}
+.bp-skill-card__desc{font-size:12px;color:#495057;line-height:1.5}
+.bp-turbulence-card{border-left:3px solid #e65100;background:#fff8f0;border-radius:0 8px 8px 0;padding:16px;margin-bottom:10px}
+.bp-turbulence-card__title{font-size:13px;font-weight:700;color:#e65100;margin-bottom:4px}
+.bp-turbulence-card__desc{font-size:12px;color:#e65100;opacity:.85;line-height:1.5}
+.bp-timeline{display:flex;gap:0;margin-bottom:8px}
+.bp-timeline__phase{flex:1;padding:14px;border-top:4px solid}
+.bp-timeline__phase:first-child{border-color:#dee2e6;background:#f8f9fa}
+.bp-timeline__phase:nth-child(2){border-color:#7ba3d4;background:#f0f4ff}
+.bp-timeline__phase:last-child{border-color:#66bb6a;background:#f0faf0}
+.bp-timeline__label{font-size:12px;font-weight:700;color:#2b3e50}
+.bp-timeline__sub{font-size:11px;color:#6c757d;margin-top:2px}
+.bp-disclaimer{font-size:12px;font-style:italic;color:#6c757d;margin-top:8px;line-height:1.5}
+.bp-loading{text-align:center;padding:120px 24px;color:#6c757d;font-size:16px}
+@media(max-width:768px){.bp-stats{grid-template-columns:repeat(2,1fr)}.bp-skills-grid{grid-template-columns:1fr}.bp-hero__route{flex-direction:column;text-align:center}.bp-hero__point--to{text-align:center}.bp-timeline{flex-direction:column}}
+@media print{.header,.shared-banner,.shared-cta{display:none!important}.shared-page{margin:0;padding:0}.bp-card{box-shadow:none}}
+</style>
+</head>
+<body>
+<header class="header"><div class="header__container"><a href="index.html" class="header__logo"><img src="images/logo.png" alt="Flightplan" class="header__logo-img"></a><nav class="header__nav"><a href="index.html#destinations" class="header__nav-link">Destinations</a><a href="index.html#journeys" class="header__nav-link">Career Journeys</a><a href="index.html#resources" class="header__nav-link">Resources</a></nav><div class="header__actions"><a href="login.html" class="header__sign-in">Log in</a></div></div></header>
+
+<div class="shared-page">
+<div id="loading" class="bp-loading">Loading boarding pass...</div>
+<div id="errorState" class="shared-error" style="display:none"><h1>Boarding pass not found</h1><p>This link may be invalid or the boarding pass may have been deleted.</p><a href="wizard.html">Create your own boarding pass →</a></div>
+<div id="passContent" style="display:none">
+<div id="banner" class="shared-banner"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg><span id="bannerText"></span></div>
+<div id="boardingPass"></div>
+<div class="shared-cta"><p>Want to create your own personalised career boarding pass?</p><a href="wizard.html">Plan my journey</a></div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+const ROLE_LABELS={nursery_assistant:'Early Years / Nursery Assistant',ta:'Teaching Assistant',sen_ta:'SEN Teaching Assistant',hlta:'Higher Level Teaching Assistant (HLTA)',cover_supervisor:'Cover Supervisor',teacher:'Teacher (Secondary)',primary_teacher:'Class Teacher (Primary)',sen_teacher:'SEN Teacher',coord:'Coordinator of Learning',second:'Second in Charge',lead_prac:'Lead Practitioner',hol:'Head of Learning',dol:'Director of Learning',phase_leader:'Phase Leader (Primary)',deputy_senco:'Deputy SENCo',senco:'SENCo',inclusion_officer:'Inclusion Officer',inclusion_manager:'Inclusion Manager',asst_principal:'Assistant Principal',vice_principal:'Vice Principal',deputy_principal:'Deputy Principal',principal:'Principal',admin:'Academy Administrator',office_manager:'Office Manager',student_services_officer:'Student Services Officer',student_services_manager:'Student Services Manager',attendance_officer:'Attendance Officer',attendance_manager:'Attendance Manager',exams_officer:'Exams Officer',exams_manager:'Exams Manager',safeguarding_officer:'Safeguarding Officer',family_liaison:'Family Liaison Officer',hr_admin:'HR Administrator',technician:'Subject Technician',curriculum_advisor:'Curriculum Advisor'};
+
+async function init(){
+const params=new URLSearchParams(window.location.search);
+const token=params.get('token');
+if(!token){showError();return;}
+const pass=await getPassByShareToken(token);
+if(!pass){showError();return;}
+document.getElementById('loading').style.display='none';
+document.getElementById('passContent').style.display='block';
+const ownerName=pass.profiles?.full_name||'A Flightplan user';
+const ownerAcademy=pass.profiles?.academy?` at ${pass.profiles.academy}`:'';
+document.getElementById('bannerText').textContent=`This boarding pass belongs to ${ownerName}${ownerAcademy}.`;
+renderPass(pass);
+}
+
+function showError(){
+document.getElementById('loading').style.display='none';
+document.getElementById('errorState').style.display='block';
+}
+
+function renderPass(pass){
+const rd=pass.route_data||{};
+const fromLabel=ROLE_LABELS[pass.current_role]||pass.current_role;
+const toLabel=ROLE_LABELS[pass.dest_role]||pass.dest_role;
+const readiness=rd.readiness||0;
+const dotCls=readiness>=70?'green':readiness>=40?'amber':'red';
+const quals=new Set(pass.quals||[]);
+const exps=new Set(pass.exps||[]);
+
+function tagHtml(t){
+const held=(t.ck!=='none')&&((t.type==='qual'&&quals.has(t.ck))||((t.type==='exp'||t.type==='dev')&&exps.has(t.ck)));
+return `<span class="bp-tag bp-tag--${t.type}${held?' bp-tag--held':''}">${held?'✓ ':''}${t.label}</span>`;
+}
+
+let legsHtml='';
+const legs=rd.allLegs||rd.routeData?.legs||[];
+legs.forEach((l,i)=>{
+const badgeCls=l.bridge?'bp-leg__badge--bridge':'bp-leg__badge';
+legsHtml+=`<div class="bp-leg"><div class="bp-leg__badge ${badgeCls}">${l.bridge?'↔':(i+1)}</div><div><div class="bp-leg__title">${l.title}</div><div class="bp-leg__desc">${l.desc}</div><div class="bp-leg__tags">${(l.tags||[]).map(tagHtml).join('')}</div></div></div>`;
+});
+
+const skillsHtml=(rd.routeData?.skills||[]).map(s=>`<div class="bp-skill-card"><div class="bp-skill-card__title">${s.title}</div><div class="bp-skill-card__desc">${s.desc}</div></div>`).join('');
+const turbHtml=(rd.routeData?.challenges||[]).map(c=>`<div class="bp-turbulence-card"><div class="bp-turbulence-card__title">${c.title}</div><div class="bp-turbulence-card__desc">${c.desc}</div></div>`).join('');
+const tlHtml=(rd.routeData?.timeline||[]).map(t=>`<div class="bp-timeline__phase"><div class="bp-timeline__label">${t.label}</div><div class="bp-timeline__sub">${t.sub}</div></div>`).join('');
+
+document.getElementById('boardingPass').innerHTML=`<div class="bp-card">
+<div class="bp-hero"><div class="bp-hero__eyebrow">FLIGHT PLAN · BOARDING PASS</div><div class="bp-hero__route"><div class="bp-hero__point"><div class="bp-hero__point-role">${fromLabel}</div><div class="bp-hero__point-sub">Departure</div></div><div class="bp-hero__arrow">→</div><div class="bp-hero__point bp-hero__point--to"><div class="bp-hero__point-role">${toLabel}</div><div class="bp-hero__point-sub">Destination</div></div></div></div>
+<div class="bp-stats"><div class="bp-stat"><div class="bp-stat__value">${rd.flightType||'—'}</div><div class="bp-stat__label">Flight type</div></div><div class="bp-stat"><div class="bp-stat__value">${rd.stopovers||legs.length}</div><div class="bp-stat__label">Stopovers</div></div><div class="bp-stat"><div class="bp-stat__value"><span class="bp-stat__dot bp-stat__dot--${dotCls}"></span>${readiness}%</div><div class="bp-stat__label">Readiness</div></div><div class="bp-stat"><div class="bp-stat__value">${rd.crossFamily?'Cross-family ↔':'Same family'}</div><div class="bp-stat__label">Route</div></div></div>
+${legsHtml?`<div class="bp-section"><div class="bp-section__heading">Flight legs</div>${legsHtml}</div>`:''}
+${skillsHtml?`<div class="bp-section"><div class="bp-section__heading">Skills to build</div><div class="bp-skills-grid">${skillsHtml}</div></div>`:''}
+${turbHtml?`<div class="bp-section"><div class="bp-section__heading">Likely turbulence</div>${turbHtml}</div>`:''}
+${tlHtml?`<div class="bp-section"><div class="bp-section__heading">Indicative timeline</div><div class="bp-timeline">${tlHtml}</div><p class="bp-disclaimer">Timelines are indicative. Discuss specifics with your Flight Agent.</p></div>`:''}
+</div>`;
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>

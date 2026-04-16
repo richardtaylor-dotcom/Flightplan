@@ -154,6 +154,13 @@ select{font-family:inherit}
 .bp-print-btn{padding:12px 24px;background:var(--gray-50);color:var(--gray-700);border:2px solid var(--gray-300);border-radius:50px;font-size:13px;font-weight:600;cursor:pointer}
 .bp-print-btn:hover{border-color:var(--gray-500)}
 .bp-reset-link{font-size:14px;color:var(--blue-600);cursor:pointer;background:none;border:none;font-weight:500;padding:12px}
+.bp-save-btn{padding:12px 24px;background:#e5a733;color:#2b3e50;border:none;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s}
+.bp-save-btn:hover{background:#d4952e}
+.bp-save-btn:disabled{opacity:.5;cursor:not-allowed}
+.bp-share-btn{padding:12px 24px;background:none;color:#3d5a80;border:2px solid #3d5a80;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.bp-share-btn:hover{background:#3d5a80;color:#fff}
+.bp-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2b3e50;color:#fff;padding:12px 24px;border-radius:50px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
+.bp-toast--show{opacity:1}
 .bp-specialist-note{padding:20px;background:#fff3e0;border:1px solid #ffe0b2;border-radius:var(--radius-sm);font-size:13px;color:var(--lat-warning);line-height:1.6;margin-bottom:24px}
 
 /* ===== Responsive ===== */
@@ -673,7 +680,8 @@ ${turbHtml?`<div class="bp-section"><div class="bp-section__heading">⚡ Likely 
 ${tlHtml?`<div class="bp-section"><div class="bp-section__heading">📅 Indicative flight schedule</div><div class="bp-timeline">${tlHtml}</div><p class="bp-disclaimer">Timelines are indicative and depend on your starting point, opportunity, and pace of development. Discuss a specific timeline with your Flight Agent.</p></div>`:''}
 <div class="bp-cta"><span class="bp-cta__text">Ready to board? Speak with your Flight Agent to turn this plan into action.</span><button class="bp-cta__btn" onclick="return false">Contact your Flight Agent →</button></div>
 </div>
-<div class="bp-actions"><button class="bp-print-btn" onclick="window.print()">Print boarding pass</button><button class="bp-reset-link" id="resetBtn">← Start a new flight plan</button></div>`;
+<div class="bp-actions"><button class="bp-save-btn" id="savePassBtn">Save my boarding pass</button><button class="bp-share-btn" id="sharePassBtn" style="display:none">Share</button><button class="bp-print-btn" onclick="window.print()">Print boarding pass</button><button class="bp-reset-link" id="resetBtn">← Start a new flight plan</button></div>`;
+
 
 document.getElementById('wizard').style.display='none';
 bp.style.display='block';
@@ -729,6 +737,33 @@ if(params.get('to')&&ROLES[params.get('to')]){state.destRole=params.get('to');}
 
 goToStep(1);
 });
+
+// ===== SAVE & SHARE (Supabase) =====
+let lastRoute=null;
+const origRender=renderBoardingPass;
+renderBoardingPass=function(route){lastRoute=route;origRender(route);setupSaveShare(route);};
+
+function setupSaveShare(route){
+const saveBtn=document.getElementById('savePassBtn');
+const shareBtn=document.getElementById('sharePassBtn');
+if(!saveBtn)return;
+
+saveBtn.addEventListener('click',async()=>{
+if(typeof getSupabase==='undefined'){alert('Supabase is not configured yet. Contact your administrator.');return;}
+const user=await getCurrentUser();
+if(!user){if(confirm('You need to log in to save your boarding pass. Go to login?')){window.location.href='login.html';}return;}
+saveBtn.disabled=true;saveBtn.textContent='Saving...';
+const passData={currentRole:state.currentRole,destRole:state.destRole,timeInRole:state.timeInRole,timeAtLAT:state.timeAtLAT,quals:[...state.quals],exps:[...state.exps],routeData:{flightType:route.flightType,readiness:route.readiness,stopovers:route.stopovers,crossFamily:route.crossFamily,from:route.from,to:route.to,routeData:route.routeData,allLegs:route.allLegs,needsBridge:route.needsBridge}};
+const{data,error}=await saveBoardingPass(passData);
+if(error){saveBtn.disabled=false;saveBtn.textContent='Save my boarding pass';alert('Error saving: '+error.message);return;}
+saveBtn.textContent='Saved!';saveBtn.style.background='#2e7d32';saveBtn.style.color='#fff';
+if(data?.share_token){shareBtn.style.display='';shareBtn.onclick=()=>{const url=window.location.origin+'/shared-pass.html?token='+data.share_token;navigator.clipboard.writeText(url);showWizToast('Share link copied!');};}
+});
+}
+
+function showWizToast(msg){let t=document.querySelector('.bp-toast');if(!t){t=document.createElement('div');t.className='bp-toast';document.body.appendChild(t);}t.textContent=msg;t.classList.add('bp-toast--show');setTimeout(()=>t.classList.remove('bp-toast--show'),2500);}
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
 </body>
 </html>

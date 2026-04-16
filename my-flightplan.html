@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Flightplan - Dashboard</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/destination.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+.dash{max-width:900px;margin:96px auto 60px;padding:0 24px}
+.profile-card{background:#fff;border:1px solid #dee2e6;border-radius:12px;padding:24px;margin-bottom:32px;display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.profile-avatar{width:56px;height:56px;border-radius:50%;background:#e5a733;color:#2b3e50;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0}
+.profile-info{flex:1;min-width:200px}
+.profile-name{font-size:20px;font-weight:700;color:#2b3e50}
+.profile-meta{font-size:14px;color:#6c757d;margin-top:4px}
+.profile-edit-btn{padding:8px 16px;font-size:13px;font-weight:600;border:2px solid #dee2e6;border-radius:50px;background:none;color:#495057;cursor:pointer;transition:all .2s}
+.profile-edit-btn:hover{border-color:#3d5a80;color:#3d5a80}
+.edit-form{display:none;margin-top:16px;width:100%}
+.edit-form input,.edit-form select{width:100%;padding:10px 14px;border:2px solid #e9ecef;border-radius:8px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none}
+.edit-form input:focus,.edit-form select:focus{border-color:#3d5a80}
+.edit-actions{display:flex;gap:8px}
+.edit-save{padding:8px 20px;font-size:13px;font-weight:600;background:#e5a733;color:#2b3e50;border:none;border-radius:50px;cursor:pointer}
+.edit-cancel{padding:8px 20px;font-size:13px;font-weight:600;background:none;color:#6c757d;border:2px solid #dee2e6;border-radius:50px;cursor:pointer}
+.dash-heading{font-size:22px;font-weight:700;color:#2b3e50;margin-bottom:20px}
+.pass-card{background:#fff;border:1px solid #dee2e6;border-radius:12px;padding:20px;margin-bottom:16px;transition:box-shadow .2s}
+.pass-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.pass-route{font-size:16px;font-weight:700;color:#2b3e50;margin-bottom:8px}
+.pass-meta{display:flex;gap:16px;font-size:13px;color:#6c757d;margin-bottom:14px;flex-wrap:wrap}
+.pass-meta .readiness{font-weight:700}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.dot--green{background:#2e7d32}.dot--amber{background:#e5a733}.dot--red{background:#c62828}
+.pass-type{display:inline-block;padding:3px 10px;background:#edf2f8;color:#3d5a80;border-radius:50px;font-size:11px;font-weight:600}
+.pass-actions{display:flex;gap:8px;flex-wrap:wrap}
+.pass-btn{padding:8px 16px;font-size:12px;font-weight:600;border-radius:50px;cursor:pointer;transition:all .2s;border:2px solid}
+.pass-btn--view{background:none;color:#3d5a80;border-color:#3d5a80}
+.pass-btn--view:hover{background:#3d5a80;color:#fff}
+.pass-btn--update{background:none;color:#e5a733;border-color:#e5a733}
+.pass-btn--update:hover{background:#e5a733;color:#2b3e50}
+.pass-btn--share{background:none;color:#6c757d;border-color:#dee2e6}
+.pass-btn--share:hover{border-color:#6c757d}
+.pass-btn--delete{background:none;color:#c62828;border:none;font-size:12px;padding:8px 12px}
+.pass-btn--delete:hover{text-decoration:underline}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2b3e50;color:#fff;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
+.toast--show{opacity:1}
+.empty-state{text-align:center;padding:80px 24px}
+.empty-state__icon{font-size:48px;margin-bottom:16px}
+.empty-state__title{font-size:20px;font-weight:700;color:#2b3e50;margin-bottom:8px}
+.empty-state__text{font-size:14px;color:#6c757d;margin-bottom:24px}
+.empty-state__btn{display:inline-block;padding:14px 32px;background:#e5a733;color:#2b3e50;font-size:15px;font-weight:700;border-radius:50px;text-decoration:none;transition:background .2s}
+.empty-state__btn:hover{background:#d4952e}
+.dash-signout{display:block;text-align:center;margin-top:40px;font-size:14px;color:#c62828;cursor:pointer;background:none;border:none;font-weight:500}
+.dash-signout:hover{text-decoration:underline}
+@media(max-width:600px){.profile-card{flex-direction:column;align-items:stretch}.pass-actions{flex-direction:column}.pass-btn{text-align:center}}
+</style>
+</head>
+<body>
+<header class="header"><div class="header__container"><a href="index.html" class="header__logo"><img src="images/logo.png" alt="Flightplan" class="header__logo-img"></a><nav class="header__nav"><a href="index.html#destinations" class="header__nav-link">Destinations</a><a href="index.html#journeys" class="header__nav-link">Career Journeys</a><a href="index.html#resources" class="header__nav-link">Resources</a></nav><div class="header__actions"><a href="my-flightplan.html" class="header__sign-in" style="background:#3d5a80;color:#fff;border-color:#3d5a80">My Flightplan</a></div></div></header>
+
+<div class="dash">
+<div id="profileCard" class="profile-card" style="display:none">
+<div class="profile-avatar" id="avatar"></div>
+<div class="profile-info"><div class="profile-name" id="profileName"></div><div class="profile-meta" id="profileMeta"></div></div>
+<button class="profile-edit-btn" id="editBtn">Edit profile</button>
+<form class="edit-form" id="editForm">
+<input type="text" id="editName" placeholder="Full name">
+<select id="editAcademy"><option value="">Select academy</option><option>Leigh Academy</option><option>Leigh Academy Bexley</option><option>Leigh Academy Blackheath</option><option>Leigh Academy Dartford</option><option>Leigh Academy Rainham</option><option>Leigh Academy Tonbridge</option><option>Longfield Academy</option><option>Wilmington Academy</option><option>Other LAT Academy</option></select>
+<div class="edit-actions"><button type="submit" class="edit-save">Save</button><button type="button" class="edit-cancel" id="editCancel">Cancel</button></div>
+</form>
+</div>
+<h2 class="dash-heading">My Boarding Passes</h2>
+<div id="passList"></div>
+<div id="emptyState" class="empty-state" style="display:none"><div class="empty-state__icon">&#9992;</div><h2 class="empty-state__title">No boarding passes yet</h2><p class="empty-state__text">Complete the journey planner to get your first personalised boarding pass.</p><a href="wizard.html" class="empty-state__btn">Plan my journey</a></div>
+<button class="dash-signout" id="signOutBtn">Sign out</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script>
+const ROLE_LABELS={nursery_assistant:'Early Years / Nursery Assistant',ta:'Teaching Assistant',sen_ta:'SEN Teaching Assistant',hlta:'Higher Level Teaching Assistant (HLTA)',cover_supervisor:'Cover Supervisor',teacher:'Teacher (Secondary)',primary_teacher:'Class Teacher (Primary)',sen_teacher:'SEN Teacher',coord:'Coordinator of Learning',second:'Second in Charge',lead_prac:'Lead Practitioner',hol:'Head of Learning',dol:'Director of Learning',phase_leader:'Phase Leader (Primary)',deputy_senco:'Deputy SENCo',senco:'SENCo',inclusion_officer:'Inclusion Officer',inclusion_manager:'Inclusion Manager',asst_principal:'Assistant Principal',vice_principal:'Vice Principal',deputy_principal:'Deputy Principal',principal:'Principal',admin:'Academy Administrator',office_manager:'Office Manager',student_services_officer:'Student Services Officer',student_services_manager:'Student Services Manager',attendance_officer:'Attendance Officer',attendance_manager:'Attendance Manager',exams_officer:'Exams Officer',exams_manager:'Exams Manager',safeguarding_officer:'Safeguarding Officer',family_liaison:'Family Liaison Officer',hr_admin:'HR Administrator',technician:'Subject Technician',curriculum_advisor:'Curriculum Advisor'};
+
+let currentProfile=null;
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('toast--show');setTimeout(()=>t.classList.remove('toast--show'),2500);}
+
+async function init(){
+const user=await getCurrentUser();
+if(!user){window.location.href='login.html';return;}
+currentProfile=await getUserProfile();
+renderProfile();
+const passes=await getUserPasses();
+renderPasses(passes);
+document.getElementById('editBtn').addEventListener('click',()=>{document.getElementById('editForm').style.display='block';document.getElementById('editName').value=currentProfile?.full_name||'';document.getElementById('editAcademy').value=currentProfile?.academy||'';});
+document.getElementById('editCancel').addEventListener('click',()=>{document.getElementById('editForm').style.display='none';});
+document.getElementById('editForm').addEventListener('submit',async(e)=>{e.preventDefault();const name=document.getElementById('editName').value.trim();const academy=document.getElementById('editAcademy').value;if(!name)return;await updateProfile({full_name:name,academy});currentProfile=await getUserProfile();renderProfile();document.getElementById('editForm').style.display='none';showToast('Profile updated');});
+document.getElementById('signOutBtn').addEventListener('click',()=>signOut());
+}
+
+function renderProfile(){
+if(!currentProfile)return;
+const p=currentProfile;
+document.getElementById('profileCard').style.display='flex';
+const initials=(p.full_name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+document.getElementById('avatar').textContent=initials;
+document.getElementById('profileName').textContent=p.full_name||'Complete your profile';
+document.getElementById('profileMeta').textContent=[p.email,p.academy].filter(Boolean).join(' · ');
+}
+
+function renderPasses(passes){
+const list=document.getElementById('passList');
+const empty=document.getElementById('emptyState');
+if(!passes||!passes.length){list.innerHTML='';empty.style.display='block';return;}
+empty.style.display='none';
+list.innerHTML=passes.map(p=>{
+const from=ROLE_LABELS[p.current_role]||p.current_role;
+const to=ROLE_LABELS[p.dest_role]||p.dest_role;
+const rd=p.route_data||{};
+const readiness=rd.readiness||0;
+const dotCls=readiness>=70?'green':readiness>=40?'amber':'red';
+const date=new Date(p.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+const shareUrl=window.location.origin+'/shared-pass.html?token='+p.share_token;
+return `<div class="pass-card"><div class="pass-route">${from} → ${to}</div><div class="pass-meta"><span class="pass-type">${rd.flightType||'—'}</span><span class="readiness"><span class="dot dot--${dotCls}"></span>${readiness}% ready</span><span>Saved ${date}</span></div><div class="pass-actions"><button class="pass-btn pass-btn--view" onclick="location.href='wizard.html?from=${p.current_role}&to=${p.dest_role}'">View</button><button class="pass-btn pass-btn--update" onclick="location.href='wizard.html?from=${p.current_role}&to=${p.dest_role}'">Update</button><button class="pass-btn pass-btn--share" onclick="navigator.clipboard.writeText('${shareUrl}');showToast('Link copied!')">Share</button><button class="pass-btn pass-btn--delete" onclick="deletePass('${p.id}')">Delete</button></div></div>`;
+}).join('');
+}
+
+async function deletePass(id){
+if(!confirm('Delete this boarding pass?'))return;
+await deleteBoardingPass(id);
+const passes=await getUserPasses();
+renderPasses(passes);
+showToast('Boarding pass deleted');
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
