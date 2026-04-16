@@ -143,18 +143,43 @@ async function getUserPassesById(userId) {
 
 // ===== Nav Auth State =====
 async function updateNavForAuth() {
-    const user = await getCurrentUser();
-    const signInLinks = document.querySelectorAll('.header__sign-in');
-    const agentLinks = document.querySelectorAll('.nav-agent-link');
+    try {
+        const user = await getCurrentUser();
+        const signInLinks = document.querySelectorAll('.header__sign-in');
+        const mobileSignIn = document.querySelectorAll('.mobile-nav__link[href="login.html"], .mobile-nav__link[href="#"]');
 
-    if (user) {
-        const profile = await getUserProfile();
-        signInLinks.forEach(link => {
-            link.textContent = 'My Flightplan';
-            link.href = 'my-flightplan.html';
-        });
-        if (profile?.is_flight_agent) {
-            agentLinks.forEach(link => link.style.display = '');
+        if (user) {
+            const profile = await getUserProfile();
+            const firstName = (profile?.full_name || '').split(' ')[0] || 'My Flightplan';
+            signInLinks.forEach(link => {
+                link.textContent = firstName;
+                link.href = 'my-flightplan.html';
+                link.style.background = '#3d5a80';
+                link.style.color = '#fff';
+                link.style.borderColor = '#3d5a80';
+            });
+            mobileSignIn.forEach(link => {
+                link.textContent = firstName + ' — My Flightplan';
+                link.href = 'my-flightplan.html';
+            });
+        } else {
+            signInLinks.forEach(link => {
+                link.textContent = 'Log in';
+                link.href = 'login.html';
+            });
+            mobileSignIn.forEach(link => {
+                link.textContent = 'Log in';
+                link.href = 'login.html';
+            });
         }
+    } catch (e) {
+        // Supabase not loaded or not configured — leave nav as-is
     }
+}
+
+// Auto-run nav update when script loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateNavForAuth);
+} else {
+    updateNavForAuth();
 }
