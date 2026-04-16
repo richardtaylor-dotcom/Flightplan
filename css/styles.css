@@ -235,7 +235,7 @@ select { font-family: inherit; }
 /* ===== Hero ===== */
 .hero {
     position: relative;
-    min-height: 600px;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -267,18 +267,26 @@ select { font-family: inherit; }
 .hero__content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     text-align: center;
 }
 
 .hero__title {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 800;
     color: var(--white);
-    line-height: 1.15;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1.5px;
+}
+
+.hero__strapline {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--orange-400);
     margin-bottom: 16px;
-    letter-spacing: -1px;
+    line-height: 1.4;
 }
 
 .hero__badge {
@@ -342,9 +350,12 @@ select { font-family: inherit; }
 }
 
 .hero__subtitle {
-    font-size: 19px;
-    color: rgba(255,255,255,0.85);
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
     margin-bottom: 40px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
     font-weight: 400;
 }
 
@@ -1529,8 +1540,11 @@ select { font-family: inherit; }
     .hero__title {
         font-size: 32px;
     }
-    .hero__subtitle {
+    .hero__strapline {
         font-size: 16px;
+    }
+    .hero__subtitle {
+        font-size: 15px;
     }
 
     .search-box__panel--active {
