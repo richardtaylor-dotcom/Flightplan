@@ -1,7 +1,7 @@
 // ===== Supabase Configuration =====
 // Replace these with your Supabase project credentials
-const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://uzgrhmipfpudbzntwppn.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_X1fyatSd9gfbiBKE0DMOFg_ejJzOln6';
 
 // Import and init (loaded via CDN in HTML pages)
 // <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
