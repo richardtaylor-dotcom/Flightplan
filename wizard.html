@@ -161,6 +161,11 @@ select{font-family:inherit}
 .bp-share-btn:hover{background:#3d5a80;color:#fff}
 .bp-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2b3e50;color:#fff;padding:12px 24px;border-radius:50px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
 .bp-toast--show{opacity:1}
+.bp-agent-notes{background:#f0f7ff;border:2px solid #b8d4f0;border-radius:12px;margin-top:24px}
+.bp-agent-notes__meta{font-size:13px;color:#3d5a80;margin-bottom:16px;font-weight:500}
+.bp-agent-note{background:#fff;border:1px solid #d6e4f0;border-radius:8px;padding:16px;margin-bottom:12px}
+.bp-agent-note__label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#3d5a80;margin-bottom:6px}
+.bp-agent-note__text{font-size:14px;color:#2b3e50;line-height:1.7}
 .bp-specialist-note{padding:20px;background:#fff3e0;border:1px solid #ffe0b2;border-radius:var(--radius-sm);font-size:13px;color:var(--lat-warning);line-height:1.6;margin-bottom:24px}
 
 /* ===== Responsive ===== */
@@ -751,16 +756,17 @@ if(viewId){
 const bp=document.getElementById('boardingPass');
 const rd=pass.route_data||{};
 if(rd.savedHtml){
-bp.innerHTML=rd.savedHtml+`<div class="bp-actions"><button class="bp-print-btn" onclick="window.print()">Print boarding pass</button><button class="bp-reset-link" onclick="location.href='wizard.html'">← Start a new flight plan</button><button class="bp-reset-link" onclick="location.href='wizard.html?update=${viewId}'">Update this plan</button></div>`;
+bp.innerHTML=rd.savedHtml+`<div id="agentNotesSection"></div><div class="bp-actions"><button class="bp-print-btn" onclick="window.print()">Print boarding pass</button><button class="bp-reset-link" onclick="location.href='wizard.html'">← Start a new flight plan</button><button class="bp-reset-link" onclick="location.href='wizard.html?update=${viewId}'">Update this plan</button></div>`;
 document.getElementById('wizard').style.display='none';
 bp.style.display='block';
 }else{
-// No saved HTML — re-compute by setting state and running wizard
 state.currentRole=pass.origin_role;state.destRole=pass.dest_role;
 state.timeInRole=pass.time_in_role;state.timeAtLAT=pass.time_at_lat;
 state.quals=new Set(pass.quals||[]);state.exps=new Set(pass.exps||[]);
 const route=computeRoute();renderBoardingPass(route);
 }
+// Load and display agent notes
+loadAgentNotes(viewId);
 return;
 }
 
@@ -804,6 +810,9 @@ const saveBtn=document.getElementById('savePassBtn');
 const shareBtn=document.getElementById('sharePassBtn');
 if(!saveBtn)return;
 
+// Only show "Update" label if we came from ?update= link
+if(window._updatePassId){saveBtn.textContent='Update boarding pass';}
+
 saveBtn.addEventListener('click',async()=>{
 if(typeof getSupabase==='undefined'){alert('Supabase is not configured yet. Contact your administrator.');return;}
 const user=await getCurrentUser();
@@ -812,12 +821,37 @@ saveBtn.disabled=true;saveBtn.textContent='Saving...';
 const bpHtml=document.getElementById('boardingPass').querySelector('.bp-card')?.outerHTML||'';
 const passData={currentRole:state.currentRole,destRole:state.destRole,timeInRole:state.timeInRole,timeAtLAT:state.timeAtLAT,quals:[...state.quals],exps:[...state.exps],routeData:{flightType:route.flightType,readiness:route.readiness,stopovers:route.stopovers,crossFamily:route.crossFamily,from:route.from,to:route.to,routeData:route.routeData,allLegs:route.allLegs,needsBridge:route.needsBridge,savedHtml:bpHtml}};
 const{data,error}=await saveBoardingPass(passData, window._updatePassId||null);
-if(error){saveBtn.disabled=false;saveBtn.textContent='Save my boarding pass';alert('Error saving: '+error.message);return;}
+if(error){saveBtn.disabled=false;saveBtn.textContent=window._updatePassId?'Update boarding pass':'Save my boarding pass';alert('Error saving: '+error.message);return;}
 saveBtn.textContent='Saved!';saveBtn.style.background='#2e7d32';saveBtn.style.color='#fff';
+if(window._updatePassId){
+// Update mode: keep the same pass ID
+setTimeout(()=>{saveBtn.textContent='Update boarding pass';saveBtn.style.background='#e5a733';saveBtn.style.color='#2b3e50';saveBtn.disabled=false;},2000);
+}else{
+// New pass: show success, link to dashboard
 window._updatePassId=data.id;
+setTimeout(()=>{saveBtn.textContent='Saved — view in My Flightplan';saveBtn.style.background='#3d5a80';saveBtn.style.color='#fff';saveBtn.disabled=false;saveBtn.onclick=()=>{window.location.href='my-flightplan.html';};},2000);
+}
 if(data?.share_token){shareBtn.style.display='';shareBtn.onclick=()=>{const url=window.location.origin+'/shared-pass.html?token='+data.share_token;navigator.clipboard.writeText(url);showWizToast('Share link copied!');};}
-setTimeout(()=>{saveBtn.textContent='Update saved pass';saveBtn.style.background='#e5a733';saveBtn.style.color='#2b3e50';saveBtn.disabled=false;},2000);
 });
+}
+
+async function loadAgentNotes(passId){
+try{
+const notes=await getAgentNotes(passId);
+const section=document.getElementById('agentNotesSection');
+if(!section)return;
+if(!notes||(!notes.recommendations&&!notes.next_steps&&!notes.general_notes)){
+section.innerHTML='';return;
+}
+const agentName=notes.profiles?.full_name||'Your Flight Agent';
+const updated=new Date(notes.updated_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+let html=`<div class="bp-section bp-agent-notes"><div class="bp-section__heading">✈️ Flight Agent Recommendations</div><div class="bp-agent-notes__meta">From ${agentName} · Updated ${updated}</div>`;
+if(notes.recommendations)html+=`<div class="bp-agent-note"><div class="bp-agent-note__label">Recommendations</div><div class="bp-agent-note__text">${notes.recommendations.replace(/\n/g,'<br>')}</div></div>`;
+if(notes.next_steps)html+=`<div class="bp-agent-note"><div class="bp-agent-note__label">Next steps</div><div class="bp-agent-note__text">${notes.next_steps.replace(/\n/g,'<br>')}</div></div>`;
+if(notes.general_notes)html+=`<div class="bp-agent-note"><div class="bp-agent-note__label">Additional notes</div><div class="bp-agent-note__text">${notes.general_notes.replace(/\n/g,'<br>')}</div></div>`;
+html+=`</div>`;
+section.innerHTML=html;
+}catch(e){console.error('Error loading agent notes:',e);}
 }
 
 function showWizToast(msg){let t=document.querySelector('.bp-toast');if(!t){t=document.createElement('div');t.className='bp-toast';document.body.appendChild(t);}t.textContent=msg;t.classList.add('bp-toast--show');setTimeout(()=>t.classList.remove('bp-toast--show'),2500);}

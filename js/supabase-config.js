@@ -151,6 +151,33 @@ async function getUserPassesById(userId) {
     return data || [];
 }
 
+// ===== Agent Notes Helpers =====
+async function getAgentNotes(boardingPassId) {
+    const sb = getSupabase();
+    const { data } = await sb.from('agent_notes')
+        .select('*, profiles(full_name)')
+        .eq('boarding_pass_id', boardingPassId)
+        .single();
+    return data;
+}
+
+async function saveAgentNotes(boardingPassId, notes) {
+    const user = await getCurrentUser();
+    if (!user) return { error: 'Not logged in' };
+    const sb = getSupabase();
+    const { data, error } = await sb.from('agent_notes')
+        .upsert({
+            boarding_pass_id: boardingPassId,
+            agent_id: user.id,
+            recommendations: notes.recommendations || '',
+            next_steps: notes.nextSteps || '',
+            general_notes: notes.generalNotes || ''
+        }, { onConflict: 'boarding_pass_id' })
+        .select()
+        .single();
+    return { data, error };
+}
+
 // ===== Nav Auth State =====
 function setNavLoggedIn(name) {
     const firstName = (name || '').split(' ')[0] || 'My Flightplan';

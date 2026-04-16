@@ -24,30 +24,56 @@
 .users-table thead th{padding:14px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.7);text-align:left;background:rgba(0,0,0,.3);border-bottom:2px solid rgba(255,255,255,.06)}
 .users-table tbody tr{cursor:pointer;transition:background .2s}
 .users-table tbody tr:hover{background:rgba(255,255,255,.08)}
+.users-table tbody tr.active-row{background:rgba(229,167,51,.15)}
 .users-table td{padding:12px 16px;border-top:1px solid rgba(255,255,255,.04)}
 .users-table .user-name{font-weight:600;color:#fff}
 .users-table .user-email{color:rgba(255,255,255,.6);font-size:13px}
 .users-table .user-count{font-family:'Courier New',monospace;color:#e5a733;font-weight:700}
 .user-detail{background:#f8f9fa;border:1px solid #dee2e6;border-radius:12px;padding:24px;margin-bottom:24px;display:none}
 .user-detail--open{display:block}
-.user-detail__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.user-detail__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
 .user-detail__name{font-size:20px;font-weight:700;color:#2b3e50}
 .user-detail__meta{font-size:13px;color:#6c757d}
-.user-detail__passes{display:flex;flex-direction:column;gap:12px}
-.user-pass-card{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.user-pass-card__route{font-size:15px;font-weight:600;color:#2b3e50}
-.user-pass-card__meta{display:flex;gap:16px;font-size:13px;color:#6c757d}
-.user-pass-card__meta .readiness{font-weight:700}
-.user-pass-card__link{font-size:13px;font-weight:600;color:#3d5a80;text-decoration:none}
-.user-pass-card__link:hover{text-decoration:underline}
+.user-detail__close{font-size:13px;font-weight:600;color:#6c757d;cursor:pointer;background:none;border:1px solid #dee2e6;border-radius:50px;padding:6px 16px}
+.user-detail__passes{display:flex;flex-direction:column;gap:16px}
+.pass-block{background:#fff;border:1px solid #dee2e6;border-radius:10px;overflow:hidden}
+.pass-block__header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:1px solid #f0f0f0}
+.pass-block__route{font-size:16px;font-weight:700;color:#2b3e50}
+.pass-block__meta{display:flex;gap:16px;font-size:13px;color:#6c757d}
+.pass-block__meta .readiness{font-weight:700}
+.pass-block__actions{display:flex;gap:8px}
+.pass-block__btn{font-size:12px;font-weight:600;padding:6px 14px;border-radius:50px;cursor:pointer;border:2px solid;transition:all .2s}
+.pass-block__btn--view{color:#3d5a80;border-color:#3d5a80;background:none}
+.pass-block__btn--view:hover{background:#3d5a80;color:#fff}
+.pass-block__btn--notes{color:#e5a733;border-color:#e5a733;background:none}
+.pass-block__btn--notes:hover{background:#e5a733;color:#2b3e50}
+.notes-panel{padding:20px;background:#f8fbff;border-top:2px solid #d6e4f0;display:none}
+.notes-panel--open{display:block}
+.notes-panel__heading{font-size:15px;font-weight:700;color:#3d5a80;margin-bottom:16px}
+.notes-field{margin-bottom:16px}
+.notes-field label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#3d5a80;margin-bottom:6px}
+.notes-field textarea{width:100%;min-height:80px;padding:12px;border:2px solid #d6e4f0;border-radius:8px;font-size:14px;font-family:inherit;line-height:1.6;resize:vertical;outline:none;transition:border-color .2s;box-sizing:border-box}
+.notes-field textarea:focus{border-color:#3d5a80}
+.notes-actions{display:flex;gap:8px;align-items:center}
+.notes-save{padding:10px 24px;background:#3d5a80;color:#fff;border:none;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s}
+.notes-save:hover{background:#2b3e50}
+.notes-save:disabled{opacity:.5;cursor:not-allowed}
+.notes-status{font-size:13px;color:#2e7d32;font-weight:500}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.dot--green{background:#2e7d32}.dot--amber{background:#e5a733}.dot--red{background:#c62828}
 .agent-empty{text-align:center;padding:60px 24px;color:#6c757d}
 .agent-empty h2{font-size:20px;color:#2b3e50;margin-bottom:8px}
 .agent-denied{text-align:center;padding:120px 24px}
 .agent-denied h1{font-size:28px;color:#c62828;margin-bottom:12px}
 .agent-denied p{color:#6c757d}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
-.dot--green{background:#2e7d32}.dot--amber{background:#e5a733}.dot--red{background:#c62828}
-@media(max-width:768px){.users-table thead{display:none}.users-table,.users-table tbody,.users-table tr,.users-table td{display:block}.users-table tbody tr{padding:16px;border-top:1px solid rgba(255,255,255,.06)}.users-table td{padding:4px 0;border:none}}
+.agent-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.agent-stat{background:#fff;border:1px solid #dee2e6;border-radius:12px;padding:20px;text-align:center}
+.agent-stat__value{font-size:28px;font-weight:800;color:#2b3e50}
+.agent-stat__label{font-size:12px;color:#6c757d;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+@media(max-width:768px){
+.users-table thead{display:none}.users-table,.users-table tbody,.users-table tr,.users-table td{display:block}.users-table tbody tr{padding:16px;border-top:1px solid rgba(255,255,255,.06)}.users-table td{padding:4px 0;border:none}
+.agent-stats{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -57,8 +83,15 @@
 <div id="accessDenied" class="agent-denied" style="display:none"><h1>Access Denied</h1><p>This page is only available to Flight Agents.</p><p style="margin-top:16px"><a href="index.html" style="color:#3d5a80;font-weight:600">Return to homepage</a></p></div>
 <div id="agentContent" style="display:none">
 <div class="agent-header"><div><h1>Flight Agent Dashboard</h1><p class="agent-header__user">Signed in as <span id="agentName"></span></p></div><button class="agent-signout" id="signOutBtn">Sign out</button></div>
+
+<div class="agent-stats">
+<div class="agent-stat"><div class="agent-stat__value" id="statUsers">0</div><div class="agent-stat__label">Registered users</div></div>
+<div class="agent-stat"><div class="agent-stat__value" id="statPasses">0</div><div class="agent-stat__label">Boarding passes</div></div>
+<div class="agent-stat"><div class="agent-stat__value" id="statNotes">0</div><div class="agent-stat__label">Notes added</div></div>
+</div>
+
 <div class="agent-filters"><input type="text" id="searchInput" placeholder="Search by name, email or academy..."><select id="filterAcademy"><option value="">All academies</option><option>Leigh Academy</option><option>Leigh Academy Bexley</option><option>Leigh Academy Blackheath</option><option>Leigh Academy Dartford</option><option>Leigh Academy Rainham</option><option>Leigh Academy Tonbridge</option><option>Longfield Academy</option><option>Wilmington Academy</option></select></div>
-<table class="users-table"><thead><tr><th>Name</th><th>Email</th><th>Academy</th><th>Current Role</th><th>Passes</th><th>Joined</th></tr></thead><tbody id="usersBody"></tbody></table>
+<table class="users-table"><thead><tr><th>Name</th><th>Email</th><th>Academy</th><th>Passes</th><th>Joined</th></tr></thead><tbody id="usersBody"></tbody></table>
 <div id="userDetail" class="user-detail"></div>
 <div id="emptyState" class="agent-empty" style="display:none"><h2>No registered users yet</h2><p>Users will appear here once they create an account and save a boarding pass.</p></div>
 </div>
@@ -81,9 +114,22 @@ document.getElementById('agentName').textContent=profile?.full_name||profile?.em
 document.getElementById('agentContent').style.display='block';
 allUsers=await getAllUsers();
 renderUsers(allUsers);
+updateStats();
 document.getElementById('searchInput').addEventListener('input',filterUsers);
 document.getElementById('filterAcademy').addEventListener('change',filterUsers);
 document.getElementById('signOutBtn').addEventListener('click',()=>signOut());
+}
+
+function updateStats(){
+const totalUsers=allUsers.length;
+const totalPasses=allUsers.reduce((sum,u)=>{const c=u.boarding_passes?.[0]?.count||0;return sum+c;},0);
+document.getElementById('statUsers').textContent=totalUsers;
+document.getElementById('statPasses').textContent=totalPasses;
+// Notes count loaded async
+const sb=getSupabase();
+sb.from('agent_notes').select('id',{count:'exact',head:true}).then(({count})=>{
+document.getElementById('statNotes').textContent=count||0;
+});
 }
 
 function filterUsers(){
@@ -104,31 +150,119 @@ if(!users.length){tbody.innerHTML='';empty.style.display='block';return;}
 empty.style.display='none';
 tbody.innerHTML=users.map(u=>{
 const count=u.boarding_passes?.[0]?.count||0;
-const role=ROLE_LABELS[u.role_current]||u.role_current||'—';
 const date=u.created_at?new Date(u.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'—';
-return `<tr onclick="showUser('${u.id}')"><td class="user-name">${u.full_name||'—'}</td><td class="user-email">${u.email}</td><td>${u.academy||'—'}</td><td>${role}</td><td class="user-count">${count}</td><td>${date}</td></tr>`;
+return `<tr onclick="showUser('${u.id}')" id="row-${u.id}"><td class="user-name">${u.full_name||'—'}</td><td class="user-email">${u.email}</td><td>${u.academy||'—'}</td><td class="user-count">${count}</td><td>${date}</td></tr>`;
 }).join('');
 }
 
 async function showUser(userId){
 const user=allUsers.find(u=>u.id===userId);
 if(!user)return;
+
+// Highlight active row
+document.querySelectorAll('.users-table tbody tr').forEach(r=>r.classList.remove('active-row'));
+const row=document.getElementById('row-'+userId);
+if(row)row.classList.add('active-row');
+
 const passes=await getUserPassesById(userId);
 const detail=document.getElementById('userDetail');
-const role=ROLE_LABELS[user.role_current]||user.role_current||'Not set';
-detail.innerHTML=`
-<div class="user-detail__header"><div><div class="user-detail__name">${user.full_name||'Unknown'}</div><div class="user-detail__meta">${user.email} · ${user.academy||'No academy'} · ${role}</div></div><a href="mailto:${user.email}" style="font-size:13px;font-weight:600;color:#3d5a80">Email this user</a></div>
-<div class="user-detail__passes">${passes.length?passes.map(p=>{
+
+let passesHtml='';
+if(passes.length){
+passesHtml=passes.map(p=>{
 const from=ROLE_LABELS[p.origin_role]||p.origin_role;
 const to=ROLE_LABELS[p.dest_role]||p.dest_role;
 const rd=p.route_data||{};
 const readiness=rd.readiness||0;
 const dotCls=readiness>=70?'green':readiness>=40?'amber':'red';
 const date=new Date(p.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-return `<div class="user-pass-card"><div><div class="user-pass-card__route">${from} → ${to}</div><div class="user-pass-card__meta"><span>${rd.flightType||'—'}</span><span class="readiness"><span class="dot dot--${dotCls}"></span>${readiness}%</span><span>${date}</span></div></div><a href="shared-pass.html?token=${p.share_token}" class="user-pass-card__link" target="_blank">View boarding pass →</a></div>`;
-}).join(''):'<p style="color:#6c757d;font-size:14px">This user has no saved boarding passes yet.</p>'}</div>`;
+return `<div class="pass-block" id="pass-${p.id}">
+<div class="pass-block__header">
+<div><div class="pass-block__route">${from} → ${to}</div>
+<div class="pass-block__meta"><span>${rd.flightType||'—'}</span><span class="readiness"><span class="dot dot--${dotCls}"></span>${readiness}%</span><span>${date}</span></div></div>
+<div class="pass-block__actions">
+<a href="shared-pass.html?token=${p.share_token}" target="_blank" class="pass-block__btn pass-block__btn--view">View pass</a>
+<button class="pass-block__btn pass-block__btn--notes" onclick="toggleNotes('${p.id}')">Add/edit notes</button>
+</div>
+</div>
+<div class="notes-panel" id="notes-${p.id}">
+<div class="notes-panel__heading">Flight Agent Notes for this boarding pass</div>
+<div class="notes-field"><label>Recommendations</label><textarea id="rec-${p.id}" placeholder="What do you recommend this person focuses on?"></textarea></div>
+<div class="notes-field"><label>Next steps</label><textarea id="next-${p.id}" placeholder="Specific actions they should take next..."></textarea></div>
+<div class="notes-field"><label>Additional notes</label><textarea id="gen-${p.id}" placeholder="Any other observations, context, or advice..."></textarea></div>
+<div class="notes-actions"><button class="notes-save" onclick="saveNotes('${p.id}')">Save notes</button><span class="notes-status" id="status-${p.id}"></span></div>
+</div>
+</div>`;
+}).join('');
+}else{
+passesHtml='<p style="color:#6c757d;font-size:14px">This user has no saved boarding passes yet.</p>';
+}
+
+detail.innerHTML=`
+<div class="user-detail__header">
+<div><div class="user-detail__name">${user.full_name||'Unknown'}</div>
+<div class="user-detail__meta">${user.email} · ${user.academy||'No academy'} · ${passes.length} boarding pass${passes.length!==1?'es':''}</div></div>
+<div style="display:flex;gap:8px"><a href="mailto:${user.email}" style="font-size:13px;font-weight:600;color:#3d5a80;text-decoration:none;border:1px solid #dee2e6;border-radius:50px;padding:6px 16px">Email</a>
+<button class="user-detail__close" onclick="closeDetail()">Close</button></div>
+</div>
+<div class="user-detail__passes">${passesHtml}</div>`;
+
 detail.classList.add('user-detail--open');
 detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+// Load existing notes for each pass
+for(const p of passes){loadNotes(p.id);}
+}
+
+function closeDetail(){
+document.getElementById('userDetail').classList.remove('user-detail--open');
+document.querySelectorAll('.users-table tbody tr').forEach(r=>r.classList.remove('active-row'));
+}
+
+function toggleNotes(passId){
+const panel=document.getElementById('notes-'+passId);
+if(panel)panel.classList.toggle('notes-panel--open');
+}
+
+async function loadNotes(passId){
+try{
+const notes=await getAgentNotes(passId);
+if(!notes)return;
+const rec=document.getElementById('rec-'+passId);
+const next=document.getElementById('next-'+passId);
+const gen=document.getElementById('gen-'+passId);
+if(rec)rec.value=notes.recommendations||'';
+if(next)next.value=notes.next_steps||'';
+if(gen)gen.value=notes.general_notes||'';
+// Show indicator if notes exist
+if(notes.recommendations||notes.next_steps||notes.general_notes){
+const btn=document.querySelector(`#pass-${passId} .pass-block__btn--notes`);
+if(btn)btn.textContent='Edit notes';
+}
+}catch(e){}
+}
+
+async function saveNotes(passId){
+const rec=document.getElementById('rec-'+passId)?.value||'';
+const next=document.getElementById('next-'+passId)?.value||'';
+const gen=document.getElementById('gen-'+passId)?.value||'';
+const status=document.getElementById('status-'+passId);
+const btn=document.querySelector(`#pass-${passId} .notes-save`);
+if(btn){btn.disabled=true;btn.textContent='Saving...';}
+
+const{error}=await saveAgentNotes(passId,{recommendations:rec,nextSteps:next,generalNotes:gen});
+
+if(error){
+if(status)status.textContent='Error saving: '+error.message;
+if(status)status.style.color='#c62828';
+}else{
+if(status)status.textContent='Saved successfully';
+if(status)status.style.color='#2e7d32';
+const noteBtn=document.querySelector(`#pass-${passId} .pass-block__btn--notes`);
+if(noteBtn)noteBtn.textContent='Edit notes';
+}
+if(btn){btn.disabled=false;btn.textContent='Save notes';}
+setTimeout(()=>{if(status)status.textContent='';},3000);
 }
 
 document.addEventListener('DOMContentLoaded',init);
