@@ -4,7 +4,7 @@ const SUPABASE_URL = 'https://uzgrhmipfpudbzntwppn.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6Z3JobWlwZnB1ZGJ6bnR3cHBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzMzU3NTQsImV4cCI6MjA5MTkxMTc1NH0.zxezBymZdZbDerWwfhrUqTe70nCdckj6EB6s9a7ueS4';
 
 // Import and init (loaded via CDN in HTML pages)
-// <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+// <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 // This gives us window.supabase
 
 let _supabaseClient = null;
@@ -15,9 +15,12 @@ function getSupabase() {
             console.error('Supabase CDN not loaded. window.supabase is:', window.supabase);
             throw new Error('Supabase library not loaded');
         }
-        const createFn = window.supabase.createClient || (window.supabase.default && window.supabase.default.createClient);
+        console.log('Supabase URL:', JSON.stringify(SUPABASE_URL));
+        console.log('Supabase key length:', SUPABASE_ANON_KEY.length);
+        console.log('window.supabase keys:', Object.keys(window.supabase));
+        const createFn = window.supabase.createClient;
         if (!createFn) {
-            console.error('createClient not found. window.supabase keys:', Object.keys(window.supabase));
+            console.error('createClient not found on window.supabase');
             throw new Error('Supabase createClient not found');
         }
         _supabaseClient = createFn(SUPABASE_URL, SUPABASE_ANON_KEY);
