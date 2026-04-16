@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Flightplan</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Login Page Styles ===== */
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--gray-50);
+        }
+
+        .login-page__main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 24px 60px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 48px 40px;
+        }
+
+        @media (max-width: 540px) {
+            .login-card {
+                padding: 36px 24px;
+            }
+        }
+
+        .login-card__heading {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .login-card__subheading {
+            font-size: 14px;
+            color: var(--gray-500);
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .login-card__label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 6px;
+        }
+
+        .login-card__input,
+        .login-card__select {
+            width: 100%;
+            height: 44px;
+            padding: 0 14px;
+            font-size: 15px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-900);
+            background: var(--white);
+            border: 1.5px solid var(--gray-300);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .login-card__input:focus,
+        .login-card__select:focus {
+            border-color: var(--blue-600);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+        }
+
+        .login-card__input::placeholder {
+            color: var(--gray-500);
+        }
+
+        .login-card__select {
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236c757d' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 38px;
+        }
+
+        .login-card__field {
+            margin-bottom: 20px;
+        }
+
+        .login-card__btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 44px;
+            padding: 0 24px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #2b3e50;
+            background: #e5a733;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, opacity 0.2s, transform 0.1s;
+            margin-top: 8px;
+        }
+
+        .login-card__btn:hover {
+            background: #d4952e;
+        }
+
+        .login-card__btn:active {
+            transform: scale(0.98);
+        }
+
+        .login-card__btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .login-card__note {
+            font-size: 13px;
+            color: var(--gray-500);
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        .login-card__error {
+            background: #fef2f2;
+            color: #b91c1c;
+            font-size: 13px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .login-card__error.visible {
+            display: block;
+        }
+
+        /* State 2 - Check Email */
+        .check-email {
+            text-align: center;
+        }
+
+        .check-email__icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .check-email__heading {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+
+        .check-email__text {
+            font-size: 15px;
+            color: var(--gray-500);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .check-email__text strong {
+            color: var(--gray-700);
+        }
+
+        .check-email__resend {
+            font-size: 14px;
+            color: var(--blue-600);
+            cursor: pointer;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            font-family: inherit;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .check-email__resend:hover {
+            color: var(--blue-700);
+        }
+
+        /* State 3 - Complete Profile */
+        .profile-form__heading {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .profile-form__subheading {
+            font-size: 14px;
+            color: var(--gray-500);
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        /* Hidden states */
+        .login-state {
+            display: none;
+        }
+
+        .login-state.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__container">
+                <a href="index.html" class="header__logo">
+                    <img src="images/logo.png" alt="Flightplan" class="header__logo-img">
+                </a>
+                <nav class="header__nav">
+                    <a href="index.html#destinations" class="header__nav-link">Destinations</a>
+                    <a href="index.html#journeys" class="header__nav-link">Career Journeys</a>
+                    <a href="index.html#resources" class="header__nav-link">Resources</a>
+                </nav>
+                <div class="header__actions">
+                    <a href="login.html" class="header__sign-in">Sign in</a>
+                    <button class="header__menu-btn" id="menuBtn" aria-label="Open menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Nav -->
+        <div class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav__overlay" id="mobileNavOverlay"></div>
+            <div class="mobile-nav__panel">
+                <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+                <a href="index.html#destinations" class="mobile-nav__link">Destinations</a>
+                <a href="index.html#journeys" class="mobile-nav__link">Career Journeys</a>
+                <a href="index.html#resources" class="mobile-nav__link">Resources</a>
+                <a href="login.html" class="mobile-nav__link">Sign in</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="login-page__main">
+            <div class="login-card">
+
+                <!-- State 1: Login Form -->
+                <div id="stateLogin" class="login-state active">
+                    <h1 class="login-card__heading">Welcome to Flightplan</h1>
+                    <p class="login-card__subheading">Sign in with your email to save your boarding passes and track your career journey.</p>
+
+                    <div id="loginError" class="login-card__error"></div>
+
+                    <form id="loginForm" autocomplete="on">
+                        <div class="login-card__field">
+                            <label for="loginEmail" class="login-card__label">Email address</label>
+                            <input
+                                type="email"
+                                id="loginEmail"
+                                class="login-card__input"
+                                placeholder="you@example.com"
+                                required
+                                autocomplete="email"
+                            >
+                        </div>
+                        <button type="submit" id="loginBtn" class="login-card__btn">
+                            Send me a magic link
+                        </button>
+                    </form>
+
+                    <p class="login-card__note">Don't have an account? We'll create one automatically.</p>
+                </div>
+
+                <!-- State 2: Check Your Email -->
+                <div id="stateCheckEmail" class="login-state">
+                    <div class="check-email">
+                        <div class="check-email__icon">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="14" width="56" height="36" rx="4" stroke="#3d5a80" stroke-width="2.5" fill="none"/>
+                                <path d="M4 18l28 18 28-18" stroke="#3d5a80" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M44 8l6-4 2 6" stroke="#e5a733" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="50" cy="10" r="1.5" fill="#e5a733"/>
+                            </svg>
+                        </div>
+                        <h2 class="check-email__heading">Check your email</h2>
+                        <p class="check-email__text">
+                            We've sent a magic link to <strong id="sentEmailDisplay"></strong>. Click it to sign in — no password needed.
+                        </p>
+                        <button type="button" id="resendLink" class="check-email__resend">
+                            Didn't receive it? Send again
+                        </button>
+                    </div>
+                </div>
+
+                <!-- State 3: Complete Your Profile -->
+                <div id="stateProfile" class="login-state">
+                    <h2 class="profile-form__heading">Complete your profile</h2>
+                    <p class="profile-form__subheading">Tell us a bit about yourself so we can personalise your experience.</p>
+
+                    <div id="profileError" class="login-card__error"></div>
+
+                    <form id="profileForm">
+                        <div class="login-card__field">
+                            <label for="profileName" class="login-card__label">Full name</label>
+                            <input
+                                type="text"
+                                id="profileName"
+                                class="login-card__input"
+                                placeholder="Your full name"
+                                required
+                                autocomplete="name"
+                            >
+                        </div>
+                        <div class="login-card__field">
+                            <label for="profileAcademy" class="login-card__label">Academy</label>
+                            <select id="profileAcademy" class="login-card__select" required>
+                                <option value="" disabled selected>Select your academy</option>
+                                <option value="Leigh Academy">Leigh Academy</option>
+                                <option value="Leigh Academy Bexley">Leigh Academy Bexley</option>
+                                <option value="Leigh Academy Blackheath">Leigh Academy Blackheath</option>
+                                <option value="Leigh Academy Dartford">Leigh Academy Dartford</option>
+                                <option value="Leigh Academy Rainham">Leigh Academy Rainham</option>
+                                <option value="Leigh Academy Tonbridge">Leigh Academy Tonbridge</option>
+                                <option value="Longfield Academy">Longfield Academy</option>
+                                <option value="Wilmington Academy">Wilmington Academy</option>
+                                <option value="Other LAT Academy">Other LAT Academy</option>
+                            </select>
+                        </div>
+                        <button type="submit" id="profileBtn" class="login-card__btn">
+                            Save and continue
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__grid">
+                    <div class="footer__brand">
+                        <a href="index.html" class="footer__logo">
+                            <img src="images/logo.png" alt="Flightplan" class="footer__logo-img">
+                        </a>
+                        <p class="footer__tagline">Helping education professionals navigate their career journey.</p>
+                    </div>
+                    <div class="footer__links">
+                        <h4>Destinations</h4>
+                        <a href="#">Teaching roles</a>
+                        <a href="#">Leadership roles</a>
+                        <a href="#">Support roles</a>
+                        <a href="#">Specialist roles</a>
+                    </div>
+                    <div class="footer__links">
+                        <h4>Resources</h4>
+                        <a href="#">Career guides</a>
+                        <a href="#">Qualifications</a>
+                        <a href="#">CPD finder</a>
+                        <a href="#">Salary scales</a>
+                    </div>
+                    <div class="footer__links">
+                        <h4>About</h4>
+                        <a href="#">Our mission</a>
+                        <a href="#">For schools</a>
+                        <a href="#">Contact us</a>
+                        <a href="#">Privacy policy</a>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p>&copy; 2026 Flightplan - Part of Leigh Academies Trust. All rights reserved.</p>
+                    <p>Helping you land your dream role in education.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Supabase CDN (must be before other scripts) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+
+    <script>
+        // ===== DOM References =====
+        const stateLogin = document.getElementById('stateLogin');
+        const stateCheckEmail = document.getElementById('stateCheckEmail');
+        const stateProfile = document.getElementById('stateProfile');
+
+        const loginForm = document.getElementById('loginForm');
+        const loginEmail = document.getElementById('loginEmail');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginError = document.getElementById('loginError');
+
+        const sentEmailDisplay = document.getElementById('sentEmailDisplay');
+        const resendLink = document.getElementById('resendLink');
+
+        const profileForm = document.getElementById('profileForm');
+        const profileName = document.getElementById('profileName');
+        const profileAcademy = document.getElementById('profileAcademy');
+        const profileBtn = document.getElementById('profileBtn');
+        const profileError = document.getElementById('profileError');
+
+        // ===== State Management =====
+        function showState(stateEl) {
+            stateLogin.classList.remove('active');
+            stateCheckEmail.classList.remove('active');
+            stateProfile.classList.remove('active');
+            stateEl.classList.add('active');
+        }
+
+        function showError(el, message) {
+            el.textContent = message;
+            el.classList.add('visible');
+        }
+
+        function hideError(el) {
+            el.textContent = '';
+            el.classList.remove('visible');
+        }
+
+        // ===== On Page Load =====
+        (async function init() {
+            try {
+                // Check for auth callback tokens in URL (Supabase magic link return)
+                const hash = window.location.hash;
+                const params = new URLSearchParams(window.location.search);
+
+                // Supabase v2 handles the token exchange automatically via onAuthStateChange
+                // but we also check if there's already a session
+                const user = await getCurrentUser();
+
+                if (user) {
+                    // User is logged in — check if profile is complete
+                    const profile = await getUserProfile();
+                    if (!profile || !profile.full_name) {
+                        showState(stateProfile);
+                    } else {
+                        // Profile is complete — redirect to dashboard
+                        window.location.href = 'my-flightplan.html';
+                    }
+                }
+            } catch (err) {
+                console.error('Init error:', err);
+            }
+        })();
+
+        // ===== Auth State Change Listener =====
+        (function listenForAuth() {
+            try {
+                const sb = getSupabase();
+                sb.auth.onAuthStateChange(async (event, session) => {
+                    if (event === 'SIGNED_IN' && session?.user) {
+                        // User just signed in via magic link
+                        const profile = await getUserProfile();
+                        if (!profile || !profile.full_name) {
+                            showState(stateProfile);
+                        } else {
+                            window.location.href = 'my-flightplan.html';
+                        }
+                    }
+                });
+            } catch (err) {
+                console.error('Auth listener error:', err);
+            }
+        })();
+
+        // ===== Login Form Submit =====
+        let lastEmail = '';
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError(loginError);
+
+            const email = loginEmail.value.trim();
+            if (!email) return;
+
+            lastEmail = email;
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Sending...';
+
+            try {
+                const { error } = await signInWithMagicLink(email);
+
+                if (error) {
+                    showError(loginError, error.message || 'Something went wrong. Please try again.');
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Send me a magic link';
+                    return;
+                }
+
+                // Success — show check email state
+                sentEmailDisplay.textContent = email;
+                showState(stateCheckEmail);
+            } catch (err) {
+                showError(loginError, 'Something went wrong. Please try again.');
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Send me a magic link';
+            }
+        });
+
+        // ===== Resend Magic Link =====
+        resendLink.addEventListener('click', async () => {
+            if (!lastEmail) return;
+
+            resendLink.textContent = 'Sending...';
+            resendLink.disabled = true;
+
+            try {
+                const { error } = await signInWithMagicLink(lastEmail);
+                if (error) {
+                    resendLink.textContent = 'Failed to send. Try again';
+                } else {
+                    resendLink.textContent = 'Sent! Check your inbox';
+                }
+            } catch (err) {
+                resendLink.textContent = 'Failed to send. Try again';
+            }
+
+            resendLink.disabled = false;
+
+            // Reset text after a few seconds
+            setTimeout(() => {
+                resendLink.textContent = "Didn't receive it? Send again";
+            }, 4000);
+        });
+
+        // ===== Profile Form Submit =====
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError(profileError);
+
+            const fullName = profileName.value.trim();
+            const academy = profileAcademy.value;
+
+            if (!fullName) {
+                showError(profileError, 'Please enter your full name.');
+                return;
+            }
+
+            if (!academy) {
+                showError(profileError, 'Please select your academy.');
+                return;
+            }
+
+            profileBtn.disabled = true;
+            profileBtn.textContent = 'Saving...';
+
+            try {
+                const { error } = await updateProfile({
+                    full_name: fullName,
+                    academy: academy
+                });
+
+                if (error) {
+                    showError(profileError, typeof error === 'string' ? error : (error.message || 'Something went wrong. Please try again.'));
+                    profileBtn.disabled = false;
+                    profileBtn.textContent = 'Save and continue';
+                    return;
+                }
+
+                // Success — redirect to my-flightplan
+                window.location.href = 'my-flightplan.html';
+            } catch (err) {
+                showError(profileError, 'Something went wrong. Please try again.');
+                profileBtn.disabled = false;
+                profileBtn.textContent = 'Save and continue';
+            }
+        });
+
+        // ===== Mobile Nav Toggle =====
+        (function mobileNav() {
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+            if (menuBtn && mobileNav) {
+                menuBtn.addEventListener('click', () => {
+                    mobileNav.classList.add('active');
+                });
+            }
+            if (mobileNavClose) {
+                mobileNavClose.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                });
+            }
+            if (mobileNavOverlay) {
+                mobileNavOverlay.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                });
+            }
+        })();
+    </script>
+
+    <!-- Superchat Widget -->
+    <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+        for (var i = 0; i < allEls.length; i++) {
+            if (allEls[i].click) { allEls[i].click(); break; }
+        }
+    }
+    </script>
+</body>
+</html>
