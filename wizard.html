@@ -883,5 +883,13 @@ function showWizToast(msg){let t=document.querySelector('.bp-toast');if(!t){t=do
 </script>
 <script src="js/supabase.min.js"></script>
 <script src="js/supabase-config.js"></script>
+<script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+<script>
+function openFlightAgent(){
+    if(window.Superchat&&typeof window.Superchat.open==='function'){window.Superchat.open();return;}
+    var allEls=document.querySelectorAll('[class*="superchat"],[id*="superchat"]');
+    for(var i=0;i<allEls.length;i++){if(allEls[i].click){allEls[i].click();break;}}
+}
+</script>
 </body>
 </html>
