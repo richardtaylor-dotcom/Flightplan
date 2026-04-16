@@ -247,16 +247,63 @@ select { font-family: inherit; }
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 40%, var(--blue-500) 100%);
+    animation: heroGradientShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroGradientShift {
+    0% { background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 40%, var(--blue-500) 100%); }
+    100% { background: linear-gradient(135deg, #1e3a5f 0%, var(--blue-700) 50%, #4a6fa5 100%); }
 }
 
 .hero__gradient {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(0, 160, 225, 0.3) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 30%, rgba(232, 73, 29, 0.15) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(91,130,184,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(229,167,51,0.12) 0%, transparent 50%);
 }
 
+/* Animated clouds */
+.hero__clouds {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero__cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(1px);
+}
+
+.hero__cloud--1 {
+    width: 200px; height: 60px; bottom: 8%; left: -200px;
+    opacity: 0.06;
+    animation: cloudDrift 35s linear infinite;
+    box-shadow: 40px -20px 0 20px white, 80px 0 0 10px white;
+}
+.hero__cloud--2 {
+    width: 160px; height: 50px; bottom: 18%; left: -160px;
+    opacity: 0.04;
+    animation: cloudDrift 50s linear infinite 8s;
+    box-shadow: 30px -15px 0 15px white, 70px 0 0 8px white;
+}
+.hero__cloud--3 {
+    width: 240px; height: 70px; bottom: 30%; left: -240px;
+    opacity: 0.05;
+    animation: cloudDrift 42s linear infinite 20s;
+    box-shadow: 50px -25px 0 25px white, 100px 0 0 15px white;
+}
+
+@keyframes cloudDrift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 400px)); }
+}
+
+/* Stars/dots in hero */
 .hero__background::after {
     content: '';
     position: absolute;
@@ -1140,6 +1187,76 @@ select { font-family: inherit; }
     opacity: 0.75;
 }
 
+/* ===== Scroll Reveal ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal--delay-1 { transition-delay: 0.1s; }
+.reveal--delay-2 { transition-delay: 0.2s; }
+.reveal--delay-3 { transition-delay: 0.3s; }
+.reveal--delay-4 { transition-delay: 0.4s; }
+
+/* ===== Flight Path Connector ===== */
+.flight-path {
+    position: relative;
+    padding-top: 40px;
+}
+
+.flight-path::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--orange-400), var(--blue-600));
+    transition: height 1.2s ease;
+    border-radius: 1px;
+}
+
+.flight-path--drawn::before {
+    height: 40px;
+}
+
+/* ===== Board Flip Animation ===== */
+.board__row--flip {
+    animation: boardFlip 0.4s ease both;
+}
+
+@keyframes boardFlip {
+    0% { transform: rotateX(90deg); opacity: 0; }
+    100% { transform: rotateX(0deg); opacity: 1; }
+}
+
+/* Enhanced hover effects */
+.resource-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.resource-card:hover {
+    border-color: var(--blue-500);
+    box-shadow: 0 12px 32px rgba(61,90,128,0.15);
+    transform: translateY(-6px);
+}
+
+.resource-card:hover .resource-card__icon {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.story-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 /* ===== Departure Board ===== */
 .departure-board {
     padding: 60px 0;
@@ -1257,12 +1374,13 @@ select { font-family: inherit; }
 }
 
 .board__row {
-    transition: background 0.15s;
+    transition: background 0.2s, transform 0.2s;
     cursor: pointer;
 }
 
 .board__row:hover {
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.08);
+    transform: translateX(4px);
 }
 
 .board__row td {

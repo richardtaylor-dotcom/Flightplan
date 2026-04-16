@@ -195,30 +195,69 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollY = scrollY;
     }, { passive: true });
 
-    // Animate elements on scroll (intersection observer)
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
+    // Scroll reveal observer
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
+                entry.target.classList.add('reveal--visible');
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    const animateElements = document.querySelectorAll(
-        '.dest-card, .step, .story-card, .resource-card, .journey-card'
-    );
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    animateElements.forEach((el, i) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = `opacity 0.5s ease ${i * 0.05}s, transform 0.5s ease ${i * 0.05}s`;
-        observer.observe(el);
+    // Step cards & resource cards - staggered reveal
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal--visible');
+                cardObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.step, .resource-card, .journey-card').forEach((el, i) => {
+        el.classList.add('reveal');
+        el.style.transitionDelay = `${i * 0.08}s`;
+        cardObserver.observe(el);
     });
+
+    // Departure board flip-in animation
+    const boardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const rows = entry.target.querySelectorAll('.board__row');
+                rows.forEach((row, i) => {
+                    row.style.animationDelay = `${i * 0.04}s`;
+                    row.classList.add('board__row--flip');
+                });
+                boardObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.05 });
+
+    const boardTable = document.querySelector('.board');
+    if (boardTable) {
+        // Hide rows initially
+        boardTable.querySelectorAll('.board__row').forEach(row => {
+            row.style.opacity = '0';
+        });
+        boardObserver.observe(boardTable);
+    }
+
+    // Flight path connector for "how it works" steps
+    const stepsSection = document.querySelector('.how-it-works');
+    if (stepsSection) {
+        const pathObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('flight-path--drawn');
+                    pathObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        stepsSection.classList.add('flight-path');
+        pathObserver.observe(stepsSection);
+    }
 });
