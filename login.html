@@ -514,7 +514,8 @@
                 sentEmailDisplay.textContent = email;
                 showState(stateCheckEmail);
             } catch (err) {
-                showError(loginError, 'Something went wrong. Please try again.');
+                console.error('Login error:', err);
+                showError(loginError, 'Error: ' + (err.message || err.toString()));
                 loginBtn.disabled = false;
                 loginBtn.textContent = 'Send me a magic link';
             }

@@ -11,7 +11,16 @@ let _supabaseClient = null;
 
 function getSupabase() {
     if (!_supabaseClient) {
-        _supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        if (!window.supabase) {
+            console.error('Supabase CDN not loaded. window.supabase is:', window.supabase);
+            throw new Error('Supabase library not loaded');
+        }
+        const createFn = window.supabase.createClient || (window.supabase.default && window.supabase.default.createClient);
+        if (!createFn) {
+            console.error('createClient not found. window.supabase keys:', Object.keys(window.supabase));
+            throw new Error('Supabase createClient not found');
+        }
+        _supabaseClient = createFn(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
     return _supabaseClient;
 }
