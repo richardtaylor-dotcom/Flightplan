@@ -151,6 +151,16 @@ async function getUserPassesById(userId) {
     return data || [];
 }
 
+async function toggleFlightAgent(userId, makeAgent) {
+    const sb = getSupabase();
+    const { data, error } = await sb.from('profiles')
+        .update({ is_flight_agent: makeAgent })
+        .eq('id', userId)
+        .select()
+        .single();
+    return { data, error };
+}
+
 // ===== Agent Notes Helpers =====
 async function getAgentNotes(boardingPassId) {
     const sb = getSupabase();
@@ -179,7 +189,7 @@ async function saveAgentNotes(boardingPassId, notes) {
 }
 
 // ===== Nav Auth State =====
-function setNavLoggedIn(name) {
+function setNavLoggedIn(name, isAgent) {
     const firstName = (name || '').split(' ')[0] || 'My Flightplan';
     document.querySelectorAll('.header__sign-in').forEach(link => {
         link.textContent = firstName;
@@ -194,6 +204,34 @@ function setNavLoggedIn(name) {
             link.href = 'my-flightplan.html';
         }
     });
+
+    // Add Agent Dashboard link if flight agent
+    if (isAgent) {
+        const nav = document.querySelector('.header__nav');
+        if (nav && !document.getElementById('agentNavLink')) {
+            const agentLink = document.createElement('a');
+            agentLink.id = 'agentNavLink';
+            agentLink.href = 'agent-dashboard.html';
+            agentLink.className = 'header__nav-link';
+            agentLink.textContent = 'Agent Dashboard';
+            agentLink.style.color = '#e5a733';
+            agentLink.style.fontWeight = '700';
+            nav.appendChild(agentLink);
+        }
+        // Also add to mobile nav
+        const mobileNav = document.querySelector('.mobile-nav__panel');
+        if (mobileNav && !document.getElementById('agentMobileLink')) {
+            const closeBtn = mobileNav.querySelector('.mobile-nav__close');
+            const agentLink = document.createElement('a');
+            agentLink.id = 'agentMobileLink';
+            agentLink.href = 'agent-dashboard.html';
+            agentLink.className = 'mobile-nav__link';
+            agentLink.textContent = 'Agent Dashboard';
+            agentLink.style.color = '#e5a733';
+            agentLink.style.fontWeight = '700';
+            mobileNav.appendChild(agentLink);
+        }
+    }
 }
 
 function setNavLoggedOut() {
@@ -204,46 +242,59 @@ function setNavLoggedOut() {
         link.style.color = '';
         link.style.borderColor = '';
     });
+    const agentLink = document.getElementById('agentNavLink');
+    if (agentLink) agentLink.remove();
+    const agentMobile = document.getElementById('agentMobileLink');
+    if (agentMobile) agentMobile.remove();
 }
 
 async function updateNavForAuth() {
     try {
         const sb = getSupabase();
 
-        // Step 1: Instant check from cached name in localStorage
         const cachedName = localStorage.getItem('fp_user_name');
+        const cachedAgent = localStorage.getItem('fp_is_agent') === 'true';
         const { data: { session } } = await sb.auth.getSession();
 
         if (session && cachedName) {
-            // Instant nav update — no network call needed
-            setNavLoggedIn(cachedName);
+            setNavLoggedIn(cachedName, cachedAgent);
+            // Refresh agent status in background
+            getUserProfile().then(profile => {
+                if (profile) {
+                    localStorage.setItem('fp_is_agent', profile.is_flight_agent ? 'true' : 'false');
+                    if (profile.is_flight_agent && !cachedAgent) {
+                        setNavLoggedIn(cachedName, true);
+                    }
+                }
+            }).catch(() => {});
         } else if (session) {
-            // Session exists but no cached name — fetch profile
             const profile = await getUserProfile();
             if (profile?.full_name) {
                 localStorage.setItem('fp_user_name', profile.full_name);
-                setNavLoggedIn(profile.full_name);
+                localStorage.setItem('fp_is_agent', profile.is_flight_agent ? 'true' : 'false');
+                setNavLoggedIn(profile.full_name, profile.is_flight_agent);
             } else {
-                setNavLoggedIn('My Flightplan');
+                setNavLoggedIn('My Flightplan', false);
             }
         } else {
-            // Not logged in
             localStorage.removeItem('fp_user_name');
+            localStorage.removeItem('fp_is_agent');
             setNavLoggedOut();
         }
 
-        // Listen for sign-in/sign-out changes
         sb.auth.onAuthStateChange(async (event, sess) => {
             if (event === 'SIGNED_IN' && sess) {
                 const profile = await getUserProfile();
                 if (profile?.full_name) {
                     localStorage.setItem('fp_user_name', profile.full_name);
-                    setNavLoggedIn(profile.full_name);
+                    localStorage.setItem('fp_is_agent', profile.is_flight_agent ? 'true' : 'false');
+                    setNavLoggedIn(profile.full_name, profile.is_flight_agent);
                 } else {
-                    setNavLoggedIn('My Flightplan');
+                    setNavLoggedIn('My Flightplan', false);
                 }
             } else if (event === 'SIGNED_OUT') {
                 localStorage.removeItem('fp_user_name');
+                localStorage.removeItem('fp_is_agent');
                 setNavLoggedOut();
             }
         });

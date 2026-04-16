@@ -198,11 +198,18 @@ return `<div class="pass-block" id="pass-${p.id}">
 passesHtml='<p style="color:#6c757d;font-size:14px">This user has no saved boarding passes yet.</p>';
 }
 
+const isAgent=user.is_flight_agent;
+const agentBadge=isAgent?'<span style="display:inline-block;background:#e5a733;color:#2b3e50;font-size:11px;font-weight:700;padding:2px 10px;border-radius:50px;margin-left:8px">FLIGHT AGENT</span>':'';
+const toggleLabel=isAgent?'Remove agent role':'Make Flight Agent';
+const toggleColor=isAgent?'#c62828':'#2e7d32';
+
 detail.innerHTML=`
 <div class="user-detail__header">
-<div><div class="user-detail__name">${user.full_name||'Unknown'}</div>
+<div><div class="user-detail__name">${user.full_name||'Unknown'}${agentBadge}</div>
 <div class="user-detail__meta">${user.email} · ${user.academy||'No academy'} · ${passes.length} boarding pass${passes.length!==1?'es':''}</div></div>
-<div style="display:flex;gap:8px"><a href="mailto:${user.email}" style="font-size:13px;font-weight:600;color:#3d5a80;text-decoration:none;border:1px solid #dee2e6;border-radius:50px;padding:6px 16px">Email</a>
+<div style="display:flex;gap:8px;align-items:center">
+<button onclick="toggleAgent('${user.id}',${!isAgent})" style="font-size:12px;font-weight:600;color:${toggleColor};background:none;border:2px solid ${toggleColor};border-radius:50px;padding:6px 14px;cursor:pointer">${toggleLabel}</button>
+<a href="mailto:${user.email}" style="font-size:13px;font-weight:600;color:#3d5a80;text-decoration:none;border:1px solid #dee2e6;border-radius:50px;padding:6px 16px">Email</a>
 <button class="user-detail__close" onclick="closeDetail()">Close</button></div>
 </div>
 <div class="user-detail__passes">${passesHtml}</div>`;
@@ -217,6 +224,19 @@ for(const p of passes){loadNotes(p.id);}
 function closeDetail(){
 document.getElementById('userDetail').classList.remove('user-detail--open');
 document.querySelectorAll('.users-table tbody tr').forEach(r=>r.classList.remove('active-row'));
+}
+
+async function toggleAgent(userId, makeAgent){
+const action=makeAgent?'grant Flight Agent access to':'remove Flight Agent access from';
+const user=allUsers.find(u=>u.id===userId);
+const name=user?.full_name||'this user';
+if(!confirm(`Are you sure you want to ${action} ${name}?`))return;
+const{error}=await toggleFlightAgent(userId, makeAgent);
+if(error){alert('Error: '+error.message);return;}
+// Update local data
+if(user)user.is_flight_agent=makeAgent;
+// Re-render user detail
+showUser(userId);
 }
 
 function toggleNotes(passId){
