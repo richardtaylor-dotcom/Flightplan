@@ -1,7 +1,7 @@
 // ===== Supabase Configuration =====
 // Replace these with your Supabase project credentials
 const SUPABASE_URL = 'https://uzgrhmipfpudbzntwppn.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_X1fyatSd9gfbiBKE0DMOFg_ejJzOln6';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6Z3JobWlwZnB1ZGJ6bnR3cHBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzMzU3NTQsImV4cCI6MjA5MTkxMTc1NH0.zxezBymZdZbDerWwfhrUqTe70nCdckj6EB6s9a7ueS4';
 
 // Import and init (loaded via CDN in HTML pages)
 // <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
