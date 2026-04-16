@@ -6,14 +6,14 @@
 }
 
 :root {
-    --blue-900: #0a1628;
-    --blue-700: #003580;
-    --blue-600: #0057b8;
-    --blue-500: #0072e5;
-    --blue-400: #00a0e1;
-    --blue-50: #e3f2fd;
-    --orange-600: #e8491d;
-    --orange-400: #ff8a50;
+    --blue-900: #2b3e50;
+    --blue-700: #3d5a80;
+    --blue-600: #4a6fa5;
+    --blue-500: #5b82b8;
+    --blue-400: #7ba3d4;
+    --blue-50: #edf2f8;
+    --orange-600: #d4952e;
+    --orange-400: #e5a733;
     --green-600: #2e7d32;
     --green-400: #66bb6a;
     --purple-600: #6a1b9a;
@@ -153,7 +153,7 @@ select { font-family: inherit; }
 }
 
 .header__sign-in:hover {
-    background: var(--blue-600);
+    background: var(--blue-700);
     color: var(--white);
 }
 
@@ -282,10 +282,7 @@ select { font-family: inherit; }
 }
 
 .hero__title-highlight {
-    background: linear-gradient(135deg, var(--orange-400), var(--orange-600));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--orange-400);
 }
 
 .hero__subtitle {
@@ -472,12 +469,58 @@ select { font-family: inherit; }
 }
 
 .search-box__btn:hover {
-    background: #d43d15;
+    background: #c0862a;
     transform: translateY(-1px);
 }
 
 .search-box__btn:active {
     transform: translateY(0);
+}
+
+/* Hero CTA buttons */
+.hero__cta-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: all 0.2s;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
+.hero__cta--primary {
+    background: var(--orange-400);
+    color: var(--blue-900);
+}
+
+.hero__cta--primary:hover {
+    background: #d4952e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(229,167,51,0.3);
+}
+
+.hero__cta--secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.hero__cta--secondary:hover {
+    border-color: var(--white);
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
 }
 
 /* ===== Section Titles ===== */
@@ -1091,9 +1134,9 @@ select { font-family: inherit; }
 
 .departure-board__filter-btn:hover,
 .departure-board__filter-btn--active {
-    background: var(--orange-600);
-    color: var(--white);
-    border-color: var(--orange-600);
+    background: var(--orange-400);
+    color: var(--blue-900);
+    border-color: var(--orange-400);
 }
 
 /* Board table */

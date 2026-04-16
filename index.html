@@ -53,66 +53,9 @@
             <h1 class="hero__title">Where do you want your <span class="hero__title-highlight">career to take you?</span></h1>
             <p class="hero__subtitle">Plan your journey through education. From where you are now to where you want to be.</p>
 
-            <!-- Departure Wizard -->
-            <div class="search-box">
-                <div class="search-box__body">
-                    <div class="search-box__panel search-box__panel--active" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;">
-                        <div class="search-box__field" style="flex:1;min-width:280px;">
-                            <label class="search-box__label" for="heroDeparture">Where are you departing from?</label>
-                            <select class="search-box__select" id="heroDeparture">
-                                <option value="">Select your current role</option>
-                                <optgroup label="Classroom Support">
-                                    <option value="nursery_assistant">Early Years / Nursery Assistant</option>
-                                    <option value="ta">Teaching Assistant</option>
-                                    <option value="sen_ta">SEN Teaching Assistant</option>
-                                    <option value="hlta">Higher Level Teaching Assistant (HLTA)</option>
-                                    <option value="cover_supervisor">Cover Supervisor</option>
-                                </optgroup>
-                                <optgroup label="Teaching">
-                                    <option value="teacher">Teacher (Secondary)</option>
-                                    <option value="primary_teacher">Class Teacher (Primary)</option>
-                                    <option value="sen_teacher">SEN Teacher</option>
-                                    <option value="coord">Coordinator of Learning</option>
-                                    <option value="second">Second in Charge</option>
-                                    <option value="lead_prac">Lead Practitioner</option>
-                                    <option value="hol">Head of Learning</option>
-                                    <option value="dol">Director of Learning</option>
-                                    <option value="phase_leader">Phase Leader (Primary)</option>
-                                </optgroup>
-                                <optgroup label="SEND / Inclusion">
-                                    <option value="deputy_senco">Deputy SENCo</option>
-                                    <option value="senco">SENCo</option>
-                                    <option value="inclusion_officer">Inclusion Officer</option>
-                                    <option value="inclusion_manager">Inclusion Manager</option>
-                                </optgroup>
-                                <optgroup label="Academy Leadership">
-                                    <option value="asst_principal">Assistant Principal</option>
-                                    <option value="vice_principal">Vice Principal / Head of College</option>
-                                    <option value="deputy_principal">Deputy Principal</option>
-                                    <option value="principal">Principal</option>
-                                </optgroup>
-                                <optgroup label="Student &amp; Academy Support">
-                                    <option value="admin">Academy Administrator</option>
-                                    <option value="office_manager">Office Manager</option>
-                                    <option value="student_services_officer">Student Services Officer</option>
-                                    <option value="student_services_manager">Student Services Manager</option>
-                                    <option value="attendance_officer">Attendance Officer</option>
-                                    <option value="attendance_manager">Attendance Manager</option>
-                                    <option value="exams_officer">Exams Officer</option>
-                                    <option value="exams_manager">Exams Manager</option>
-                                    <option value="safeguarding_officer">Safeguarding Officer</option>
-                                    <option value="family_liaison">Family Liaison Officer</option>
-                                    <option value="hr_admin">HR Administrator</option>
-                                </optgroup>
-                                <optgroup label="Technical / Specialist">
-                                    <option value="technician">Subject Technician</option>
-                                    <option value="curriculum_advisor">Curriculum Advisor</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        <button class="search-box__btn" id="startWizardBtn">Start my flight plan</button>
-                    </div>
-                </div>
+            <div class="hero__cta-group">
+                <a href="wizard.html" class="hero__cta hero__cta--primary">Plan my journey</a>
+                <button class="hero__cta hero__cta--secondary" onclick="openFlightAgent()">Speak to a Flightplan Agent</button>
             </div>
         </div>
         <!-- Animated plane -->
@@ -480,5 +423,17 @@
 
     <script src="js/main.js"></script>
     <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
+    <script>
+    function openFlightAgent() {
+        if (window.Superchat && typeof window.Superchat.open === 'function') {
+            window.Superchat.open();
+            return;
+        }
+        var allEls = document.querySelectorAll('[class*="superchat"], [id*="superchat"]');
+        for (var i = 0; i < allEls.length; i++) {
+            if (allEls[i].click) { allEls[i].click(); break; }
+        }
+    }
+    </script>
 </body>
 </html>

@@ -13,17 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Hero departure → wizard
-    const startBtn = document.getElementById('startWizardBtn');
-    if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            const from = document.getElementById('heroDeparture').value;
-            const params = new URLSearchParams();
-            if (from) params.set('from', from);
-            window.location.href = 'wizard.html' + (params.toString() ? '?' + params.toString() : '');
-        });
-    }
-
     // Role search suggestions with links to destination pages
     var basePath = window.location.pathname.includes('/destinations/') ? '' : 'destinations/';
     if (basePath === '' && !window.location.pathname.includes('/destinations/')) basePath = 'destinations/';
