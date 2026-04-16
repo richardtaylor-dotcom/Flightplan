@@ -52,7 +52,7 @@ async function signInWithMagicLink(email) {
     const sb = getSupabase();
     const { error } = await sb.auth.signInWithOtp({
         email,
-        options: { emailRedirectTo: window.location.origin + '/my-flightplan.html' }
+        options: { emailRedirectTo: 'https://flightplan.org.uk/my-flightplan.html' }
     });
     return { error };
 }
