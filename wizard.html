@@ -252,6 +252,7 @@ select{font-family:inherit}
 <option value="exams_manager">Exams Manager</option>
 <option value="safeguarding_officer">Safeguarding Officer</option>
 <option value="family_liaison">Family Liaison Officer</option>
+<option value="hr_admin">HR Administrator</option>
 </optgroup>
 <optgroup label="Technical / Specialist">
 <option value="technician">Subject Technician</option>
@@ -386,7 +387,8 @@ exams_manager:{label:'Exams Manager',tier:3,family:'ops'},
 safeguarding_officer:{label:'Safeguarding Officer',tier:3,family:'ops'},
 family_liaison:{label:'Family Liaison Officer',tier:2,family:'ops'},
 technician:{label:'Subject Technician',tier:2,family:'tech'},
-curriculum_advisor:{label:'Curriculum Advisor',tier:5,family:'teaching'}
+curriculum_advisor:{label:'Curriculum Advisor',tier:5,family:'teaching'},
+hr_admin:{label:'HR Administrator',tier:2,family:'ops'}
 };
 
 const ROLE_GROUPS=[
@@ -394,7 +396,7 @@ const ROLE_GROUPS=[
 {label:'Teaching',roles:['teacher','primary_teacher','sen_teacher','coord','second','lead_prac','hol','dol','phase_leader']},
 {label:'SEND / Inclusion',roles:['deputy_senco','senco','inclusion_officer','inclusion_manager']},
 {label:'Academy Leadership',roles:['asst_principal','vice_principal','deputy_principal','principal']},
-{label:'Student & Academy Support',roles:['admin','office_manager','student_services_officer','student_services_manager','attendance_officer','attendance_manager','exams_officer','exams_manager','safeguarding_officer','family_liaison']},
+{label:'Student & Academy Support',roles:['admin','office_manager','student_services_officer','student_services_manager','attendance_officer','attendance_manager','exams_officer','exams_manager','safeguarding_officer','family_liaison','hr_admin']},
 {label:'Technical / Specialist',roles:['technician','curriculum_advisor']}
 ];
 

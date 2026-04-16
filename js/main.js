@@ -87,7 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Lunchtime Supervisor', slug: 'lunchtime-supervisor' },
         { name: 'Music Tutor', slug: 'music-tutor' },
         { name: 'School Counsellor', slug: 'school-counsellor' },
-        { name: 'Assistant Headteacher', slug: 'assistant-headteacher' }
+        { name: 'Assistant Headteacher', slug: 'assistant-headteacher' },
+        { name: 'HR Administrator', slug: 'hr-administrator' }
     ];
 
     const searchInput = document.getElementById('roleSearch');
