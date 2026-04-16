@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS profiles (
 CREATE TABLE IF NOT EXISTS boarding_passes (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id uuid REFERENCES profiles(id) ON DELETE CASCADE NOT NULL,
-    current_role text NOT NULL,
+    origin_role text NOT NULL,
     dest_role text NOT NULL,
     time_in_role text,
     time_at_lat text,

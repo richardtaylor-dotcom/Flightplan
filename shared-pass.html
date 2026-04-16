@@ -107,7 +107,7 @@ document.getElementById('errorState').style.display='block';
 
 function renderPass(pass){
 const rd=pass.route_data||{};
-const fromLabel=ROLE_LABELS[pass.current_role]||pass.current_role;
+const fromLabel=ROLE_LABELS[pass.origin_role]||pass.origin_role;
 const toLabel=ROLE_LABELS[pass.dest_role]||pass.dest_role;
 const readiness=rd.readiness||0;
 const dotCls=readiness>=70?'green':readiness>=40?'amber':'red';

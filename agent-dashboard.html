@@ -119,7 +119,7 @@ const role=ROLE_LABELS[user.role_current]||user.role_current||'Not set';
 detail.innerHTML=`
 <div class="user-detail__header"><div><div class="user-detail__name">${user.full_name||'Unknown'}</div><div class="user-detail__meta">${user.email} · ${user.academy||'No academy'} · ${role}</div></div><a href="mailto:${user.email}" style="font-size:13px;font-weight:600;color:#3d5a80">Email this user</a></div>
 <div class="user-detail__passes">${passes.length?passes.map(p=>{
-const from=ROLE_LABELS[p.current_role]||p.current_role;
+const from=ROLE_LABELS[p.origin_role]||p.origin_role;
 const to=ROLE_LABELS[p.dest_role]||p.dest_role;
 const rd=p.route_data||{};
 const readiness=rd.readiness||0;

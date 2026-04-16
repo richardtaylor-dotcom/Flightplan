@@ -72,7 +72,7 @@ async function saveBoardingPass(passData) {
     const { data, error } = await sb.from('boarding_passes')
         .insert({
             user_id: user.id,
-            current_role: passData.currentRole,
+            origin_role: passData.currentRole,
             dest_role: passData.destRole,
             time_in_role: passData.timeInRole,
             time_at_lat: passData.timeAtLAT,
