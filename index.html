@@ -7,7 +7,193 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+    /* ===== Split-flap Departures Board ===== */
+    :root {
+        --fp-flip-speed: 2600ms;
+        --fp-board-rows: 10;
+        --fp-board-dim: 0.82;
+        --fp-accent: #e5a733;
+    }
+    .hero { position: relative; min-height: 100vh; overflow: hidden; background: #0f1a26; }
+    .hero__background, .hero__clouds, .hero__plane { display: none !important; }
+    .fp-board {
+        position: absolute; inset: 0;
+        display: grid;
+        grid-template-rows: 44px repeat(var(--fp-board-rows), 1fr);
+        padding: 92px 0 24px;
+        font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+        z-index: 1;
+        user-select: none;
+    }
+    .fp-board__header {
+        display: grid;
+        grid-template-columns: 96px 1fr 180px 72px 120px;
+        padding: 0 max(32px, calc((100vw - 1360px) / 2));
+        align-items: center;
+        font-size: 10px;
+        letter-spacing: 3px;
+        font-weight: 700;
+        color: rgba(229,167,51,0.55);
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(229,167,51,0.18);
+        padding-bottom: 10px;
+        margin-bottom: 6px;
+    }
+    .fp-board__header > div:last-child { text-align: right; }
+    .fp-row {
+        display: grid;
+        grid-template-columns: 96px 1fr 180px 72px 120px;
+        align-items: center;
+        padding: 0 max(32px, calc((100vw - 1360px) / 2));
+    }
+    .fp-row + .fp-row { border-top: 1px dashed rgba(229,167,51,0.10); }
+    .flap-cell {
+        display: inline-flex;
+        align-items: center;
+        gap: 1px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .flap {
+        position: relative;
+        display: inline-block;
+        width: 1ch;
+        height: 1.25em;
+        line-height: 1.25em;
+        text-align: center;
+        color: var(--fp-accent);
+        font-weight: 700;
+        font-feature-settings: "tnum" 1;
+        perspective: 200px;
+        will-change: transform;
+    }
+    .flap__face {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        backface-visibility: hidden;
+        background: linear-gradient(#1b1b1b 0 50%, #2a2a2a 50% 100%);
+        border-radius: 2px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.6), 0 1px 0 rgba(0,0,0,0.5);
+        overflow: hidden;
+    }
+    .flap__face::after {
+        content: '';
+        position: absolute; left: 0; right: 0; top: 50%;
+        height: 1px;
+        background: rgba(0,0,0,0.85);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .flap__face--front {
+        transform: rotateX(0deg);
+        animation: flap-out calc(var(--fp-flip-speed) * 0.16) cubic-bezier(.6,0,.9,.3) forwards;
+    }
+    .flap__face--next {
+        transform: rotateX(90deg);
+        animation: flap-in calc(var(--fp-flip-speed) * 0.16) cubic-bezier(.1,.7,.4,1) forwards;
+        animation-delay: calc(var(--fp-flip-speed) * 0.16);
+    }
+    @keyframes flap-out { 0% { transform: rotateX(0deg); } 100% { transform: rotateX(-90deg); } }
+    @keyframes flap-in { 0% { transform: rotateX(90deg); } 100% { transform: rotateX(0deg); } }
+    .fp-row .fp-col--flight .flap { color: #f0b54a; }
+    .fp-row .fp-col--dest .flap { color: #f6d58a; font-weight: 700; }
+    .fp-row .fp-col--dept .flap { color: #d9c9a3; font-weight: 500; }
+    .fp-row .fp-col--gate .flap { color: #f0b54a; }
+    .fp-col--status { display: flex; justify-content: flex-end; }
+    .fp-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        background: rgba(102,187,106,0.14);
+        color: #7ed884;
+        border: 1px solid rgba(102,187,106,0.3);
+        white-space: nowrap;
+    }
+    .fp-status::before {
+        content: ''; width: 6px; height: 6px; border-radius: 50%;
+        background: currentColor;
+        box-shadow: 0 0 6px currentColor;
+        animation: fp-pulse 1.4s ease-in-out infinite;
+    }
+    .fp-status--boarding { background: rgba(229,167,51,0.14); color: #f0b54a; border-color: rgba(229,167,51,0.35); }
+    .fp-status--departing { background: rgba(100,181,246,0.12); color: #74b9ff; border-color: rgba(100,181,246,0.3); }
+    @keyframes fp-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+    .hero__dim {
+        position: absolute; inset: 0;
+        background:
+            radial-gradient(ellipse 70% 55% at 50% 50%, rgba(15,26,38, calc(var(--fp-board-dim) + 0.08)) 0%, rgba(15,26,38, calc(var(--fp-board-dim) - 0.25)) 55%, rgba(15,26,38, 0.35) 100%),
+            linear-gradient(180deg, rgba(15,26,38,0.55) 0%, rgba(15,26,38,0) 20%, rgba(15,26,38,0) 80%, rgba(15,26,38,0.55) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    .hero__content { position: relative; z-index: 3; }
+    .hero__title { text-shadow: 0 2px 30px rgba(0,0,0,0.4); }
+    .hero.is-paused .flap__face { animation-play-state: paused; }
+
+    .fp-clock {
+        position: absolute;
+        top: 88px; right: 32px;
+        z-index: 4;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: rgba(229,167,51,0.8);
+        display: flex; align-items: center; gap: 8px;
+    }
+    .fp-clock__dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #7ed884;
+        box-shadow: 0 0 8px #7ed884;
+        animation: fp-pulse 1.4s ease-in-out infinite;
+    }
+
+    .fp-quick {
+        position: absolute;
+        right: 32px; bottom: 24px;
+        z-index: 4;
+        display: flex; gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        max-width: 50%;
+    }
+    .fp-quick__chip {
+        padding: 6px 14px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.15);
+        backdrop-filter: blur(8px);
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.85);
+        cursor: pointer;
+        transition: all .2s;
+        font-family: 'Inter', sans-serif;
+    }
+    .fp-quick__chip:hover {
+        background: var(--fp-accent);
+        color: #2b3e50;
+        border-color: var(--fp-accent);
+    }
+
+    @media (max-width: 900px) {
+        .fp-board__header, .fp-row { grid-template-columns: 72px 1fr 90px; padding: 0 16px; }
+        .fp-board__header > div:nth-child(3), .fp-board__header > div:nth-child(4),
+        .fp-row .fp-col--dept, .fp-row .fp-col--gate { display: none; }
+        .fp-clock { top: 80px; right: 16px; font-size: 10px; }
+        .fp-quick { display: none; }
+    }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -43,14 +229,15 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero__background">
-            <div class="hero__gradient"></div>
-        </div>
-        <div class="hero__clouds">
-            <div class="hero__cloud hero__cloud--1"></div>
-            <div class="hero__cloud hero__cloud--2"></div>
-            <div class="hero__cloud hero__cloud--3"></div>
+    <section class="hero" id="hero">
+        <div class="fp-board" id="fpBoard"></div>
+        <div class="hero__dim"></div>
+        <div class="fp-clock"><span class="fp-clock__dot"></span><span id="fpClock">00:00 UTC</span></div>
+        <div class="fp-quick">
+            <button class="fp-quick__chip" data-jump="teaching">Teaching</button>
+            <button class="fp-quick__chip" data-jump="leadership">Leadership</button>
+            <button class="fp-quick__chip" data-jump="admin">Administration</button>
+            <button class="fp-quick__chip" data-jump="specialist">Specialist</button>
         </div>
         <div class="hero__content">
             <div class="hero__badge">Leigh Academies Trust</div>
@@ -74,13 +261,6 @@
                 <span>Personalised boarding passes</span>
                 <span>Expert flight agents</span>
             </div>
-        </div>
-        <!-- Animated planes -->
-        <div class="hero__plane hero__plane--1" id="heroPlane">
-            <svg viewBox="0 0 60 60" width="40" height="40"><path d="M2 38 L18 30 L14 28 L30 20 L26 18 L52 6 L44 22 L40 18 L34 34 L30 30 L24 46 Z" fill="white" opacity="0.7"/></svg>
-        </div>
-        <div class="hero__plane hero__plane--2">
-            <svg viewBox="0 0 60 60" width="24" height="24"><path d="M2 38 L18 30 L14 28 L30 20 L26 18 L52 6 L44 22 L40 18 L34 34 L30 30 L24 46 Z" fill="white" opacity="0.4"/></svg>
         </div>
     </section>
 
@@ -407,6 +587,237 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    // ===== Flightplan Split-Flap Board =====
+    const FP_DESTINATIONS = [
+        {flight:'FP-001', name:'Academies Director', dept:'Leadership', gate:'T1', cat:'leadership', color:'#ab47bc', slug:'academies-director'},
+        {flight:'FP-002', name:'Principal', dept:'Leadership', gate:'T1', cat:'leadership', color:'#ab47bc', slug:'principal'},
+        {flight:'FP-003', name:'Deputy Principal', dept:'Leadership', gate:'T1', cat:'leadership', color:'#ab47bc', slug:'deputy-principal'},
+        {flight:'FP-004', name:'Vice Principal', dept:'Leadership', gate:'T1', cat:'leadership', color:'#ab47bc', slug:'vice-principal'},
+        {flight:'FP-005', name:'Curriculum Advisor', dept:'Leadership', gate:'T2', cat:'leadership', color:'#ab47bc', slug:'curriculum-advisor'},
+        {flight:'FP-006', name:'Assistant Principal', dept:'Leadership', gate:'T3', cat:'leadership', color:'#ab47bc', slug:'assistant-principal'},
+        {flight:'FP-007', name:'SENCO', dept:'Leadership', gate:'T3', cat:'leadership', color:'#ab47bc', slug:'senco'},
+        {flight:'FP-010', name:'Director of Learning', dept:'Dept. Leadership', gate:'T2', cat:'dept-leadership', color:'#42a5f5', slug:'director-of-learning'},
+        {flight:'FP-011', name:'Head of Learning', dept:'Dept. Leadership', gate:'T2', cat:'dept-leadership', color:'#42a5f5', slug:'head-of-learning'},
+        {flight:'FP-012', name:'Phase Leader', dept:'Dept. Leadership', gate:'T2', cat:'dept-leadership', color:'#42a5f5', slug:'phase-leader'},
+        {flight:'FP-013', name:'Deputy Director of Learning', dept:'Dept. Leadership', gate:'T2', cat:'dept-leadership', color:'#42a5f5', slug:'deputy-director-of-learning'},
+        {flight:'FP-014', name:'Coordinator of Learning', dept:'Dept. Leadership', gate:'T2', cat:'dept-leadership', color:'#42a5f5', slug:'coordinator-of-learning'},
+        {flight:'FP-015', name:'Second in Charge', dept:'Dept. Leadership', gate:'T2', cat:'dept-leadership', color:'#42a5f5', slug:'second-in-charge'},
+        {flight:'FP-020', name:'Lead Practitioner', dept:'Teaching', gate:'T3', cat:'teaching', color:'#66bb6a', slug:'lead-practitioner'},
+        {flight:'FP-021', name:'Teacher of Subject', dept:'Teaching', gate:'T3', cat:'teaching', color:'#66bb6a', slug:'teacher-of-subject'},
+        {flight:'FP-022', name:'Class Teacher', dept:'Teaching', gate:'T3', cat:'teaching', color:'#66bb6a', slug:'class-teacher'},
+        {flight:'FP-023', name:'SEN Teacher', dept:'Teaching', gate:'T3', cat:'teaching', color:'#66bb6a', slug:'sen-teacher'},
+        {flight:'FP-024', name:'Intervention Teacher', dept:'Teaching', gate:'T3', cat:'teaching', color:'#66bb6a', slug:'intervention-teacher'},
+        {flight:'FP-030', name:'Teaching Assistant', dept:'Classroom Support', gate:'T4', cat:'classroom-support', color:'#4dd0e1', slug:'teaching-assistant'},
+        {flight:'FP-031', name:'SEN Teaching Assistant', dept:'Classroom Support', gate:'T4', cat:'classroom-support', color:'#4dd0e1', slug:'sen-teaching-assistant'},
+        {flight:'FP-032', name:'Higher Level TA', dept:'Classroom Support', gate:'T4', cat:'classroom-support', color:'#4dd0e1', slug:'higher-level-teaching-assistant'},
+        {flight:'FP-033', name:'SEN Higher Level TA', dept:'Classroom Support', gate:'T4', cat:'classroom-support', color:'#4dd0e1', slug:'sen-higher-level-teaching-assistant'},
+        {flight:'FP-034', name:'Cover Supervisor', dept:'Classroom Support', gate:'T4', cat:'classroom-support', color:'#4dd0e1', slug:'cover-supervisor'},
+        {flight:'FP-035', name:'Technician', dept:'Classroom Support', gate:'T4', cat:'classroom-support', color:'#4dd0e1', slug:'technician'},
+        {flight:'FP-036', name:'Nursery Manager', dept:'Classroom Support', gate:'T5', cat:'classroom-support', color:'#4dd0e1', slug:'nursery-manager'},
+        {flight:'FP-037', name:'Deputy Nursery Manager', dept:'Classroom Support', gate:'T5', cat:'classroom-support', color:'#4dd0e1', slug:'deputy-nursery-manager'},
+        {flight:'FP-038', name:'Nursery Assistant', dept:'Classroom Support', gate:'T5', cat:'classroom-support', color:'#4dd0e1', slug:'nursery-assistant'},
+        {flight:'FP-040', name:'Office Manager', dept:'Administration', gate:'T5', cat:'admin', color:'#ff8a50', slug:'office-manager'},
+        {flight:'FP-041', name:'Academy Administrator', dept:'Administration', gate:'T5', cat:'admin', color:'#ff8a50', slug:'academy-administrator'},
+        {flight:'FP-042', name:'Receptionist', dept:'Administration', gate:'T5', cat:'admin', color:'#ff8a50', slug:'receptionist'},
+        {flight:'FP-043', name:'Personal Assistant', dept:'Administration', gate:'T5', cat:'admin', color:'#ff8a50', slug:'personal-assistant'},
+        {flight:'FP-044', name:'Executive Assistant', dept:'Administration', gate:'T5', cat:'admin', color:'#ff8a50', slug:'executive-assistant'},
+        {flight:'FP-045', name:'HR Administrator', dept:'Administration', gate:'T5', cat:'admin', color:'#ff8a50', slug:'hr-administrator'},
+        {flight:'FP-050', name:'Student Services Manager', dept:'Student Services', gate:'T6', cat:'student-services', color:'#ef5350', slug:'student-services-manager'},
+        {flight:'FP-051', name:'Student Services Officer', dept:'Student Services', gate:'T6', cat:'student-services', color:'#ef5350', slug:'student-services-officer'},
+        {flight:'FP-052', name:'Assistant SENCO', dept:'Student Services', gate:'T6', cat:'student-services', color:'#ef5350', slug:'assistant-senco'},
+        {flight:'FP-053', name:'Safeguarding Manager', dept:'Safeguarding', gate:'T6', cat:'student-services', color:'#ef5350', slug:'safeguarding-manager'},
+        {flight:'FP-054', name:'Safeguarding Officer', dept:'Safeguarding', gate:'T6', cat:'student-services', color:'#ef5350', slug:'safeguarding-officer'},
+        {flight:'FP-055', name:'Safeguarding Admin', dept:'Safeguarding', gate:'T6', cat:'student-services', color:'#ef5350', slug:'safeguarding-administrator'},
+        {flight:'FP-060', name:'Careers Manager', dept:'Careers', gate:'T7', cat:'specialist', color:'#ff7043', slug:'careers-manager'},
+        {flight:'FP-061', name:'Careers Officer', dept:'Careers', gate:'T7', cat:'specialist', color:'#ff7043', slug:'careers-officer'},
+        {flight:'FP-062', name:'Library Manager', dept:'Learning Resources', gate:'T7', cat:'specialist', color:'#ff7043', slug:'library-manager'},
+        {flight:'FP-063', name:'Library Assistant', dept:'Learning Resources', gate:'T7', cat:'specialist', color:'#ff7043', slug:'library-assistant'},
+        {flight:'FP-064', name:'Cover Manager', dept:'Operations', gate:'T7', cat:'specialist', color:'#ff7043', slug:'cover-manager'},
+        {flight:'FP-065', name:'Music Tutor', dept:'Specialist Teaching', gate:'T7', cat:'specialist', color:'#ff7043', slug:'music-tutor'},
+        {flight:'FP-066', name:'School Counsellor', dept:'Student Welfare', gate:'T7', cat:'specialist', color:'#ff7043', slug:'school-counsellor'},
+        {flight:'FP-067', name:'Lunchtime Supervisor', dept:'Student Welfare', gate:'T7', cat:'specialist', color:'#ff7043', slug:'lunchtime-supervisor'},
+        {flight:'FP-070', name:'Exams Manager', dept:'Examinations', gate:'T8', cat:'exams-data', color:'#78909c', slug:'exams-manager'},
+        {flight:'FP-071', name:'Exams Officer', dept:'Examinations', gate:'T8', cat:'exams-data', color:'#78909c', slug:'exams-officer'},
+        {flight:'FP-072', name:'Exams Administrator', dept:'Examinations', gate:'T8', cat:'exams-data', color:'#78909c', slug:'exams-administrator'},
+        {flight:'FP-073', name:'Lead Invigilator', dept:'Examinations', gate:'T8', cat:'exams-data', color:'#78909c', slug:'lead-invigilator'},
+        {flight:'FP-074', name:'Invigilator', dept:'Examinations', gate:'T8', cat:'exams-data', color:'#78909c', slug:'invigilator'},
+        {flight:'FP-075', name:'Data Manager', dept:'Data Services', gate:'T8', cat:'exams-data', color:'#78909c', slug:'data-manager'},
+        {flight:'FP-076', name:'Data Officer', dept:'Data Services', gate:'T8', cat:'exams-data', color:'#78909c', slug:'data-officer'},
+        {flight:'FP-077', name:'Data Administrator', dept:'Data Services', gate:'T8', cat:'exams-data', color:'#78909c', slug:'data-administrator'},
+        {flight:'FP-078', name:'Attendance Manager', dept:'Attendance', gate:'T8', cat:'exams-data', color:'#78909c', slug:'attendance-manager'},
+        {flight:'FP-079', name:'Attendance Officer', dept:'Attendance', gate:'T8', cat:'exams-data', color:'#78909c', slug:'attendance-officer'},
+    ];
+    const FP_STATUSES = [
+        {type:'ontime', label:'On time'},
+        {type:'ontime', label:'On time'},
+        {type:'ontime', label:'On time'},
+        {type:'boarding', label:'Boarding'},
+        {type:'boarding', label:'Boarding'},
+        {type:'departing', label:'Departing'},
+    ];
+    const FP_COL_W = { flight: 6, dest: 22, dept: 16, gate: 2 };
+    const FP_STATE = { rows: 10, flipSpeed: 2600 };
+
+    function fpBuildBoard() {
+        const board = document.getElementById('fpBoard');
+        if (!board) return;
+        board.innerHTML = '';
+        const header = document.createElement('div');
+        header.className = 'fp-board__header';
+        header.innerHTML = `<div>Flight</div><div>Destination</div><div>Airline</div><div>Gate</div><div>Status</div>`;
+        board.appendChild(header);
+        for (let i = 0; i < FP_STATE.rows; i++) {
+            const row = document.createElement('div');
+            row.className = 'fp-row';
+            row.dataset.idx = i;
+            row.innerHTML = `
+                <div class="fp-col--flight flap-cell" data-col="flight" data-w="${FP_COL_W.flight}"></div>
+                <div class="fp-col--dest flap-cell" data-col="dest" data-w="${FP_COL_W.dest}"></div>
+                <div class="fp-col--dept flap-cell" data-col="dept" data-w="${FP_COL_W.dept}"></div>
+                <div class="fp-col--gate flap-cell" data-col="gate" data-w="${FP_COL_W.gate}"></div>
+                <div class="fp-col--status"></div>`;
+            board.appendChild(row);
+        }
+        document.documentElement.style.setProperty('--fp-board-rows', FP_STATE.rows);
+    }
+
+    function fpMakeFlap(ch) {
+        const el = document.createElement('span');
+        el.className = 'flap';
+        const front = document.createElement('span');
+        front.className = 'flap__face flap__face--front';
+        front.textContent = ch;
+        const next = document.createElement('span');
+        next.className = 'flap__face flap__face--next';
+        el.appendChild(front);
+        el.appendChild(next);
+        return el;
+    }
+
+    function fpPad(str, w) {
+        str = (str || '').toUpperCase();
+        if (str.length > w) str = str.slice(0, w);
+        return str.padEnd(w, ' ');
+    }
+
+    function fpFillCell(cell, text) {
+        const w = parseInt(cell.dataset.w, 10);
+        const padded = fpPad(text, w);
+        if (!cell.children.length) {
+            for (let i = 0; i < w; i++) cell.appendChild(fpMakeFlap(padded[i]));
+            return;
+        }
+        for (let i = 0; i < w; i++) {
+            const flap = cell.children[i];
+            const front = flap.querySelector('.flap__face--front');
+            const newCh = padded[i];
+            if (front.textContent === newCh) continue;
+            const next = flap.querySelector('.flap__face--next');
+            next.textContent = newCh;
+            front.style.animation = 'none';
+            next.style.animation = 'none';
+            void flap.offsetWidth;
+            const stagger = i * 22;
+            front.style.animation = '';
+            next.style.animation = '';
+            front.style.animationDelay = `${stagger}ms`;
+            next.style.animationDelay = `calc(var(--fp-flip-speed) * 0.16 + ${stagger}ms)`;
+            const duration = FP_STATE.flipSpeed * 0.16 * 2 + stagger + 20;
+            setTimeout(() => {
+                front.textContent = newCh;
+                front.style.animation = 'none';
+                next.style.animation = 'none';
+                front.style.animationDelay = '';
+                next.style.animationDelay = '';
+                void flap.offsetWidth;
+                front.style.animation = '';
+                next.style.animation = '';
+            }, duration);
+        }
+    }
+
+    function fpFillStatus(cell, status) {
+        cell.innerHTML = `<span class="fp-status fp-status--${status.type}">${status.label}</span>`;
+    }
+
+    function fpPickNext(currentFlights) {
+        const shown = new Set(currentFlights);
+        let pool = FP_DESTINATIONS.filter(d => !shown.has(d.flight));
+        if (!pool.length) pool = FP_DESTINATIONS;
+        return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function fpUpdateRow(rowEl, dest) {
+        rowEl._flight = dest.flight;
+        rowEl._slug = dest.slug;
+        const status = FP_STATUSES[Math.floor(Math.random() * FP_STATUSES.length)];
+        fpFillCell(rowEl.querySelector('[data-col=flight]'), dest.flight);
+        fpFillCell(rowEl.querySelector('[data-col=dest]'), dest.name);
+        fpFillCell(rowEl.querySelector('[data-col=dept]'), dest.dept);
+        fpFillCell(rowEl.querySelector('[data-col=gate]'), dest.gate);
+        fpFillStatus(rowEl.querySelector('.fp-col--status'), status);
+    }
+
+    function fpSeedBoard() {
+        const rows = document.querySelectorAll('.fp-row');
+        const pool = [...FP_DESTINATIONS].sort(() => Math.random() - 0.5);
+        rows.forEach((r, i) => fpUpdateRow(r, pool[i % pool.length]));
+    }
+
+    function fpStartFlipLoop() {
+        setInterval(() => {
+            const hero = document.getElementById('hero');
+            if (!hero || hero.classList.contains('is-paused')) return;
+            const rows = [...document.querySelectorAll('.fp-row')];
+            const n = 1 + Math.floor(Math.random() * 2);
+            const shuffled = rows.sort(() => Math.random() - 0.5).slice(0, n);
+            const taken = rows.map(r => r._flight);
+            shuffled.forEach(r => fpUpdateRow(r, fpPickNext(taken)));
+        }, FP_STATE.flipSpeed);
+    }
+
+    function fpTickClock() {
+        const el = document.getElementById('fpClock');
+        if (!el) return;
+        const d = new Date();
+        const hh = String(d.getUTCHours()).padStart(2,'0');
+        const mm = String(d.getUTCMinutes()).padStart(2,'0');
+        const ss = String(d.getUTCSeconds()).padStart(2,'0');
+        el.textContent = `${hh}:${mm}:${ss} UTC`;
+    }
+
+    function fpSetupHeroPause() {
+        const hero = document.getElementById('hero');
+        if (!hero) return;
+        hero.addEventListener('mouseenter', () => hero.classList.add('is-paused'));
+        hero.addEventListener('mouseleave', () => hero.classList.remove('is-paused'));
+    }
+
+    function fpSetupQuickChips() {
+        document.querySelectorAll('.fp-quick__chip').forEach(c => {
+            c.onclick = () => {
+                const cat = c.dataset.jump;
+                document.getElementById('destinations').scrollIntoView({behavior: 'smooth'});
+                setTimeout(() => {
+                    const btn = document.querySelector(`.departure-board__filter-btn[data-filter="${cat}"]`);
+                    if (btn) btn.click();
+                }, 500);
+            };
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fpBuildBoard();
+        fpSeedBoard();
+        fpStartFlipLoop();
+        fpSetupHeroPause();
+        fpSetupQuickChips();
+        fpTickClock();
+        setInterval(fpTickClock, 1000);
+    });
+    </script>
 
     <script src="js/main.js"></script>
     <script src='https://widget.superchat.de/snippet.js?applicationKey=WCenpRbmV689dw7ar2XqQZ4AYj' referrerpolicy='no-referrer-when-downgrade'></script>
